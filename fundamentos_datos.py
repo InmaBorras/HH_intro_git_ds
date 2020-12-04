@@ -3,7 +3,7 @@ import numpy as np
 from plotnine import ggplot, aes, geom_line, geom_point, geom_bar, geom_boxplot
 import matplotlib.pyplot as plt
 from pandas.plotting import scatter_matrix
-dataframe = pd.read_csv('precios_casas.csv')
+dataframe = pd.read_csv('precios_casas_full.csv')
 
 def esDeProporcion(minimo):
     if(minimo<0):
@@ -126,8 +126,13 @@ corr_matrix["Price"].sort_values(ascending=False)
 import pdb;pdb.set_trace()
 
 #COGEMOS LOS QUE TENGAN MAS CORRELACION ENTRE ELLOS Y HACEMOS LO SIGUIENTE PARA VER COMO ES LA CORRELACION
-attributes = ['Price',"Rooms", "Postcode", "Propertycount","Distance"]
+
+corr_matrix=dataframe.corr(method='pearson')         
+corr_matrix["Price"].sort_values(ascending=False)
+
+attributes = ['Price',"Rooms", "Bedroom2", "Bathroom","Car",'Lattitude','YearBuilt']
 scatter_matrix(dataframe[attributes], figsize=(12, 8))
+plt.show()
 import pdb;pdb.set_trace()
 
 
@@ -139,15 +144,19 @@ plt.xlabel('Romms')
 plt.plot(dataframe['Distance'],dataframe['Price'],"bo")
 plt.ylabel('Price')
 plt.xlabel('Distance')
-import pdb;pdb.set_trace()
-
-#despues experimentar combinando diferentes tipos de datos a ver cual es la correlacion con estos
-dataframe['romms_per_propertycount']=dataframe['Rooms']/dataframe['Propertycount']
-
+plt.plot(dataframe['YearBuilt'],dataframe['Price'],"bo")
+plt.ylabel('Price')
+plt.xlabel('YearBuilt')
+dataframe=dataframe.assign(Bathroom_per_rooms=dataframe['Bathroom']/dataframe['Rooms'])
+#despues experimentar combinando diferentes tipos de datos a ver cual es la correlacion con estos  Bathroom
+#df_comunidad = df_comunidad.assign(num_casos_prueba_pcr=df_aux2['num_casos_prueba_pcr'])
 
 for i in dataframe['Suburb']:
     dataframe_aux=dataframe[dataframe.Suburb ==i]
-    dataframe_aux['rooms_per_Suburb']=dataframe_aux['Rooms'].mean()*dataframe_aux['Propertycount']
+    mean_room=dataframe_aux['Rooms'].mean()*dataframe_aux['Propertycount']
+    dataframe_aux=dataframe_aux.assign(rooms_per_Suburb=mean_room)
+    dataframe_aux=dataframe_aux.assign(Total_rooms_Suburb=dataframe_aux['Rooms'].sum())
+    dataframe_aux=dataframe_aux.assign(pr_rooms_Suburb=100*round(dataframe['Rooms']/dataframe_aux['Total_rooms_Suburb'],6))
     dataframe_bueno=pd.concat([dataframe_bueno, dataframe_aux], axis=1,join='inner')
 import pdb;pdb.set_trace()
 
@@ -156,3 +165,22 @@ corr_matrix["Price"].sort_values(ascending=False)
 #tipos_columnas=clasificar_variables(dataframe)
 
 import pdb;pdb.set_trace()
+duplicateRowsDF = dataframe_bueno[dataframe_bueno.duplicated(['Suburb', 'Address','Postcode','CouncilArea'])]
+duplicateRowsDF.value_counts().sum()
+ #aqui vemos que hay varios casos en donde no se pudo vender la casa y otro vendedor si que pudo
+dataframe_bueno=dataframe_bueno[dataframe_bueno.Address =='15 Incana Dr']
+
+dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='17 Talofa Av']
+dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='22 Yongala St']
+dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='26 Grace St']
+#26 Grace St, Yarraville VIC, Australia  aqui se puede ver que es una casa y que ha habido diferentes ventas por el mismo precio en diferentes fechas por el mismo comprados, duplicados
+
+#lo mismo paa con yongala
+duplicateRowsDF = dataframe_bueno[dataframe_bueno.duplicated(['Suburb', 'Address','Postcode','CouncilArea',],keep=False)]
+duplicateRowsDF=duplicateRowsDF.drop_duplicates(subset=['Address','SellerG','Price','Date'])
+duplicateRowsDF=duplicateRowsDF.dropna(subset=['Price'])
+dataframe_bueno=dataframe_bueno.drop_duplicates(subset=['Address','Suburb'], keep=False, ignore_index=True)
+dataframe_bueno=pd.concat([dataframe_bueno, duplicateRowsDF], axis=1,join='inner')
+#diferentes dias de ventas diferentes metodos de ventas diferentes numero de habitaciones diferentes precios misma casa 
+dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='118 Westgarth St']
+dataframe_aux=duplicateRowsDF[duplicateRowsDF.Address =='11 Harrington Rd']
