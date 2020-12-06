@@ -155,4 +155,12 @@ corr_matrix=dataframe.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 #tipos_columnas=clasificar_variables(dataframe)
 
+#Funcion que pinta los cálculos de dispersion y asimetria de una columna de un dataframe
+def mostrar_analisis_var_cuantitativas(data):
+    #calcular coeficiente de variacion
+ datos_variable=pd.DataFrame([{"coeficiente de Variacion":(data.std()/data.mean())*100,\
+                 "rango de la variable":data.max() - dataframe["Rooms"].min(),
+                 "rango intercuartilico":data.quantile(0.75) - data.quantile(0.25),
+                 "coeficiente de asimetria":ss.skew(data)}])
+ return(datos_variable)
 import pdb;pdb.set_trace()
