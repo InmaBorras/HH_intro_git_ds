@@ -1,0 +1,14 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+- file: 1-DefinicionObjetivos 
+- file: 2-AnalisisExploratorioInicial 
+- file: 3-DeteccionImputacionDatosFaltantes
+- file: 4-TransformacionVariablesCuantitativas
+- file: 5-ProcesamientoVaribalesCualitativas
+- file: 6-SelecciondeVariables
+- file: 7-AjusteDelModelosdeRegresionLineal 
+  sections:
+    - file: markdown
+    - file: notebooks
+    - file: notebooks

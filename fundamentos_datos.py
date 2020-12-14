@@ -255,6 +255,17 @@ corr_matrix=dataframe_bueno.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 #tipos_columnas=clasificar_variables(dataframe)
 
+<<<<<<< HEAD
+#Funcion que pinta los cálculos de dispersion y asimetria de una columna de un dataframe
+def mostrar_analisis_var_cuantitativas(data):
+    #calcular coeficiente de variacion
+ datos_variable=pd.DataFrame([{"coeficiente de Variacion":(data.std()/data.mean())*100,\
+                 "rango de la variable":data.max() - dataframe["Rooms"].min(),
+                 "rango intercuartilico":data.quantile(0.75) - data.quantile(0.25),
+                 "coeficiente de asimetria":ss.skew(data)}])
+ return(datos_variable)
+import pdb;pdb.set_trace()
+=======
 import pdb;pdb.set_trace()
 
 
@@ -285,6 +296,7 @@ for index, i in enumerate(dataframe.keys()):
 #diferentes dias de ventas diferentes metodos de ventas diferentes numero de habitaciones diferentes precios misma casa 
 dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='118 Westgarth St']
 dataframe_aux=duplicateRowsDF[duplicateRowsDF.Address =='11 Harrington Rd']
+<<<<<<< HEAD
 
 
 import pdb;pdb.set_trace()
@@ -391,3 +403,6 @@ corr_matrix=dataframe.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 #dataframe.hist(bins=50, figsize=(20,15))
 #plt.show()'''
+=======
+>>>>>>> c0637582118b4ae56d6f6430d04c2414c366ecb2
+>>>>>>> 61a7af31d162ead43cc071d35a08943db2f3a5c2
