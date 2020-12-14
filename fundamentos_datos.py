@@ -111,7 +111,6 @@ def error_cuadratico(y_true,y_pred):
             diferencia_cuadratica = difference**2  
             sumatorio = sumatorio + diferencia_cuadratica 
         error_cuadratico_sub = error_cuadratico_sub+sumatorio/n
-    import pdb;pdb.set_trace() 
     error_cuadratico=round(error_cuadratico_sub/len(y_pred),4)
     return(error_cuadratico)
 '''import pdb;pdb.set_trace()
@@ -201,10 +200,10 @@ def prediccion_varias_variables(dataframe,df_filter,feature_to_predict,features,
     #df_missings[str(feature_to_predict) + '_imp']=y_pred_missing
     return(y_pred_missing)
 
+
 for index, j in enumerate(lista_missings):
-    dataframe[str(j) + '_imp'] = dataframe[str(j)]
     #deter_data["Det" + str(j)] = dataframe[str(j) + "_imp"]
-    df_missings=dataframe[dataframe.isnull().any(axis=1)].copy()
+    df_missings=dataframe[dataframe[j].isnull()].copy()
     #df_missings=dataframe[dataframe[str(j)] == np.nan].copy()
     #df_missings=dataframe[dataframe[lista_parametros] != np.nan].copy()
     df_filter = dataframe[dataframe[str(j)] != np.nan].copy()
@@ -212,9 +211,14 @@ for index, j in enumerate(lista_missings):
     max_corr=corr_matrix[str(j)].sort_values(ascending=False)
     import pdb;pdb.set_trace()
     prediccion=prediccion_varias_variables(dataframe,df_filter,str(j),lista_parametros,df_missings)
+    prediccion_redondeada = [round(num, 1) for num in prediccion]
+    prediccion_redondeada = [round(num, 0) for num in prediccion_redondeada]
+    df_missings['prediccion']=prediccion_redondeada
+    dataframe[str(j)].fillna(df_missings['prediccion'], inplace = True)
+    import pdb;pdb.set_trace()
+    #dataframe[dataframe[str(j)].isnull().any(axis=1)]
     lista_parametros.append(str(j))
-    model = linear_model.LinearRegression()
-    model.fit(X = df[parameters], y = df[feature + '_imp'])
+    
     
 
 import pdb;pdb.set_trace()
@@ -255,7 +259,6 @@ corr_matrix=dataframe_bueno.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 #tipos_columnas=clasificar_variables(dataframe)
 
-<<<<<<< HEAD
 #Funcion que pinta los cálculos de dispersion y asimetria de una columna de un dataframe
 def mostrar_analisis_var_cuantitativas(data):
     #calcular coeficiente de variacion
@@ -264,8 +267,7 @@ def mostrar_analisis_var_cuantitativas(data):
                  "rango intercuartilico":data.quantile(0.75) - data.quantile(0.25),
                  "coeficiente de asimetria":ss.skew(data)}])
  return(datos_variable)
-import pdb;pdb.set_trace()
-=======
+
 import pdb;pdb.set_trace()
 
 
@@ -296,7 +298,6 @@ for index, i in enumerate(dataframe.keys()):
 #diferentes dias de ventas diferentes metodos de ventas diferentes numero de habitaciones diferentes precios misma casa 
 dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='118 Westgarth St']
 dataframe_aux=duplicateRowsDF[duplicateRowsDF.Address =='11 Harrington Rd']
-<<<<<<< HEAD
 
 
 import pdb;pdb.set_trace()
@@ -403,6 +404,3 @@ corr_matrix=dataframe.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 #dataframe.hist(bins=50, figsize=(20,15))
 #plt.show()'''
-=======
->>>>>>> c0637582118b4ae56d6f6430d04c2414c366ecb2
->>>>>>> 61a7af31d162ead43cc071d35a08943db2f3a5c2
