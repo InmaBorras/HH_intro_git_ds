@@ -8,9 +8,14 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.feature_selection import SelectKBest
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RepeatedKFold
+from sklearn.linear_model import Lasso
 import statsmodels.api as sm
-
+import statsmodels.formula.api as smf
+import pwlf
 #import fancyimpute
+#statsmodels.regression.linear_model.OLSResults.aic     statsmodels.tools.eval_measures.aic
 '''
 fs = SelectKBest(score_func=f_regression, k='all')
 	# learn relationship from training data
@@ -113,6 +118,57 @@ def error_cuadratico(y_true,y_pred):
         error_cuadratico_sub = error_cuadratico_sub+sumatorio/n
     error_cuadratico=round(error_cuadratico_sub/len(y_pred),4)
     return(error_cuadratico)
+def alfa_optima(X,y):
+    modelo_lasso = Lasso()
+    # definimos el metodo de evaluacion del modelo_lassoo
+    cv = RepeatedKFold(n_splits=10, n_repeats=3, random_state=1)
+    grid = dict()
+    grid['alpha'] = arange(0, 1, 0.01)
+    busqueda = GridbusquedaCV(modelo_lasso, grid, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
+    results = busqueda.fit(X, y)
+    return(results.best_params_,results.best_score_)
+    
+def lasso_prueba(X,y,lista_parametros):
+    alfa_op=alfa_optimo(X,y)
+    clf = linear_model.Lasso(alpha=alfa_op)
+    clf.fit(X,y)
+    coeficientes=clf.coef_
+    for index,i in enumerate(coeficientes):
+        if(round(i,1)==0):
+            print('hay que borrar el parametro: '+str(lista_parametros[index]) )
+            lista_parametros.pop(index)
+    print(clf.intercept_)
+    return(lista_parametros)
+
+def info_del_modelo(dataframe,feature_to_predict,X,y):
+    mod = smf.ols(formula=str(feature_to_predict)+' ~ Rooms + Bathroom', data=dataframe)
+    res = mod.fit(X,y)
+    print(mod.fvalue, mod.f_pvalue)
+    #probablemente no es normal asi que hay que recurrir a un test de permutaciones, seguir indagando.
+    print(res.summary())
+def prediccion_por_intervalos(dataframe,x,y):
+    #si sabemos el numero especifico de veces que cambia el gradiente podemos utilizar fitfast https://jekel.me/piecewise_linear_fit_py/examples.html
+    my_pwlf = pwlf.PiecewiseLinFit(x, y)
+    breaks = my_pwlf.fit(2)
+    print('el gradiente cambia en: '+str(breaks))
+    x_hat = np.linspace(x.min(), x.max(), num=100)
+    y_hat = my_pwlf.predict(x_hat)
+    plt.figure()
+    plt.plot(x, y, 'o')
+    plt.plot(x_hat, y_hat, '-')
+    plt.show()
+def modelo_lineal(dataframe,features):
+    X=dataframe[features]
+    y=dataframe['Price']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50)
+    
+    model=LinearRegression()
+    model.fit(X_train,y_train)
+    predictions = model.predict(X_test)
+    ec_modelo=error_cuadratico(y_test,predictions)
+    info_del_modelo(dataframe,'Price',X_train,y_train)
+    features=lasso_prueba(X_train,y_train,features)
+
 '''import pdb;pdb.set_trace()
 lista_true=[[5,7,9,11,13],[2,4,6,8,10]]
 lista_pred=[[19/4,40/6,8,12,13],[5/2,7/2,13/2,17/2,9]]
