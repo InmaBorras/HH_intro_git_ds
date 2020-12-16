@@ -16,6 +16,8 @@ from scipy import stats
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import pwlf
+from sklearn.model_selection import train_test_split
+
 #import fancyimpute
 #statsmodels.regression.linear_model.OLSResults.aic     statsmodels.tools.eval_measures.aic
 '''
@@ -43,7 +45,6 @@ def esAcotada(minimo,maximo):
         return(False)
 
 def clasificar_variables(dataframe):
-        
     tipos_columnas=dict()
     for index,i in enumerate(dataframe.keys()):
         if(isinstance(dataframe.iloc[0][index], ( np.int64))):
@@ -108,10 +109,10 @@ def eliminar_duplicados(dataframe_bueno):
     import pdb;pdb.set_trace()
     duplicateRowsDF=pd.DataFrame()
     duplicateRowsDF = dataframe_bueno[dataframe_bueno.duplicated(['Suburb', 'Address','Postcode','CouncilArea',],keep=False)]
-    duplicateRowsDF=duplicateRowsDF.drop_duplicates(subset=['Address','SellerG','Price','Date'])
+    duplicateRowsDF=duplicateRowsDF.drop_duplicates(subset=['Address','Price','Date'])
     duplicateRowsDF=duplicateRowsDF.dropna(subset=['Price'])
     dataframe_bueno=dataframe_bueno.drop_duplicates(subset=['Address','Suburb'], keep=False, ignore_index=True)
-    dataframe_bueno=pd.concat([dataframe_bueno, duplicateRowsDF], axis=1,join='inner')
+    dataframe_bueno.append(duplicateRowsDF)
     dataframe_bueno=dataframe_bueno.dropna(subset=['Price'])
     dataframe_bueno=dataframe_bueno.reset_index(drop=True)
     return(dataframe_bueno)
@@ -134,17 +135,21 @@ def alfa_optima(X,y):
     # definimos el metodo de evaluacion del modelo_lassoo
     cv = RepeatedKFold(n_splits=10, n_repeats=3, random_state=1)
     grid = dict()
-    grid['alpha'] = arange(0, 1, 0.01)
-    busqueda = GridbusquedaCV(modelo_lasso, grid, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
+    import pdb;pdb.set_trace() 
+    grid['alpha'] = np.arange(0, 100000, 1000)
+    busqueda = GridSearchCV(modelo_lasso, grid, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
     results = busqueda.fit(X, y)
-    return(results.best_params_,results.best_score_)
+    import pdb;pdb.set_trace()
+    return(results.best_params_['alpha'],results.best_score_)
     
 def lasso_prueba(X,y,lista_parametros):
-    alfa_op=alfa_optimo(X,y)
-    clf = linear_model.Lasso(alpha=alfa_op)
+    import pdb;pdb.set_trace()
+    #alfa_op, alfa_score=alfa_optima(X,y)
+    clf = Lasso(alpha=20000)
     clf.fit(X,y)
     coeficientes=clf.coef_
     for index,i in enumerate(coeficientes):
+        import pdb;pdb.set_trace()
         if(round(i,1)==0):
             print('hay que borrar el parametro: '+str(lista_parametros[index]) )
             lista_parametros.pop(index)
@@ -152,12 +157,14 @@ def lasso_prueba(X,y,lista_parametros):
     return(lista_parametros)
 
 def info_del_modelo(dataframe,feature_to_predict,X,y):
+    import pdb;pdb.set_trace()
     mod = smf.ols(formula=str(feature_to_predict)+' ~ Rooms + Bathroom', data=dataframe)
     res = mod.fit(X,y)
     print(mod.fvalue, mod.f_pvalue)
-    #probablemente no es normal asi que hay que recurrir a un test de permutaciones, seguir indagando.
+    #probablemente no es normal asi que hay que recurrir a un test de permutaciones, seguir indagando.   best score -341640.2872449162
     print(res.summary())
-def prediccion_por_intervalos(dataframe,x,y):
+def prediccion_por_intervalos(x,y):
+    import pdb;pdb.set_trace()
     #si sabemos el numero especifico de veces que cambia el gradiente podemos utilizar fitfast https://jekel.me/piecewise_linear_fit_py/examples.html
     my_pwlf = pwlf.PiecewiseLinFit(x, y)
     breaks = my_pwlf.fit(2)
@@ -168,21 +175,28 @@ def prediccion_por_intervalos(dataframe,x,y):
     plt.plot(x, y, 'o')
     plt.plot(x_hat, y_hat, '-')
     plt.show()
+#lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Landsize', 'Propertycount'] X=dataframe[lista_parametros]
+
 def modelo_lineal(dataframe,features):
     X=dataframe[features]
     y=dataframe['Price']
+    import pdb;pdb.set_trace()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50)
-    
+    features=lasso_prueba(X,y,features)
+    import pdb;pdb.set_trace()
+    prediccion_por_intervalos(x,y)
+    import pdb;pdb.set_trace()
     model=LinearRegression()
     model.fit(X_train,y_train)
+
     predictions = model.predict(X_test)
     RSS = mean_squared_error(y_test,predictions) * len(y_test)
     R_squared = model_k.score(X,Y)
     ec_modelo=error_cuadratico(y_test,predictions)
     pendiente, intercepto, r_value, p_value, std_err = stats.linregress(X_train,y_train)
-    
 
     info_del_modelo(dataframe,'Price',X_train,y_train)
+    import pdb;pdb.set_trace()
     features=lasso_prueba(X_train,y_train,features)
 def visualizacion_missings(dataframe):
     #ELIMINACION VISUALIZACION Y SUSTITUCION DE LOS MISSINGS
@@ -199,26 +213,28 @@ lista_true=[[5,7,9,11,13],[2,4,6,8,10]]
 lista_pred=[[19/4,40/6,8,12,13],[5/2,7/2,13/2,17/2,9]]
 ec_prueba=error_cuadratico(lista_true,lista_pred)'''
 
-dataframe = pd.read_csv('precios_casas_full.csv')
+dataframe3 = pd.read_csv('precios_casas_full.csv')
 dataframe_bueno=pd.DataFrame()
 #dataframe=dataframe[dataframe.BuildingArea.drop()]
 dataframe_final=pd.DataFrame()
-import pdb;pdb.set_trace()
 #dataframe=dataframe.dropna(subset=['Price'])
+'''
 for i in dataframe.keys():
     if(i!='YearBuilt' and i!='BuildingArea' and i!='Bedroom2'):
         dataframe_final[i]=dataframe[i]
-dataframe=dataframe_final
+dataframe=dataframe_final'''
 lista_parametros=list()
 lista_missings=list()
-for index, i in enumerate(dataframe.keys()):
-    if(isinstance(dataframe.iloc[0][index], ( np.int64))  or isinstance(dataframe.iloc[0][index],(np.float64)) ):
-        if(dataframe[str(i)].isna().sum()>1000):
+for index, i in enumerate(dataframe3.keys()):
+    if(isinstance(dataframe3.iloc[0][index], ( np.int64))  or isinstance(dataframe3.iloc[0][index],(np.float64)) ):
+        if(dataframe3[str(i)].isna().sum()>1000):
             lista_missings.append(i)
         else:
             lista_parametros.append(i)
-#deter_data = pd.DataFrame(columns = ["Det" + name for name in missing_columns])
+
 '''
+#deter_data = pd.DataFrame(columns = ["Det" + name for name in missing_columns])
+
 #analisis bivariante explicativo para ver las interacciones entre las variables   standar scaler  restando la media dividiendo ppor la desviacion tipica
 #categorizar  CATEGORIZAR
 predictions= model.summary()      
@@ -283,7 +299,10 @@ def prediccion_varias_variables(dataframe,df_filter,feature_to_predict,features,
     import pdb;pdb.set_trace()
     #df_missings[str(feature_to_predict) + '_imp']=y_pred_missing
     return(y_pred_missing)
-visualizacion_missings(dataframe)
+#visualizacion_missings(dataframe3)
+
+#visualizacion_missings(dataframe)
+'''
 for index, j in enumerate(lista_missings):
     #deter_data["Det" + str(j)] = dataframe[str(j) + "_imp"]      
     df_missings=dataframe[dataframe[j].isnull()].copy()
@@ -302,19 +321,35 @@ for index, j in enumerate(lista_missings):
     lista_parametros.append(str(j))
     
 dataframe=eliminar_duplicados(dataframe)
-visual
+visualizacion_missings(dataframe)
 
-import pdb;pdb.set_trace()
+
+
+
 
 #COGEMOS LOS QUE TENGAN MAS CORRELACION ENTRE ELLOS Y HACEMOS LO SIGUIENTE PARA VER COMO ES LA CORRELACION
 
-corr_matrix=dataframe.corr(method='pearson')         
-corr_matrix["Price"].sort_values(ascending=False)
+#corr_matrix=dataframe.corr(method='pearson')         
+#corr_matrix["Price"].sort_values(ascending=False)
 
-attributes = ['Price',"Rooms", "Bedroom2", "Bathroom","Car",'Lattitude','YearBuilt']
+#attributes = ['Price',"Rooms", "Bedroom2", "Bathroom","Car",'Lattitude','YearBuilt']
 #scatter_matrix(dataframe[attributes], figsize=(12, 8))
 #plt.show()
-import pdb;pdb.set_trace()
+'''
+dataframe= pd.read_csv('precios_casas_sinduplicados.csv')
+dataframe['Price']=dataframe3['Price']
+dataframe=eliminar_duplicados(dataframe)
+
+
+dataframe=dataframe.dropna(subset=['Price']) 
+dataframe=dataframe.dropna(subset=['Distance']) 
+dataframe=dataframe.dropna(subset=['Regionname']) 
+dataframe=dataframe.dropna(subset=['Regionname']) 
+dataframe=dataframe.dropna(subset=['CouncilArea']) 
+dataframe=dataframe.dropna(subset=['Propertycount']) 
+dataframe=dataframe.dropna(subset=['Postcode']) 
+
+
 #habria que borrar estas filas ya que se carga la visualizacion
 #hacer una funcion que pase el nombre de la columna y el valor a partir del cual quiere borrar y eliminar todos los datos
 #dataframe_aux=dataframe[dataframe.YearBuilt <1800]
@@ -323,24 +358,32 @@ import pdb;pdb.set_trace()
 #OBSERVAR SI HAY LINEAS HORIZONTALES EN LA GRAFICA Y ANALIZAR SI ES CONVENIENTE ELIMINAR CIERTOS DATOS DE AHI
 
 
-dataframe=dataframe.assign(Bathroom_per_rooms=dataframe['Bathroom']/dataframe['Rooms'])
+dataframe=dataframe.assign(Bathroom_times_rooms=dataframe['Bathroom']*dataframe['Rooms'])
 #despues experimentar combinando diferentes tipos de datos a ver cual es la correlacion con estos  Bathroom
 #df_comunidad = df_comunidad.assign(num_casos_prueba_pcr=df_aux2['num_casos_prueba_pcr'])
 
 for i in dataframe['Suburb'].value_counts().index:
     dataframe_aux=dataframe[dataframe.Suburb ==i]
     mean_room=dataframe_aux['Rooms'].mean()*dataframe_aux['Propertycount']
-    dataframe_aux=dataframe_aux.assign(rooms_per_Suburb=mean_room)
+    #dataframe_aux=dataframe_aux.assign(rooms_per_Suburb=mean_room)
     dataframe_aux=dataframe_aux.assign(Total_rooms_Suburb=dataframe_aux['Rooms'].sum())
-    dataframe_aux=dataframe_aux.assign(pr_rooms_Suburb=100*round(dataframe['Rooms']/dataframe_aux['Total_rooms_Suburb'],6))
+    #dataframe_aux=dataframe_aux.assign(pr_rooms_Suburb=100*round(dataframe['Rooms']/dataframe_aux['Total_rooms_Suburb'],6))
     frames = [dataframe_bueno, dataframe_aux]
     dataframe_bueno = pd.concat(frames)
     dataframe_bueno=dataframe_bueno.reset_index(drop=True)
+
+import pdb;pdb.set_trace()
+lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
+
+lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
+
+modelo_lineal(dataframe_bueno,lista_parametros)
+
 import pdb;pdb.set_trace()
 
 corr_matrix=dataframe_bueno.corr(method='pearson')         
 corr_matrix["Price"].sort_values(ascending=False)
-#tipos_columnas=clasificar_variables(dataframe)
+#tipos_columnas=clasificar_variables(dataframe)  ['Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Bathroom_per_rooms', 'Total_rooms_Suburb', 'Landsize']
 
 #Funcion que pinta los cálculos de dispersion y asimetria de una columna de un dataframe
 def mostrar_analisis_var_cuantitativas(data):
