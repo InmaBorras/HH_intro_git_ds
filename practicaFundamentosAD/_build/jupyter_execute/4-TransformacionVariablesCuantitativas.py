@@ -85,7 +85,7 @@ aux=pd.DataFrame({"Suburb":dataframe["Suburb"].describe(),"CouncilArea":datafram
 aux
 
 
-# ## 3. Análisis y Transformación de Variables Cualitativas
+# ## 4. Análisis y Transformación de Variables Cualitativas
 # 
 # para cada una de las variables cualitativas del dataframe comprobaremos sus medidas de centralidad y veremos cuales de ellas tiene sentido analizar
 # 
@@ -103,7 +103,7 @@ dataframe.describe()
 # - Si el coeficiente de asimetría se encuentra entre **-1 y -0,5 o entre 0,5 y 1**, la distribución de la variable es **moderadamente sesgada**.  
 # - Si el coeficiente de asimetría se encuentra entre **-0,5 y 0,5**, la distribución de la variable es **aproximadamente sesgada**.  
 
-# ### 3.3.1 Analisis de la variable Rooms
+# ### 4.3.1 Analisis de la variable Rooms
 
 # Esta variable contiene el número de habitaciones de cada propiedad que hay en la muesta. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 34857 toma valores discretos en el rango 1 a 16 dormitorios, que es el máximo encontrado. La mitad de la muestra tiene tres habitaciones o menos y el 75% de pisos tienen entre 1 y 4 habitaciones.
 # A continuacion vamos a ver las frecuencias de la variable
@@ -141,7 +141,7 @@ plot.show()
 # Como ya se habia comprobado numéricamente la variable es muy simetrica aunque se aprecia unos outliers, viviendas de mas de 7 dormitorios que posteriormente veremos que efecto tienen en los modelos.  
 # A priori no parece necesario tratar de ningún modo esta variable por ser simétrica y los outliers no parecen ser error de muestra.
 
-# ### 3.3.2 Analisis de la variable Bedroom2
+# ### 4.3.2 Analisis de la variable Bedroom2
 # Esta variable contiene el numero de dormitorios de cada propiedad. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26640 elementos de la muestra.Toma valores discretos en el rango 0 a 30 dormitorios, que es el máximo encontrado. La mitad de la muestra tiene tres dormitorios o menos y el 75% de pisos tienen entre 0 y 4 dormitorios. Estas cifras llaman la atencion ya que **el máximo numero de habitaciones de la variable rooms tenia como maximo 16**, por lo que esos datos puede que estén mal imputados.
 
 # In[10]:
@@ -171,7 +171,7 @@ mostrar_graf_variables_discretas(dataframe,"Bedroom2")
 # 
 # En este caso la variable tiene un coeficiente de asimetria 0 y algún outlier que veremos posteriormente como afecta al modelo 
 
-# ### 3.3.3 Analisis de la variable Distance
+# ### 4.3.3 Analisis de la variable Distance
 # La variable Distance indica la distancia al centro del inmbueble y toma como unidad las millas. Como se puede ver en la tabla 3.3.1 esta variable tiene valores en 34856 elementos de la muestra. La variable toma valores entre 0 y 48 millas , el 50% de los pisos de la muestra se encuentran a menos de 10,3 millas del centro de la ciudad y la desviacion tipica es 6,78. 
 # Calculamos medidas de dispersión y simetriía ya que las de centralidad las hemos visto en la tabla 3.3.1
 # 
@@ -225,7 +225,7 @@ mostrar_graf_variables_continuas(dataframe_filtered,"Distance")
 
 # ¿que hacemos con esto
 
-# ### 3.3.4 Analisis de la variable Bathrooms
+# ### 4.3.4 Analisis de la variable Bathrooms
 # 
 # Esta variable indica el número de baños del inmuble.Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26631 elementos de la muestra. Toma valores discretos en el rango 0 a 12 dormitorios. El 75% de pisos tienen entre 0 y 2 baños . A continuacion vamos a ver las frecuencias de la variable:
 
@@ -250,6 +250,9 @@ mostrar_analisis_var_cuantitativas(dataframe["Bathroom"])
 
 mostrar_graf_variables_discretas(dataframe,"Bathroom")
 
+sb.regplot(x="Bathroom", y="Price", data=dataframe);
+plot.show()
+
 
 # In[19]:
 
@@ -264,23 +267,26 @@ plot.show()
 
 dataframe_filtered=dataframe[(dataframe["Bathroom"]>0) & (dataframe["Bathroom"] is not None)]
 dataframe["Bathroom_TRA"]=dataframe["Bathroom"].apply(np.sqrt)
-
+dataframe["Price_TRA"]=dataframe["Price"].apply(np.sqrt)
+dataframe["Price_TRA"]=np.log2(dataframe["Price"])
 #dataframe["Distance_SQR"]=dataframe["Distance"].apply(np.sqrt)
 sb.scatterplot(data=dataframe, x="Bathroom_TRA", y="Price")
 mostrar_graf_variables_continuas(dataframe,"Bathroom_TRA")
 plot.show()
 
-sb.displot(data=dataframe, x="Bathroom_TRA",y="Price",kind="kde")
+sb.displot(data=dataframe, x="Bathroom_TRA",y="Price_TRA",kind="kde")
 plot.show()
 #dataframe["Distance_SQR"]=dataframe["Distance"].apply(np.sqrt)
 #sb.scatterplot(data=dataframe, x="Distance", y="Price")
 #plot.show()
 mostrar_graf_variables_continuas(dataframe,"Bathroom_TRA")
+sb.regplot(x="Bathroom_TRA", y="Price_TRA", data=dataframe);
+plot.show()
 
 
 # NI idea de que hacer con esta variable si es que hay que hacer algo...
 
-# ### 3.3.5 Analisis de la variable Car
+# ### 4.3.5 Analisis de la variable Car
 # 
 # Esta variable contiene el numero de plazas de aparcamiento que tiene asociadas la vivienda. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26129 de la muestra y toma valores discretos en el rango 0 a 26 plazas de aparcamiento. El 75% de pisos tienen entre 0 y 2 plazas de aparcamiento . A continuacion vamos a ver las frecuencias de la variable:
 # 
@@ -315,7 +321,7 @@ mostrar_graf_variables_continuas(dataframe,"Car")
 plot.show()
 
 
-# ### 3.3.6 Analisis de la variable Landsize
+# ### 4.3.6 Analisis de la variable Landsize
 # 
 # Esta variable contiene el tamaño del terreno asociado a la vivienda, excluye los metros de la vivienda y está calculada en metros cuadrados. La media de terreno asociado al inmbueble es de  593.598993  El 75% de pisos tienen menos de 670 metros cuadrados de parcela. A continuacion vamos a ver las frecuencias de la variable:
 
@@ -383,7 +389,7 @@ plot.show()
 mostrar_graf_variables_continuas(dataframe_filtered,"Landsize_TRA")
 
 
-# ### 3.3.7 Analisis de la variable BulldingArea
+# ### 4.3.7 Analisis de la variable BulldingArea
 # 
 # Esta variable contiene el el tamaño del terreno asociado a la vivienda en metros cuadrados. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 13742 elementos de la muestra.La media del tamaño de los inmubles de 160.25640 y toma valores continuos en el rango 0 a 44515 . El 75% de pisos tienen menos de 188.00000 metros cuadrado. A continuacion vamos a ver las medidas de dispersión de la varibale:
 
@@ -428,7 +434,7 @@ plot.show()
 
 # Los datos sin ese registro tienen mejor aspecto y parecen muy concentrados. Lo tendremos en cuenta cuando tratemos la variables.
 
-# ### 3.3.8 Analisis de la variable PropertyCountss
+# ### 4.3.8 Analisis de la variable PropertyCountss
 # 
 # Esta variable contiene el numero de viviendas existentes en el barrio. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 34854 y toma valores discretos en el rango 83 a 21650(que es el maximo de viviendas en un bbarrio). El 75% de pisos están en barrios con 10412 viviendas o menos.
 # A continuacion vamos a ver las frecuencias de la variable:
@@ -447,13 +453,40 @@ mostrar_analisis_var_cuantitativas(dataframe["Propertycount"])
 mostrar_graf_variables_continuas(dataframe,"Propertycount")
 
 
-# ### 3.3.1 Analisis de la variable Price
-# ANALIZAR como cambia el tiempo
+# ### 4.3.1 Analisis de la variable Latitud y Longitud
 # 
-# Meter el algun calculo de lat y long.
+
+# In[61]:
+
+
+dataframe.describe()
+#df_fil=dataframe[(dataframe["Lattitude"] is not None) & (dataframe["Longtitude"] is not None)]
+dataframe["Location_TRA"]=dataframe.Lattitude*dataframe.Longtitude
+
+mostrar_graf_variables_continuas(dataframe,"Location_TRA")
+sb.scatterplot(data=dataframe, x="Location_TRA", y="Price")
+#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
+plot.show()
+
+x_estimator=np.mean
+
+sb.lmplot(x="Location_TRA", y="Price", data=dataframe, x_estimator=np.mean);
+plot.show()
+
 
 # In[ ]:
 
 
 
 
+
+# 
+# ```{toctree}
+# :hidden:
+# :titlesonly:
+# 
+# 
+# culita1
+# cualita2
+# ```
+# 
