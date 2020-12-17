@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3. Análisis y Transformación de Variables Cualitativas &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -57,8 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Procesamiento de Variables Cualitativas" href="5-ProcesamientoVaribalesCualitativas.html" />
-    <link rel="prev" title="3. Detección e Imputación de Datos Faltantes" href="3-DeteccionImputacionDatosFaltantes.html" />
+    <link rel="next" title="3.Variables Cualitativas" href="4-ProcesamientoVaribalesCualitativas.html" />
+    <link rel="prev" title="2. Análisis Exploratorio Inicial (EDA)" href="2-AnalisisExploratorioInicial.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -98,12 +98,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="2-AnalisisExploratorioInicial.html">
-   2. Análisis Exploratorio Inicial
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="3-DeteccionImputacionDatosFaltantes.html">
-   3. Detección e Imputación de Datos Faltantes
+   2. Análisis Exploratorio Inicial (EDA)
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -112,8 +107,33 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
-   5. Procesamiento de Variables Cualitativas
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html">
+   3.Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#resumen-numerico-de-variables-cualitativas">
+   3.1 Resumen Numérico de Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#seleccion-de-variables-categoricas">
+   3.3 Selección de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#correlacion-de-variables-categoricas">
+   3.4 Correlación de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#transformacion-de-variables-categoricas">
+   3.5 Transformación de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-DeteccionImputacionDatosFaltantes.html">
+   5. Limpieza de los datos
   </a>
  </li>
  <li class="toctree-l1">
@@ -185,7 +205,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/4-TransformacionVariablesCuantitativas.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/3-TransformacionVariablesCuantitativas.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -205,7 +225,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F4-TransformacionVariablesCuantitativas.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F3-TransformacionVariablesCuantitativas.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -226,7 +246,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/4-TransformacionVariablesCuantitativas.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/3-TransformacionVariablesCuantitativas.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -343,6 +363,59 @@
     <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
     <span class="n">sb</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
     <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="n">f25d3b4ae28</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default=&#39;warn&#39;</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/ruben/Fundamentos-de-Analisis-de-DAtos-I/Practica/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plot</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
+<span class="g g-Whitespace">    </span><span class="mi">686</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span> 
+<span class="ne">--&gt; </span><span class="mi">688</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">689</span> 
+<span class="g g-Whitespace">    </span><span class="mi">690</span> 
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">fp_or_buf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span> 
+<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span> 
+<span class="ne">--&gt; </span><span class="mi">948</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">949</span> 
+<span class="g g-Whitespace">    </span><span class="mi">950</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="k">def</span> <span class="nf">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1180</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="n">CParserWrapper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1181</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span>             <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2008</span>         <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;usecols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">usecols</span>
+<span class="g g-Whitespace">   </span><span class="mi">2009</span> 
+<span class="ne">-&gt; </span><span class="mi">2010</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="n">parsers</span><span class="o">.</span><span class="n">TextReader</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2011</span>         <span class="bp">self</span><span class="o">.</span><span class="n">unnamed_cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">unnamed_cols</span>
+<span class="g g-Whitespace">   </span><span class="mi">2012</span> 
+
+<span class="nn">pandas/_libs/parsers.pyx</span> in <span class="ni">pandas._libs.parsers.TextReader.__cinit__</span><span class="nt">()</span>
+
+<span class="nn">pandas/_libs/parsers.pyx</span> in <span class="ni">pandas._libs.parsers.TextReader._setup_parser_source</span><span class="nt">()</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/ruben/Fundamentos-de-Analisis-de-DAtos-I/Practica/Melbourne_housing_FULL.csv&#39;
 </pre></div>
 </div>
 </div>
@@ -1072,8 +1145,8 @@ Name: Rooms, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_16_0.png" src="_images/4-TransformacionVariablesCuantitativas_16_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_16_1.png" src="_images/4-TransformacionVariablesCuantitativas_16_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_16_0.png" src="_images/3-TransformacionVariablesCuantitativas_16_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_16_1.png" src="_images/3-TransformacionVariablesCuantitativas_16_1.png" />
 </div>
 </div>
 <p>Como ya se habia comprobado numéricamente la variable es muy simetrica aunque se aprecia unos outliers, viviendas de mas de 7 dormitorios que posteriormente veremos que efecto tienen en los modelos.<br />
@@ -1162,7 +1235,7 @@ Vamos a verificar las medidas de dispersión y asimetria de la variable</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_23_0.png" src="_images/4-TransformacionVariablesCuantitativas_23_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_23_0.png" src="_images/3-TransformacionVariablesCuantitativas_23_0.png" />
 </div>
 </div>
 <p>como ya se habia comprobado numéricamente la variable es muy simetrica aunque se aprecia unos outliers, viviendas de mas de 7 dormitorios que se deberian eliminar. También habra que seleccionar que variable es de mejor calidad para llevar a cabo el modelo.</p>
@@ -1224,8 +1297,8 @@ Vemos la distribucion de la variable y posibles outliers</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_28_0.png" src="_images/4-TransformacionVariablesCuantitativas_28_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_28_1.png" src="_images/4-TransformacionVariablesCuantitativas_28_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_28_0.png" src="_images/3-TransformacionVariablesCuantitativas_28_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_28_1.png" src="_images/3-TransformacionVariablesCuantitativas_28_1.png" />
 </div>
 </div>
 <p>¿que se ve aqui?</p>
@@ -1257,9 +1330,9 @@ Vemos la distribucion de la variable y posibles outliers</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_31_0.png" src="_images/4-TransformacionVariablesCuantitativas_31_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_31_1.png" src="_images/4-TransformacionVariablesCuantitativas_31_1.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_31_2.png" src="_images/4-TransformacionVariablesCuantitativas_31_2.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_31_0.png" src="_images/3-TransformacionVariablesCuantitativas_31_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_31_1.png" src="_images/3-TransformacionVariablesCuantitativas_31_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_31_2.png" src="_images/3-TransformacionVariablesCuantitativas_31_2.png" />
 </div>
 </div>
 <p>¿que hacemos con esto?</p>
@@ -1343,7 +1416,7 @@ Name: Bathroom, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_39_0.png" src="_images/4-TransformacionVariablesCuantitativas_39_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_39_0.png" src="_images/3-TransformacionVariablesCuantitativas_39_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1355,7 +1428,7 @@ Name: Bathroom, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_40_0.png" src="_images/4-TransformacionVariablesCuantitativas_40_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_40_0.png" src="_images/3-TransformacionVariablesCuantitativas_40_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1378,12 +1451,12 @@ Name: Bathroom, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_41_0.png" src="_images/4-TransformacionVariablesCuantitativas_41_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_41_1.png" src="_images/4-TransformacionVariablesCuantitativas_41_1.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_41_2.png" src="_images/4-TransformacionVariablesCuantitativas_41_2.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_41_3.png" src="_images/4-TransformacionVariablesCuantitativas_41_3.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_41_4.png" src="_images/4-TransformacionVariablesCuantitativas_41_4.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_41_5.png" src="_images/4-TransformacionVariablesCuantitativas_41_5.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_41_0.png" src="_images/3-TransformacionVariablesCuantitativas_41_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_41_1.png" src="_images/3-TransformacionVariablesCuantitativas_41_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_41_2.png" src="_images/3-TransformacionVariablesCuantitativas_41_2.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_41_3.png" src="_images/3-TransformacionVariablesCuantitativas_41_3.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_41_4.png" src="_images/3-TransformacionVariablesCuantitativas_41_4.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_41_5.png" src="_images/3-TransformacionVariablesCuantitativas_41_5.png" />
 </div>
 </div>
 <p>NI idea de que hacer con esta variable si es que hay que hacer algo…</p>
@@ -1470,7 +1543,7 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_48_0.png" src="_images/4-TransformacionVariablesCuantitativas_48_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_48_0.png" src="_images/3-TransformacionVariablesCuantitativas_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1482,9 +1555,9 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_49_0.png" src="_images/4-TransformacionVariablesCuantitativas_49_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_49_1.png" src="_images/4-TransformacionVariablesCuantitativas_49_1.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_49_2.png" src="_images/4-TransformacionVariablesCuantitativas_49_2.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_49_0.png" src="_images/3-TransformacionVariablesCuantitativas_49_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_49_1.png" src="_images/3-TransformacionVariablesCuantitativas_49_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_49_2.png" src="_images/3-TransformacionVariablesCuantitativas_49_2.png" />
 </div>
 </div>
 </div>
@@ -1542,8 +1615,8 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_53_0.png" src="_images/4-TransformacionVariablesCuantitativas_53_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_53_1.png" src="_images/4-TransformacionVariablesCuantitativas_53_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_53_0.png" src="_images/3-TransformacionVariablesCuantitativas_53_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_53_1.png" src="_images/3-TransformacionVariablesCuantitativas_53_1.png" />
 </div>
 </div>
 <p>vamos a eliminar el registro superior que está desvirtuando el gráfico para poder analizarlo con mas detalle</p>
@@ -1566,9 +1639,9 @@ Name: Car, dtype: float64
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registros filtrado =  23
 </pre></div>
 </div>
-<img alt="_images/4-TransformacionVariablesCuantitativas_55_1.png" src="_images/4-TransformacionVariablesCuantitativas_55_1.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_55_2.png" src="_images/4-TransformacionVariablesCuantitativas_55_2.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_55_3.png" src="_images/4-TransformacionVariablesCuantitativas_55_3.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_55_1.png" src="_images/3-TransformacionVariablesCuantitativas_55_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_55_2.png" src="_images/3-TransformacionVariablesCuantitativas_55_2.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_55_3.png" src="_images/3-TransformacionVariablesCuantitativas_55_3.png" />
 </div>
 </div>
 <p>Continua habiendo outliers que hacen que la variabe sea muy dispersa por lo que la variable es clara condidata a ser transformada</p>
@@ -1604,10 +1677,10 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_57_0.png" src="_images/4-TransformacionVariablesCuantitativas_57_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_57_1.png" src="_images/4-TransformacionVariablesCuantitativas_57_1.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_57_2.png" src="_images/4-TransformacionVariablesCuantitativas_57_2.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_57_3.png" src="_images/4-TransformacionVariablesCuantitativas_57_3.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_57_0.png" src="_images/3-TransformacionVariablesCuantitativas_57_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_57_1.png" src="_images/3-TransformacionVariablesCuantitativas_57_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_57_2.png" src="_images/3-TransformacionVariablesCuantitativas_57_2.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_57_3.png" src="_images/3-TransformacionVariablesCuantitativas_57_3.png" />
 </div>
 </div>
 </div>
@@ -1665,8 +1738,8 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_61_0.png" src="_images/4-TransformacionVariablesCuantitativas_61_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_61_1.png" src="_images/4-TransformacionVariablesCuantitativas_61_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_61_0.png" src="_images/3-TransformacionVariablesCuantitativas_61_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_61_1.png" src="_images/3-TransformacionVariablesCuantitativas_61_1.png" />
 </div>
 </div>
 <p>como se puede ver hay claramente algún outlier que desvirtua la muestra (ya lo pudimos ver tambien en la tabla 3.1.1 donde la media era de 522 y el maximo era mas de 44000 metros cuadrados de parcela).
@@ -1697,10 +1770,10 @@ Eliinamos el el maximo en cuestión y repiintamos los graficos</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registros filtrado =  13
 </pre></div>
 </div>
-<img alt="_images/4-TransformacionVariablesCuantitativas_63_1.png" src="_images/4-TransformacionVariablesCuantitativas_63_1.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_63_2.png" src="_images/4-TransformacionVariablesCuantitativas_63_2.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_63_3.png" src="_images/4-TransformacionVariablesCuantitativas_63_3.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_63_4.png" src="_images/4-TransformacionVariablesCuantitativas_63_4.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_63_1.png" src="_images/3-TransformacionVariablesCuantitativas_63_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_63_2.png" src="_images/3-TransformacionVariablesCuantitativas_63_2.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_63_3.png" src="_images/3-TransformacionVariablesCuantitativas_63_3.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_63_4.png" src="_images/3-TransformacionVariablesCuantitativas_63_4.png" />
 </div>
 </div>
 <p>Los datos sin ese registro tienen mejor aspecto y parecen muy concentrados. Lo tendremos en cuenta cuando tratemos la variables.</p>
@@ -1760,8 +1833,8 @@ A continuacion vamos a ver las frecuencias de la variable:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4-TransformacionVariablesCuantitativas_68_0.png" src="_images/4-TransformacionVariablesCuantitativas_68_0.png" />
-<img alt="_images/4-TransformacionVariablesCuantitativas_68_1.png" src="_images/4-TransformacionVariablesCuantitativas_68_1.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_68_0.png" src="_images/3-TransformacionVariablesCuantitativas_68_0.png" />
+<img alt="_images/3-TransformacionVariablesCuantitativas_68_1.png" src="_images/3-TransformacionVariablesCuantitativas_68_1.png" />
 </div>
 </div>
 </div>
@@ -1800,8 +1873,8 @@ A continuacion vamos a ver las frecuencias de la variable:</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="3-DeteccionImputacionDatosFaltantes.html" title="previous page">3. Detección e Imputación de Datos Faltantes</a>
-    <a class='right-next' id="next-link" href="5-ProcesamientoVaribalesCualitativas.html" title="next page">5. Procesamiento de Variables Cualitativas</a>
+    <a class='left-prev' id="prev-link" href="2-AnalisisExploratorioInicial.html" title="previous page">2. Análisis Exploratorio Inicial (EDA)</a>
+    <a class='right-next' id="next-link" href="4-ProcesamientoVaribalesCualitativas.html" title="next page">3.Variables Cualitativas</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
