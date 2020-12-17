@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 604, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 85, in ensure_async
-    result = await obj
-  File "/home/ruben/anaconda3/lib/python3.7/site-packages/jupyter_client/asynchronous/channels.py", line 48, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/home/ruben/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
   File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
@@ -22,16 +11,106 @@ Traceback (most recent call last):
     return future.result()
   File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 811, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 628, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 679, in _async_handle_timeout
-    "Cell execution timed out", timeout, cell
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-mostrar_graf_variables_continuas(dataframe,"Landsize")
--------------------
+  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 827, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/ruben/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 735, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+arr=[]
+for lat, lon in zip(data_filtered['Lattitude'], data_filtered['Longtitude']):
+    arr.append(distance((lat,lon), coords_2).km)
+
+data_filtered["Distancia_NEW"]=arr
+
+
+
+dataframe.describe()
+#df_fil=dataframe[(dataframe["Lattitude"] is not None) & (dataframe["Longtitude"] is not None)]
+dataframe["Location_TRA"]=dataframe.Longtitude/dataframe.Lattitude
+dataframe_less=dataframe[(dataframe["Lattitude"]>=dataframe["Lattitude"].mean()) ]
+dataframe_over=dataframe[(dataframe["Lattitude"]<dataframe["Lattitude"].mean()) ]
+
+sb.regplot(data=data_filtered, x="Distancia_NEW", y="Price")
+plot.show()
+#mostrar_graf_variables_continuas(dataframe,"Location_TRA")
+sb.scatterplot(data=dataframe, x="Location_TRA", y="Price")
+mostrar_graf_variables_continuas(dataframe,"Longtitude")
+plot.show()
+
+dataframe_min=dataframe[dataframe["Lattitude"]>=dataframe["Lattitude"].mean()]
+#dataframe["Lattitude_TRA"]=np.log(dataframe["Lattitude"])
+#dataframe["Price_TRA"]=np.log(dataframe["Price"])
+#mostrar_graf_variables_continuas(dataframe,"Location_TRA")
+sb.scatterplot(data=dataframe, x="Lattitude", y="Price_TRA")
+mostrar_graf_variables_continuas(dataframe,"Lattitude_TRA")
+plot.show()
+
+sb.scatterplot(data=dataframe, x="Lattitude_TRA", y="Price_TRA")
+#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
+plot.show()
+
+data_filtered.corr()
+
+#sb.swarmplot(data=dataframe, x="Lattitude", y="Longtitude",hue="Price",s = 4)
+#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
+#plot.show()x_estimator=np.mean
+
+#sb.lmplot(x="Location_TRA", y="Price", data=dataframe, x_estimator=np.mean);
+#plot.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m<ipython-input-37-5596a4c4f5ea>[0m in [0;36m<module>[0;34m[0m
+[1;32m     25[0m [0;31m#mostrar_graf_variables_continuas(dataframe,"Location_TRA")[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     26[0m [0msb[0m[0;34m.[0m[0mscatterplot[0m[0;34m([0m[0mdata[0m[0;34m=[0m[0mdataframe[0m[0;34m,[0m [0mx[0m[0;34m=[0m[0;34m"Lattitude"[0m[0;34m,[0m [0my[0m[0;34m=[0m[0;34m"Price_TRA"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 27[0;31m [0mmostrar_graf_variables_continuas[0m[0;34m([0m[0mdataframe[0m[0;34m,[0m[0;34m"Lattitude_TRA"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     28[0m [0mplot[0m[0;34m.[0m[0mshow[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     29[0m [0;34m[0m[0m
+
+[0;32m<ipython-input-1-5d2674297076>[0m in [0;36mmostrar_graf_variables_continuas[0;34m(df_data, column)[0m
+[1;32m     30[0m     [0msb[0m[0;34m.[0m[0mset_theme[0m[0;34m([0m[0mstyle[0m[0;34m=[0m[0;34m"whitegrid"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     31[0m     [0mfig[0m[0;34m,[0m [0;34m([0m[0max1[0m[0;34m,[0m[0max2[0m[0;34m)[0m [0;34m=[0m [0mplot[0m[0;34m.[0m[0msubplots[0m[0;34m([0m[0;36m1[0m[0;34m,[0m[0;36m2[0m[0;34m,[0m[0mfigsize[0m[0;34m=[0m[0;34m([0m[0;36m12[0m[0;34m,[0m[0;36m6[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 32[0;31m     [0msb[0m[0;34m.[0m[0mhistplot[0m[0;34m([0m[0mdata[0m[0;34m=[0m[0mdf_data[0m[0;34m,[0m[0mx[0m[0;34m=[0m[0mcolumn[0m[0;34m,[0m[0max[0m[0;34m=[0m[0max1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     33[0m     [0msb[0m[0;34m.[0m[0mboxplot[0m[0;34m([0m[0mdata[0m[0;34m=[0m[0mdf_data[0m[0;34m,[0m[0mx[0m[0;34m=[0m[0mcolumn[0m[0;34m,[0m[0max[0m[0;34m=[0m[0max2[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     34[0m     [0msb[0m[0;34m.[0m[0mdisplot[0m[0;34m([0m[0mdata[0m[0;34m=[0m[0mdf_data[0m[0;34m,[0m [0mx[0m[0;34m=[0m[0mcolumn[0m[0;34m,[0m[0mkind[0m[0;34m=[0m[0;34m"kde"[0m[0;34m,[0m[0mrug[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py[0m in [0;36mhistplot[0;34m(data, x, y, hue, weights, stat, bins, binwidth, binrange, discrete, cumulative, common_bins, common_norm, multiple, element, fill, shrink, kde, kde_kws, line_kws, thresh, pthresh, pmax, cbar, cbar_ax, cbar_kws, palette, hue_order, hue_norm, color, log_scale, legend, ax, **kwargs)[0m
+[1;32m   1390[0m     p = _DistributionPlotter(
+[1;32m   1391[0m         [0mdata[0m[0;34m=[0m[0mdata[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1392[0;31m         [0mvariables[0m[0;34m=[0m[0m_DistributionPlotter[0m[0;34m.[0m[0mget_semantics[0m[0;34m([0m[0mlocals[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1393[0m     )
+[1;32m   1394[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py[0m in [0;36m__init__[0;34m(self, data, variables)[0m
+[1;32m    106[0m     ):
+[1;32m    107[0m [0;34m[0m[0m
+[0;32m--> 108[0;31m         [0msuper[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0mdata[0m[0;34m=[0m[0mdata[0m[0;34m,[0m [0mvariables[0m[0;34m=[0m[0mvariables[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    109[0m [0;34m[0m[0m
+[1;32m    110[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.7/site-packages/seaborn/_core.py[0m in [0;36m__init__[0;34m(self, data, variables)[0m
+[1;32m    602[0m     [0;32mdef[0m [0m__init__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mdata[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mvariables[0m[0;34m=[0m[0;34m{[0m[0;34m}[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    603[0m [0;34m[0m[0m
+[0;32m--> 604[0;31m         [0mself[0m[0;34m.[0m[0massign_variables[0m[0;34m([0m[0mdata[0m[0;34m,[0m [0mvariables[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    605[0m [0;34m[0m[0m
+[1;32m    606[0m         [0;32mfor[0m [0mvar[0m[0;34m,[0m [0mcls[0m [0;32min[0m [0mself[0m[0;34m.[0m[0m_semantic_mappings[0m[0;34m.[0m[0mitems[0m[0;34m([0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.7/site-packages/seaborn/_core.py[0m in [0;36massign_variables[0;34m(self, data, variables)[0m
+[1;32m    666[0m             [0mself[0m[0;34m.[0m[0minput_format[0m [0;34m=[0m [0;34m"long"[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    667[0m             plot_data, variables = self._assign_variables_longform(
+[0;32m--> 668[0;31m                 [0mdata[0m[0;34m,[0m [0;34m**[0m[0mvariables[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    669[0m             )
+[1;32m    670[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/lib/python3.7/site-packages/seaborn/_core.py[0m in [0;36m_assign_variables_longform[0;34m(self, data, **kwargs)[0m
+[1;32m    885[0m                     [0;31m# We don't know what this name means[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    886[0m                     [0merr[0m [0;34m=[0m [0;34mf"Could not interpret value `{val}` for parameter `{key}`"[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 887[0;31m                     [0;32mraise[0m [0mValueError[0m[0;34m([0m[0merr[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    888[0m [0;34m[0m[0m
+[1;32m    889[0m             [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: Could not interpret value `Lattitude_TRA` for parameter `x`
+ValueError: Could not interpret value `Lattitude_TRA` for parameter `x`
 

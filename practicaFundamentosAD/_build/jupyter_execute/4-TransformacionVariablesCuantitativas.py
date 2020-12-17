@@ -6,6 +6,7 @@
 
 import pandas as pd 
 import numpy as np
+import folium
 import math
 from scipy import stats
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -24,7 +25,10 @@ def mostrar_analisis_var_cuantitativas(data):
     #calcular coeficiente de variacion
  datos_variable=pd.DataFrame([{"coeficiente de Variacion":(data.std()/data.mean())*100,                 "rango de la variable":data.max() - data.min(),
                  "rango intercuartilico":data.quantile(0.75) - data.quantile(0.25),
-                 "coeficiente de asimetria":quartile_skew(data)}])
+                 "coeficiente de asimetria":quartile_skew(data),
+                 "Min":data.min(),
+                 "Max":data.max(),
+                 "Mean":data.mean()}])
  return(datos_variable)
 
 def mostrar_graf_variables_continuas(df_data,column):
@@ -68,6 +72,7 @@ dataframe.head()
 
 
 dataframe.dtypes
+len(dataframe["Suburb"].unique())
 
 
 # In[4]:
@@ -136,6 +141,8 @@ dataframe["Rooms_TR"]=dataframe["Rooms"].apply(np.sqrt)
 sb.scatterplot(data=dataframe, x="Rooms", y="Price")
 #mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
 plot.show()
+sb.regplot(x="Rooms", y="Price", data=dataframe);
+plot.show()
 
 
 # Como ya se habia comprobado numéricamente la variable es muy simetrica aunque se aprecia unos outliers, viviendas de mas de 7 dormitorios que posteriormente veremos que efecto tienen en los modelos.  
@@ -200,7 +207,7 @@ mostrar_graf_variables_continuas(dataframe,"Distance")
 
 #dataframe=dataframe[dataframe["Distance"].notna()] 
 
-
+dataframe["BathsAndRooms"]=(dataframe["Rooms"]+dataframe["Bathroom"])/dataframe["Distance"].apply(np.sqrt)
 
 dataframe_filtered=dataframe[dataframe["Distance"] >0]
 
@@ -219,6 +226,13 @@ dataframe["Distance_TRA"]=dataframe["Distance"].apply(np.sqrt)
 #sb.scatterplot(data=dataframe, x="Distance", y="Price")
 #plot.show()
 mostrar_graf_variables_continuas(dataframe_filtered,"Distance")
+sb.regplot(x="Distance_TRA", y="Price", data=dataframe);
+plot.show()
+sb.regplot(x="BathsAndRooms", y="Price", data=dataframe);
+plot.show()
+
+
+dataframe.corr()
 
 
 # ¿que hacemos con esto?
@@ -453,25 +467,188 @@ mostrar_analisis_var_cuantitativas(dataframe["Propertycount"])
 mostrar_graf_variables_continuas(dataframe,"Propertycount")
 
 
-# ### 4.3.1 Analisis de la variable Latitud y Longitud
+# ### 4.3.1 Analisis de la variable Latitud 
 # 
+# Esta variable contiene la coordenada geográfica correspondiente a la latitud del inmueble. Como se puede ver en la tabla de abajo
 
-# In[61]:
+# In[34]:
+
+
+mostrar_analisis_var_cuantitativas(dataframe["Lattitude"])
+
+
+# In[35]:
+
+
+mostrar_analisis_var_cuantitativas(dataframe["Longtitude"])
+
+
+# In[36]:
+
+
+import geopy.distance 
+import geopandas
+import numpy as np
+from shapely.geometry import Point
+from geopy.distance import distance
+
+mapa = folium.Map(location=[-37.810634, 145.001851], zoom_start=11)
+data_filtered=dataframe[dataframe['Lattitude'].notnull() &                         dataframe['Longtitude'].notnull() &                       dataframe['Rooms'].notnull() &                        dataframe['Bathroom'].notnull() &                        dataframe['Price'].notnull()]
+coords_2=(-37.810634,145.001851)
+
+
+
+locations=data_filtered[['Lattitude', 'Longtitude']]
+locations.round(6)
+locationlist=locations.values.tolist()
+len(locationlist)
+for i,v in  data_filtered.iterrows():
+    popup = popup = """
+    Bathrooms: <b>%s</b><br>
+    Rooms: <b>%s</b><br>
+    Suburb : <b>%s</b><br>
+    Price : <b>%s</b><br>
+    """ % (v['Bathroom'], v['Rooms'], v['Suburb'], v['Price'])
+    #print(v['Price'])
+    if v['Price'] < float('500000.0'):
+        #Color Azul
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#0000FF',
+                            fill_color='#0000FF',
+                            fill=True, radius=1 ).add_to(mapa)
+    elif  (v['Price'] >= float('500000.0')) & (v['Price'] < float('800000.0')):
+        #color Verde
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#00FF40',
+                            fill_color='#00FF40',
+                            fill=True, radius=1 ).add_to(mapa)
+    elif  (v['Price'] >= float('800000.0')) & (v['Price'] < float('1200000.0')):
+        #Color Amarillo
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#FFFF00',
+                            fill_color='#FFFF00',
+                            fill=True, radius=1 ).add_to(mapa)
+    elif  (v['Price'] >= float('1200000.0'))& (v['Price'] < float('1500000.0')):
+        #Color cian
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#00fff7',
+                            fill_color='#00fff7',
+                            fill=True, radius=1 ).add_to(mapa)
+    elif  (v['Price'] >= float('1500000.0'))& (v['Price'] < float('1800000.0')):
+        #Color Rojo
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#ff2300',
+                            fill_color='#ff2300',
+                            fill=True, radius=1 ).add_to(mapa)
+    elif  (v['Price'] >= float('1800000.0'))& (v['Price'] < float('2100000.0')):
+        #Color Naranja
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#ffc900',
+                            fill_color='#ffc900',
+                            fill=True, radius=1 ).add_to(mapa)
+    elif  (v['Price'] >= float('2100000.0')):
+        #Color Morado
+        folium.CircleMarker(location=[v['Lattitude'], v['Longtitude']], tooltip=popup,
+                            color='#f700ff',
+                            fill_color='#f700ff',
+                            fill=True, radius=1 ).add_to(mapa)
+folium.Marker(location=('37.84280999999999','145.03483'), tooltip=popup,
+                            color='#f711ff',
+                            fill_color='#ffffff',
+                            fill=True, radius=20 ).add_to(mapa)
+mapa
+    
+    
+
+
+# In[37]:
+
+
+arr=[]
+for lat, lon in zip(data_filtered['Lattitude'], data_filtered['Longtitude']):
+    arr.append(distance((lat,lon), coords_2).km)
+
+data_filtered["Distancia_NEW"]=arr
+
 
 
 dataframe.describe()
 #df_fil=dataframe[(dataframe["Lattitude"] is not None) & (dataframe["Longtitude"] is not None)]
-dataframe["Location_TRA"]=dataframe.Lattitude*dataframe.Longtitude
+dataframe["Location_TRA"]=dataframe.Longtitude/dataframe.Lattitude
+dataframe_less=dataframe[(dataframe["Lattitude"]>=dataframe["Lattitude"].mean()) ]
+dataframe_over=dataframe[(dataframe["Lattitude"]<dataframe["Lattitude"].mean()) ]
 
-mostrar_graf_variables_continuas(dataframe,"Location_TRA")
+sb.regplot(data=data_filtered, x="Distancia_NEW", y="Price")
+plot.show()
+#mostrar_graf_variables_continuas(dataframe,"Location_TRA")
 sb.scatterplot(data=dataframe, x="Location_TRA", y="Price")
+mostrar_graf_variables_continuas(dataframe,"Longtitude")
+plot.show()
+
+dataframe_min=dataframe[dataframe["Lattitude"]>=dataframe["Lattitude"].mean()]
+#dataframe["Lattitude_TRA"]=np.log(dataframe["Lattitude"])
+#dataframe["Price_TRA"]=np.log(dataframe["Price"])
+#mostrar_graf_variables_continuas(dataframe,"Location_TRA")
+sb.scatterplot(data=dataframe, x="Lattitude", y="Price_TRA")
+mostrar_graf_variables_continuas(dataframe,"Lattitude_TRA")
+plot.show()
+
+sb.scatterplot(data=dataframe, x="Lattitude_TRA", y="Price_TRA")
 #mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
 plot.show()
 
-x_estimator=np.mean
+data_filtered.corr()
 
-sb.lmplot(x="Location_TRA", y="Price", data=dataframe, x_estimator=np.mean);
+#sb.swarmplot(data=dataframe, x="Lattitude", y="Longtitude",hue="Price",s = 4)
+#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
+#plot.show()x_estimator=np.mean
+
+#sb.lmplot(x="Location_TRA", y="Price", data=dataframe, x_estimator=np.mean);
+#plot.show()
+
+
+# In[90]:
+
+
+
+dataframe.corr()
+data_filtered.corr()
+
+#Calculamos el precio medio por barrio
+data_aux=data_filtered.groupby("Suburb")[["Price"]].mean().reset_index() 
+#nos quedamos con el precio medio mas alta
+data_aux[data_aux["Price"]==max(data_aux['Price'])]
+# cogemos como centro para el calculo de distancia la latitud y longitud media del barrio mas caro
+data_frameKoyong=data_filtered[data_filtered["Suburb"]=='Kooyong']
+Koyong_lat_mean=data_frameKoyong["Lattitude"].mean()
+Koyong_lon_mean=data_frameKoyong["Longtitude"].mean()
+
+#Calculamos la nueva distancia 
+arr=[]
+for lat, lon in zip(data_filtered['Lattitude'], data_filtered['Longtitude']):
+    arr.append(distance((lat,lon), (Koyong_lat_mean,Koyong_lon_mean)).km)
+
+data_filtered["Distancia_NEW"]=arr
+#Comprobamos si la correlaciñon mejora y verficamos que casi duplica 
+data_filtered.corr()
+sb.scatterplot(data=data_filtered, x="Distancia_NEW", y="Price")
+#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
 plot.show()
+
+sb.regplot(data=data_filtered, x="Distancia_NEW", y="Price_TRA")
+plot.show()
+data_filtered["BathsAndRooms"]=(data_filtered["Rooms"]+data_filtered["Bathroom"])/data_filtered["Distancia_NEW"].apply(np.sqrt)
+
+
+
+data_filtered.corr()
+
+
+# In[96]:
+
+
+data_filtered.to_csv('\\home\\ruben\\data_filtered.csv')
+print(data_filtered)
 
 
 # In[ ]:
