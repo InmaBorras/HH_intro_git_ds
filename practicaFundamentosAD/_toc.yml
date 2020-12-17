@@ -5,6 +5,9 @@
 - file: 2-AnalisisExploratorioInicial 
 - file: 3-DeteccionImputacionDatosFaltantes
 - file: 4-TransformacionVariablesCuantitativas
+  sections:
+     - file: culita1
+     - file: cualita2
 - file: 5-ProcesamientoVaribalesCualitativas
 - file: 6-SelecciondeVariables
 - file: 7-AjusteDelModelosdeRegresionLineal 

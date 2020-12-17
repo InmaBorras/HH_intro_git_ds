@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Análisis y Transformación de Variables Cualitativas &#8212; Práctica de Fundamentos de Análisis de Datos</title>
+    <title>4. Análisis y Transformación de Variables Cualitativas &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Procesamiento de Variables Cualitativas" href="5-ProcesamientoVaribalesCualitativas.html" />
+    <link rel="next" title="&lt;no title&gt;" href="cualita2.html" />
     <link rel="prev" title="3. Detección e Imputación de Datos Faltantes" href="3-DeteccionImputacionDatosFaltantes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,10 +106,14 @@
    3. Detección e Imputación de Datos Faltantes
   </a>
  </li>
- <li class="toctree-l1 current active">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
-   3. Análisis y Transformación de Variables Cualitativas
+   4. Análisis y Transformación de Variables Cualitativas
   </a>
+  <ul class="simple collapse-ul">
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
@@ -250,47 +254,47 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-rooms">
-   3.3.1 Analisis de la variable Rooms
+   4.3.1 Analisis de la variable Rooms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-bedroom2">
-   3.3.2 Analisis de la variable Bedroom2
+   4.3.2 Analisis de la variable Bedroom2
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-distance">
-   3.3.3 Analisis de la variable Distance
+   4.3.3 Analisis de la variable Distance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-bathrooms">
-   3.3.4 Analisis de la variable Bathrooms
+   4.3.4 Analisis de la variable Bathrooms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-car">
-   3.3.5 Analisis de la variable Car
+   4.3.5 Analisis de la variable Car
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-landsize">
-   3.3.6 Analisis de la variable Landsize
+   4.3.6 Analisis de la variable Landsize
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-bulldingarea">
-   3.3.7 Analisis de la variable BulldingArea
+   4.3.7 Analisis de la variable BulldingArea
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analisis-de-la-variable-propertycountss">
-   3.3.8 Analisis de la variable PropertyCountss
+   4.3.8 Analisis de la variable PropertyCountss
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analisis-de-la-variable-price">
-   3.3.1 Analisis de la variable Price
+  <a class="reference internal nav-link" href="#analisis-de-la-variable-latitud-y-longitud">
+   4.3.1 Analisis de la variable Latitud y Longitud
   </a>
  </li>
 </ul>
@@ -805,7 +809,7 @@ max      -37.390200    145.526350   21650.000000
 </div></div></div>
 </div>
 <div class="section" id="analisis-y-transformacion-de-variables-cualitativas">
-<h1>3. Análisis y Transformación de Variables Cualitativas<a class="headerlink" href="#analisis-y-transformacion-de-variables-cualitativas" title="Permalink to this headline">¶</a></h1>
+<h1>4. Análisis y Transformación de Variables Cualitativas<a class="headerlink" href="#analisis-y-transformacion-de-variables-cualitativas" title="Permalink to this headline">¶</a></h1>
 <p>para cada una de las variables cualitativas del dataframe comprobaremos sus medidas de centralidad y veremos cuales de ellas tiene sentido analizar</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -988,7 +992,7 @@ Antes de empezar el analisis de las variables indicar que el coeficiente de asim
 <li><p>Si el coeficiente de asimetría se encuentra entre <strong>-0,5 y 0,5</strong>, la distribución de la variable es <strong>aproximadamente sesgada</strong>.</p></li>
 </ul>
 <div class="section" id="analisis-de-la-variable-rooms">
-<h2>3.3.1 Analisis de la variable Rooms<a class="headerlink" href="#analisis-de-la-variable-rooms" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.1 Analisis de la variable Rooms<a class="headerlink" href="#analisis-de-la-variable-rooms" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable contiene el número de habitaciones de cada propiedad que hay en la muesta. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 34857 toma valores discretos en el rango 1 a 16 dormitorios, que es el máximo encontrado. La mitad de la muestra tiene tres habitaciones o menos y el 75% de pisos tienen entre 1 y 4 habitaciones.
 A continuacion vamos a ver las frecuencias de la variable</p>
 <div class="cell docutils container">
@@ -1080,7 +1084,7 @@ Name: Rooms, dtype: float64
 A priori no parece necesario tratar de ningún modo esta variable por ser simétrica y los outliers no parecen ser error de muestra.</p>
 </div>
 <div class="section" id="analisis-de-la-variable-bedroom2">
-<h2>3.3.2 Analisis de la variable Bedroom2<a class="headerlink" href="#analisis-de-la-variable-bedroom2" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.2 Analisis de la variable Bedroom2<a class="headerlink" href="#analisis-de-la-variable-bedroom2" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable contiene el numero de dormitorios de cada propiedad. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26640 elementos de la muestra.Toma valores discretos en el rango 0 a 30 dormitorios, que es el máximo encontrado. La mitad de la muestra tiene tres dormitorios o menos y el 75% de pisos tienen entre 0 y 4 dormitorios. Estas cifras llaman la atencion ya que <strong>el máximo numero de habitaciones de la variable rooms tenia como maximo 16</strong>, por lo que esos datos puede que estén mal imputados.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1169,7 +1173,7 @@ Vamos a verificar las medidas de dispersión y asimetria de la variable</p>
 <p>En este caso la variable tiene un coeficiente de asimetria 0 y algún outlier que veremos posteriormente como afecta al modelo</p>
 </div>
 <div class="section" id="analisis-de-la-variable-distance">
-<h2>3.3.3 Analisis de la variable Distance<a class="headerlink" href="#analisis-de-la-variable-distance" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.3 Analisis de la variable Distance<a class="headerlink" href="#analisis-de-la-variable-distance" title="Permalink to this headline">¶</a></h2>
 <p>La variable Distance indica la distancia al centro del inmbueble y toma como unidad las millas. Como se puede ver en la tabla 3.3.1 esta variable tiene valores en 34856 elementos de la muestra. La variable toma valores entre 0 y 48 millas , el 50% de los pisos de la muestra se encuentran a menos de 10,3 millas del centro de la ciudad y la desviacion tipica es 6,78.
 Calculamos medidas de dispersión y simetriía ya que las de centralidad las hemos visto en la tabla 3.3.1</p>
 <div class="cell docutils container">
@@ -1266,7 +1270,7 @@ Vemos la distribucion de la variable y posibles outliers</p>
 <p>¿que hacemos con esto</p>
 </div>
 <div class="section" id="analisis-de-la-variable-bathrooms">
-<h2>3.3.4 Analisis de la variable Bathrooms<a class="headerlink" href="#analisis-de-la-variable-bathrooms" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.4 Analisis de la variable Bathrooms<a class="headerlink" href="#analisis-de-la-variable-bathrooms" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable indica el número de baños del inmuble.Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26631 elementos de la muestra. Toma valores discretos en el rango 0 a 12 dormitorios. El 75% de pisos tienen entre 0 y 2 baños . A continuacion vamos a ver las frecuencias de la variable:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1339,11 +1343,15 @@ Name: Bathroom, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mostrar_graf_variables_discretas</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">)</span>
+
+<span class="n">sb</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">);</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/4-TransformacionVariablesCuantitativas_39_0.png" src="_images/4-TransformacionVariablesCuantitativas_39_0.png" />
+<img alt="_images/4-TransformacionVariablesCuantitativas_39_1.png" src="_images/4-TransformacionVariablesCuantitativas_39_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1362,18 +1370,21 @@ Name: Bathroom, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[(</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)]</span>
 <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span>
-
+<span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Price_TRA&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Price_TRA&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">])</span>
 <span class="c1">#dataframe[&quot;Distance_SQR&quot;]=dataframe[&quot;Distance&quot;].apply(np.sqrt)</span>
 <span class="n">sb</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">)</span>
 <span class="n">mostrar_graf_variables_continuas</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">sb</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price_TRA&quot;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="c1">#dataframe[&quot;Distance_SQR&quot;]=dataframe[&quot;Distance&quot;].apply(np.sqrt)</span>
 <span class="c1">#sb.scatterplot(data=dataframe, x=&quot;Distance&quot;, y=&quot;Price&quot;)</span>
 <span class="c1">#plot.show()</span>
 <span class="n">mostrar_graf_variables_continuas</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Bathroom_TRA&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price_TRA&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">);</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1384,12 +1395,13 @@ Name: Bathroom, dtype: float64
 <img alt="_images/4-TransformacionVariablesCuantitativas_41_3.png" src="_images/4-TransformacionVariablesCuantitativas_41_3.png" />
 <img alt="_images/4-TransformacionVariablesCuantitativas_41_4.png" src="_images/4-TransformacionVariablesCuantitativas_41_4.png" />
 <img alt="_images/4-TransformacionVariablesCuantitativas_41_5.png" src="_images/4-TransformacionVariablesCuantitativas_41_5.png" />
+<img alt="_images/4-TransformacionVariablesCuantitativas_41_6.png" src="_images/4-TransformacionVariablesCuantitativas_41_6.png" />
 </div>
 </div>
 <p>NI idea de que hacer con esta variable si es que hay que hacer algo…</p>
 </div>
 <div class="section" id="analisis-de-la-variable-car">
-<h2>3.3.5 Analisis de la variable Car<a class="headerlink" href="#analisis-de-la-variable-car" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.5 Analisis de la variable Car<a class="headerlink" href="#analisis-de-la-variable-car" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable contiene el numero de plazas de aparcamiento que tiene asociadas la vivienda. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26129 de la muestra y toma valores discretos en el rango 0 a 26 plazas de aparcamiento. El 75% de pisos tienen entre 0 y 2 plazas de aparcamiento . A continuacion vamos a ver las frecuencias de la variable:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1489,7 +1501,7 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="section" id="analisis-de-la-variable-landsize">
-<h2>3.3.6 Analisis de la variable Landsize<a class="headerlink" href="#analisis-de-la-variable-landsize" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.6 Analisis de la variable Landsize<a class="headerlink" href="#analisis-de-la-variable-landsize" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable contiene el tamaño del terreno asociado a la vivienda, excluye los metros de la vivienda y está calculada en metros cuadrados. La media de terreno asociado al inmbueble es de  593.598993  El 75% de pisos tienen menos de 670 metros cuadrados de parcela. A continuacion vamos a ver las frecuencias de la variable:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1612,7 +1624,7 @@ Name: Car, dtype: float64
 </div>
 </div>
 <div class="section" id="analisis-de-la-variable-bulldingarea">
-<h2>3.3.7 Analisis de la variable BulldingArea<a class="headerlink" href="#analisis-de-la-variable-bulldingarea" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.7 Analisis de la variable BulldingArea<a class="headerlink" href="#analisis-de-la-variable-bulldingarea" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable contiene el el tamaño del terreno asociado a la vivienda en metros cuadrados. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 13742 elementos de la muestra.La media del tamaño de los inmubles de 160.25640 y toma valores continuos en el rango 0 a 44515 . El 75% de pisos tienen menos de 188.00000 metros cuadrado. A continuacion vamos a ver las medidas de dispersión de la varibale:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1706,7 +1718,7 @@ Eliinamos el el maximo en cuestión y repiintamos los graficos</p>
 <p>Los datos sin ese registro tienen mejor aspecto y parecen muy concentrados. Lo tendremos en cuenta cuando tratemos la variables.</p>
 </div>
 <div class="section" id="analisis-de-la-variable-propertycountss">
-<h2>3.3.8 Analisis de la variable PropertyCountss<a class="headerlink" href="#analisis-de-la-variable-propertycountss" title="Permalink to this headline">¶</a></h2>
+<h2>4.3.8 Analisis de la variable PropertyCountss<a class="headerlink" href="#analisis-de-la-variable-propertycountss" title="Permalink to this headline">¶</a></h2>
 <p>Esta variable contiene el numero de viviendas existentes en el barrio. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 34854 y toma valores discretos en el rango 83 a 21650(que es el maximo de viviendas en un bbarrio). El 75% de pisos están en barrios con 10412 viviendas o menos.
 A continuacion vamos a ver las frecuencias de la variable:</p>
 <div class="cell docutils container">
@@ -1765,10 +1777,35 @@ A continuacion vamos a ver las frecuencias de la variable:</p>
 </div>
 </div>
 </div>
-<div class="section" id="analisis-de-la-variable-price">
-<h2>3.3.1 Analisis de la variable Price<a class="headerlink" href="#analisis-de-la-variable-price" title="Permalink to this headline">¶</a></h2>
-<p>ANALIZAR como cambia el tiempo</p>
-<p>Meter el algun calculo de lat y long.</p>
+<div class="section" id="analisis-de-la-variable-latitud-y-longitud">
+<h2>4.3.1 Analisis de la variable Latitud y Longitud<a class="headerlink" href="#analisis-de-la-variable-latitud-y-longitud" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataframe</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="c1">#df_fil=dataframe[(dataframe[&quot;Lattitude&quot;] is not None) &amp; (dataframe[&quot;Longtitude&quot;] is not None)]</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Location_TRA&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="o">.</span><span class="n">Lattitude</span><span class="o">*</span><span class="n">dataframe</span><span class="o">.</span><span class="n">Longtitude</span>
+
+<span class="n">mostrar_graf_variables_continuas</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="s2">&quot;Location_TRA&quot;</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Location_TRA&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">)</span>
+<span class="c1">#mostrar_graf_variables_continuas(dataframe_filtered,&quot;Distance_SQR&quot;)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">x_estimator</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span>
+
+<span class="n">sb</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Location_TRA&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">x_estimator</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">);</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4-TransformacionVariablesCuantitativas_70_0.png" src="_images/4-TransformacionVariablesCuantitativas_70_0.png" />
+<img alt="_images/4-TransformacionVariablesCuantitativas_70_1.png" src="_images/4-TransformacionVariablesCuantitativas_70_1.png" />
+<img alt="_images/4-TransformacionVariablesCuantitativas_70_2.png" src="_images/4-TransformacionVariablesCuantitativas_70_2.png" />
+<img alt="_images/4-TransformacionVariablesCuantitativas_70_3.png" src="_images/4-TransformacionVariablesCuantitativas_70_3.png" />
+</div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
@@ -1801,7 +1838,7 @@ A continuacion vamos a ver las frecuencias de la variable:</p>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="3-DeteccionImputacionDatosFaltantes.html" title="previous page">3. Detección e Imputación de Datos Faltantes</a>
-    <a class='right-next' id="next-link" href="5-ProcesamientoVaribalesCualitativas.html" title="next page">5. Procesamiento de Variables Cualitativas</a>
+    <a class='right-next' id="next-link" href="cualita2.html" title="next page">&lt;no title&gt;</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
