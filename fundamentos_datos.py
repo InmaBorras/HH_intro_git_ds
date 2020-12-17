@@ -17,10 +17,18 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import pwlf
 from sklearn.model_selection import train_test_split
+from statsmodels.stats.outliers_influence import OLSInfluence
+import itertools    
 
 #import fancyimpute
 #statsmodels.regression.linear_model.OLSResults.aic     statsmodels.tools.eval_measures.aic
 '''
+name = ['Jarque-Bera', 'Chi^2 two-tail prob.', 'Skew', 'Kurtosis']
+test = sms.jarque_bera(mod.fit().resid)
+lzip(name, test)
+
+
+
 fs = SelectKBest(score_func=f_regression, k='all')
 	# learn relationship from training data
 	fs.fit(X_train, y_train)
@@ -158,9 +166,9 @@ def lasso_prueba(X,y,lista_parametros):
 
 def info_del_modelo(dataframe,feature_to_predict,X,y):
     import pdb;pdb.set_trace()
-    mod = smf.ols(formula=str(feature_to_predict)+' ~ Rooms + Bathroom', data=dataframe)
-    res = mod.fit(X,y)
-    print(mod.fvalue, mod.f_pvalue)
+    mod = smf.ols(formula='Price ~ Bathroom_times_rooms +Car+ Distance +Lattitude+Longtitude', data=dataframe)
+    res = mod.fit()
+    #print(mod.fvalue, mod.f_pvalue)
     #probablemente no es normal asi que hay que recurrir a un test de permutaciones, seguir indagando.   best score -341640.2872449162
     print(res.summary())
 def prediccion_por_intervalos(x,y):
@@ -169,31 +177,59 @@ def prediccion_por_intervalos(x,y):
     my_pwlf = pwlf.PiecewiseLinFit(x, y)
     breaks = my_pwlf.fit(2)
     print('el gradiente cambia en: '+str(breaks))
-    x_hat = np.linspace(x.min(), x.max(), num=100)
+    x_hat = np.linspace(x.min(), x.max(), num=4)
     y_hat = my_pwlf.predict(x_hat)
     plt.figure()
     plt.plot(x, y, 'o')
     plt.plot(x_hat, y_hat, '-')
     plt.show()
-#lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Landsize', 'Propertycount'] X=dataframe[lista_parametros]
+def processSubset(X,y,feature_set):
+    # Fit model on feature_set and calculate RSS
+    model = sm.OLS(y,X[list(feature_set)])
+    regr = model.fit()
+    RSS = ((regr.predict(X[list(feature_set)]) - y) ** 2).sum()
+    return {"model":regr, "RSS":RSS}
 
+def getBest(dataframe,y,k):
+    results = []
+    for combo in itertools.combinations(dataframe.columns, k):
+        results.append(processSubset(dataframe,y,combo))
+    # Wrap everything up in a nice dataframe
+    models = pd.DataFrame(results)
+    # Choose the model with the highest RSS
+    best_model = models.loc[models['RSS'].argmin()]
+    
+    # Return the best model, along with some other useful information about the model  
+    return best_model
+def Best_stepwise_selection(dataframe,X):
+    y=dataframe['Price']
+    models_best = pd.DataFrame(columns=["RSS", "model"])
+    import pdb;pdb.set_trace()
+    for i in range(1,len(X.columns)):
+        models_best.loc[i] = getBest(X,y,i)
+        if(len(models_best)>1):
+            if(round(models_best.loc[i, "model"].rsquared-models_best.loc[i-1, "model"].rsquared,4)<0.01):
+                break
+    import pdb;pdb.set_trace()
+#lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Landsize', 'Propertycount'] X=dataframe[lista_parametros]
+ #X=dataframe[lista_parametros]
 def modelo_lineal(dataframe,features):
     X=dataframe[features]
     y=dataframe['Price']
     import pdb;pdb.set_trace()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50)
-    features=lasso_prueba(X,y,features)
+    #features=lasso_prueba(X,y,features)
     import pdb;pdb.set_trace()
-    prediccion_por_intervalos(x,y)
+    #prediccion_por_intervalos(X,y)
     import pdb;pdb.set_trace()
     model=LinearRegression()
     model.fit(X_train,y_train)
 
-    predictions = model.predict(X_test)
-    RSS = mean_squared_error(y_test,predictions) * len(y_test)
-    R_squared = model_k.score(X,Y)
-    ec_modelo=error_cuadratico(y_test,predictions)
-    pendiente, intercepto, r_value, p_value, std_err = stats.linregress(X_train,y_train)
+    #predictions = model.predict(X_test)
+    #RSS = mean_squared_error(y_test,predictions) * len(y_test)
+    #R_squared = model.score(X,y)
+    #ec_modelo=mean_squared_error(y_test,predictions)
+    #pendiente, intercepto, r_value, p_value, std_err = stats.linregress(X_train,y_train)
 
     info_del_modelo(dataframe,'Price',X_train,y_train)
     import pdb;pdb.set_trace()
@@ -212,7 +248,8 @@ def visualizacion_missings(dataframe):
 lista_true=[[5,7,9,11,13],[2,4,6,8,10]]
 lista_pred=[[19/4,40/6,8,12,13],[5/2,7/2,13/2,17/2,9]]
 ec_prueba=error_cuadratico(lista_true,lista_pred)'''
-
+dataframe_cualitativas = pd.read_csv('precios_casas_Cualitativas.csv')
+dataframe_cualitativas2=pd.read_csv('precios_casas.csv')
 dataframe3 = pd.read_csv('precios_casas_full.csv')
 dataframe_bueno=pd.DataFrame()
 #dataframe=dataframe[dataframe.BuildingArea.drop()]
@@ -354,29 +391,48 @@ dataframe=dataframe.dropna(subset=['Postcode'])
 #hacer una funcion que pase el nombre de la columna y el valor a partir del cual quiere borrar y eliminar todos los datos
 #dataframe_aux=dataframe[dataframe.YearBuilt <1800]
 #dataframe=dataframe.drop(dataframe_aux.index) 
-#DESPUES DE VERLAS TODAS NOS CENTRAMOS EN LA QUE TIENE MAS RELACION CON EL PRECIO Y HACEMOS LO SIGUIENTE 
+#DESPUES DE VERLAS TODAS NOS CENTRAMOS EN LA QUE TIENE MAS RELACION CON EL PRECIO Y HACEMOS LO SIGUIENTE       
 #OBSERVAR SI HAY LINEAS HORIZONTALES EN LA GRAFICA Y ANALIZAR SI ES CONVENIENTE ELIMINAR CIERTOS DATOS DE AHI
 
+dataframe=dataframe[dataframe['Distance']<40]
+dataframe=dataframe[dataframe['Rooms']<10]
+dataframe=dataframe[dataframe['Bathroom']<5]
+dataframe=dataframe[dataframe['Type']=='h']
+dataframe=dataframe[dataframe['Regionname']=='Southern Metropolitan']
+#el aic se ha reducido con esto de 70000 a 13000
 
 dataframe=dataframe.assign(Bathroom_times_rooms=dataframe['Bathroom']*dataframe['Rooms'])
 #despues experimentar combinando diferentes tipos de datos a ver cual es la correlacion con estos  Bathroom
-#df_comunidad = df_comunidad.assign(num_casos_prueba_pcr=df_aux2['num_casos_prueba_pcr'])
+#df_comunidad = df_comunidad.assign(num_casos_prueba_pcr=df_aux2['num_casos_prueba_pcr'])    "Regionname_Southern Metropolitan"   
 
 for i in dataframe['Suburb'].value_counts().index:
     dataframe_aux=dataframe[dataframe.Suburb ==i]
     mean_room=dataframe_aux['Rooms'].mean()*dataframe_aux['Propertycount']
-    #dataframe_aux=dataframe_aux.assign(rooms_per_Suburb=mean_room)
+    dataframe_aux=dataframe_aux.assign(rooms_per_Suburb=mean_room)
     dataframe_aux=dataframe_aux.assign(Total_rooms_Suburb=dataframe_aux['Rooms'].sum())
-    #dataframe_aux=dataframe_aux.assign(pr_rooms_Suburb=100*round(dataframe['Rooms']/dataframe_aux['Total_rooms_Suburb'],6))
+    dataframe_aux=dataframe_aux.assign(pr_rooms_Suburb=100*round(dataframe['Rooms']/dataframe_aux['Total_rooms_Suburb'],6))
     frames = [dataframe_bueno, dataframe_aux]
     dataframe_bueno = pd.concat(frames)
     dataframe_bueno=dataframe_bueno.reset_index(drop=True)
 
 import pdb;pdb.set_trace()
-lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
+'''
+dataframe_bueno['Rooms']=dataframe_bueno['Rooms'].replace(0, 1)
+dataframe_bueno['Rooms']=np.log(dataframe_bueno['Rooms'])
+dataframe_bueno['Distance']=dataframe_bueno['Distance'].replace(0, 1)
+dataframe_bueno['Distance']=np.log(dataframe_bueno['Distance'])
 
-lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
-
+dataframe_bueno['Landsize']=dataframe_bueno['Landsize'].replace(0, 1)
+dataframe_bueno['Landsize']=np.log(dataframe_bueno['Landsize'])
+dataframe_bueno['Longtitude']=dataframe_bueno['Longtitude'].replace(0, 1)
+dataframe_bueno['Longtitude']=np.log(dataframe_bueno['Longtitude'])
+'''
+lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount','rooms_per_Suburb','pr_rooms_Suburb']
+X=dataframe_bueno[lista_parametros]
+#lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
+#Bathroom_times_rooms + Distance   Bathroom_times_rooms +Car+ Landsize +Propertycount    model = sm.OLS(y, sm.add_constant(X, prepend=False))
+Best_stepwise_selection(dataframe_bueno,X)
+#lista_parametros=['Bathroom_times_rooms', 'Car','Landsize', 'Propertycount']
 modelo_lineal(dataframe_bueno,lista_parametros)
 
 import pdb;pdb.set_trace()
@@ -399,7 +455,7 @@ import pdb;pdb.set_trace()
 
 duplicateRowsDF = dataframe_bueno[dataframe_bueno.duplicated(['Suburb', 'Address','Postcode','CouncilArea'])]
 duplicateRowsDF.value_counts().sum()
- #aqui vemos que hay varios casos en donde no se pudo vender la casa y otro vendedor si que pudo
+ #aqui vemos que hay varios casos en donde no se pudo vender la casa y otro vendedor si que pudo     
 dataframe_bueno=dataframe_bueno[dataframe_bueno.Address =='15 Incana Dr']
 
 dataframe_aux=dataframe_bueno[dataframe_bueno.Address =='17 Talofa Av']    
@@ -517,4 +573,26 @@ plt.legend()'''
 corr_matrix=dataframe.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 #dataframe.hist(bins=50, figsize=(20,15))
-#plt.show()'''
+#plt.show()
+# 
+# 
+# 
+# Omnibus / Prob (Omnibus): una prueba de la asimetría y curtosis del residual (característica n. ° 2). Esperamos ver un valor cercano a cero que indicaría normalidad. El Prob (Omnibus) realiza una prueba estadística que indica la probabilidad de que los residuos se distribuyan normalmente. Esperamos ver algo cercano a 1 aquí. En este caso, Omnibus es relativamente bajo y el Prob (Omnibus) es relativamente alto, por lo que los datos son algo normales, pero no del todo ideales. Un enfoque de regresión lineal probablemente sería mejor que una conjetura aleatoria, pero probablemente no tan bueno como un enfoque no lineal.
+
+Sesgo: una medida de simetría de datos. Queremos ver algo cercano a cero, lo que indica que la distribución residual es normal. Tenga en cuenta que este valor también impulsa al Omnibus. Este resultado tiene un sesgo pequeño y, por lo tanto, bueno.
+
+Curtosis: una medida de "picos" o curvatura de los datos. Los picos más altos conducen a una mayor curtosis. La mayor curtosis se puede interpretar como una agrupación más estrecha de residuos alrededor de cero, lo que implica un mejor modelo con pocos valores atípicos.
+
+Durbin-Watson: pruebas de homocedasticidad (característica n. ° 3). Esperamos tener un valor entre 1 y 2. En este caso, los datos están cerca, pero dentro de límites.
+
+Jarque-Bera (JB) / Prob (JB): como la prueba Omnibus en el sentido de que prueba tanto la inclinación como la curtosis. Esperamos ver en esta prueba una confirmación de la prueba Omnibus. En este caso lo hacemos.
+
+Número de condición: esta prueba mide la sensibilidad de la salida de una función en comparación con su entrada (característica n. ° 4). Cuando tenemos multicolinealidad, podemos esperar fluctuaciones mucho mayores a pequeños cambios en los datos, por lo tanto, esperamos ver un número relativamente pequeño, algo por debajo de 30. En este caso, estamos muy por debajo de 30, lo que esperaríamos dado nuestro modelo solamente tiene dos variables y una es una constante.
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# '''
