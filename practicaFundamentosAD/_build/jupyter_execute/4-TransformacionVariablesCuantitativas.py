@@ -305,7 +305,7 @@ plot.show()
 # Esta variable contiene el numero de plazas de aparcamiento que tiene asociadas la vivienda. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 26129 de la muestra y toma valores discretos en el rango 0 a 26 plazas de aparcamiento. El 75% de pisos tienen entre 0 y 2 plazas de aparcamiento . A continuacion vamos a ver las frecuencias de la variable:
 # 
 
-# In[21]:
+# In[22]:
 
 
 pd.value_counts(dataframe['Car'])/dataframe["Car"].count()
@@ -313,7 +313,7 @@ pd.value_counts(dataframe['Car'])/dataframe["Car"].count()
 
 # como se puede ver casi el 47% de las casas de la muestra tienen dos plaza de aparcamiento y el 81% entre 1 y 2 plazas de aparcamiento.Respecto a las medidas de dispersión, en la tabla 3.3.1 podemos ver que la desviacion típica es de 1.01. En la siguiente tabla vemos mas variables de dispersión y asimetria:
 
-# In[22]:
+# In[23]:
 
 
 mostrar_analisis_var_cuantitativas(dataframe["Car"])
@@ -321,13 +321,13 @@ mostrar_analisis_var_cuantitativas(dataframe["Car"])
 
 # como se puede ver hay un coeficiente de variación alto y asimetria por la izquierda que verificaremos mejor haciendo algunos diagramas
 
-# In[23]:
+# In[24]:
 
 
 mostrar_graf_variables_discretas(dataframe,"Car")
 
 
-# In[24]:
+# In[25]:
 
 
 sb.scatterplot(data=dataframe, x="Car", y="Price")
@@ -339,7 +339,7 @@ plot.show()
 # 
 # Esta variable contiene el tamaño del terreno asociado a la vivienda, excluye los metros de la vivienda y está calculada en metros cuadrados. La media de terreno asociado al inmbueble es de  593.598993  El 75% de pisos tienen menos de 670 metros cuadrados de parcela. A continuacion vamos a ver las frecuencias de la variable:
 
-# In[25]:
+# In[26]:
 
 
 mostrar_analisis_var_cuantitativas(dataframe["Landsize"])
@@ -347,7 +347,7 @@ mostrar_analisis_var_cuantitativas(dataframe["Landsize"])
 
 # la variable es aproximadamente sesgada a la izquierda y con un rango de valores muy amplio.pintamos algunos gráficos para entender mejor la asimietria y la dispersión del a variablable
 
-# In[26]:
+# In[28]:
 
 
 mostrar_graf_variables_continuas(dataframe,"Landsize")
@@ -355,7 +355,7 @@ mostrar_graf_variables_continuas(dataframe,"Landsize")
 
 # vamos a eliminar el registro superior que está desvirtuando el gráfico para poder analizarlo con mas detalle
 
-# In[27]:
+# In[29]:
 
 
 #Eliminamos outliers superiores para poder seguir analizando 
@@ -372,7 +372,7 @@ plot.show()
 
 # Continua habiendo outliers que hacen que la variabe sea muy dispersa por lo que la variable es clara condidata a ser transformada
 
-# In[28]:
+# In[34]:
 
 
 #dataframe=dataframe[dataframe["Distance"].notna()] 
@@ -407,7 +407,7 @@ mostrar_graf_variables_continuas(dataframe_filtered,"Landsize_TRA")
 # 
 # Esta variable contiene el el tamaño del terreno asociado a la vivienda en metros cuadrados. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 13742 elementos de la muestra.La media del tamaño de los inmubles de 160.25640 y toma valores continuos en el rango 0 a 44515 . El 75% de pisos tienen menos de 188.00000 metros cuadrado. A continuacion vamos a ver las medidas de dispersión de la varibale:
 
-# In[29]:
+# In[35]:
 
 
 mostrar_analisis_var_cuantitativas(dataframe["BuildingArea"])
@@ -415,7 +415,7 @@ mostrar_analisis_var_cuantitativas(dataframe["BuildingArea"])
 
 # como se puede ver la variable tiene asimetria a la derecha, pero en la tabla inicial vimos que la desviación estándar era muy alta para el valor que tomaba la media. Pasamos a comprobar visualmente la simetria
 
-# In[30]:
+# In[36]:
 
 
 mostrar_graf_variables_continuas(dataframe,"BuildingArea")
@@ -424,7 +424,7 @@ mostrar_graf_variables_continuas(dataframe,"BuildingArea")
 # como se puede ver hay claramente algún outlier que desvirtua la muestra (ya lo pudimos ver tambien en la tabla 3.1.1 donde la media era de 522 y el maximo era mas de 44000 metros cuadrados de parcela).
 # Eliinamos el el maximo en cuestión y repiintamos los graficos
 
-# In[31]:
+# In[37]:
 
 
 #Eliminamos el maximo y vemos que ocurre
@@ -453,7 +453,7 @@ plot.show()
 # Esta variable contiene el numero de viviendas existentes en el barrio. Como se puede ver en la tabla 3.3.1 la variable tiene valor en 34854 y toma valores discretos en el rango 83 a 21650(que es el maximo de viviendas en un bbarrio). El 75% de pisos están en barrios con 10412 viviendas o menos.
 # A continuacion vamos a ver las frecuencias de la variable:
 
-# In[32]:
+# In[38]:
 
 
 mostrar_analisis_var_cuantitativas(dataframe["Propertycount"])
@@ -461,7 +461,7 @@ mostrar_analisis_var_cuantitativas(dataframe["Propertycount"])
 
 # La variable es aproximadamente sesgada a la derecha , lo comprobaremos visalmente:
 
-# In[33]:
+# In[40]:
 
 
 mostrar_graf_variables_continuas(dataframe,"Propertycount")

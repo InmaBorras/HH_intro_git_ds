@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>6. Selección de Variables &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="7. Ajuste del Modelo de Regresión Lineal" href="7-AjusteDelModelosdeRegresionLineal.html" />
-    <link rel="prev" title="5. Procesamiento de Variables Cualitativas" href="5-ProcesamientoVaribalesCualitativas.html" />
+    <link rel="prev" title="2. Análisis Exploratorio Inicial (EDA)" href="2-AnalisisExploratorioInicial.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -98,6 +98,9 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="2-AnalisisExploratorioInicial.html">
+<<<<<<< HEAD
+   2. Análisis Exploratorio Inicial (EDA)
+=======
    2. Análisis Exploratorio Inicial
   </a>
  </li>
@@ -118,6 +121,7 @@
  <li class="toctree-l1">
   <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
    5. Procesamiento de Variables Cualitativas
+>>>>>>> 000807e021c0d23a9c82143670d32e6db87c56bc
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -256,6 +260,44 @@
                 
   <div class="section" id="seleccion-de-variables">
 <h1>6. Selección de Variables<a class="headerlink" href="#seleccion-de-variables" title="Permalink to this headline">¶</a></h1>
+<p>Despues de tratar los datos  y de haber analizado las variables por separado procedemos a la selección de las mas adecuadas para la creación del modelo.</p>
+<p>En primer lugar procedemos a separar los datos en dos datasets, uno para hacer en entrenamiento del modelo y otro para hacer el test final.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prediccion_varias_variables</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="n">df_filter</span><span class="p">,</span><span class="n">feature_to_predict</span><span class="p">,</span><span class="n">features</span><span class="p">,</span><span class="n">df_missings</span><span class="p">):</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">y_pred_lineal</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">y_true_l</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">y_true_r</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">y_pred_rf</span><span class="o">=</span><span class="p">[]</span>
+    <span class="c1">#kfold para dividir el dataframe en 10 partes y utilizar 9 como training y la otra como test</span>
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">df_filter</span><span class="p">):</span>
+        <span class="n">df_test</span> <span class="o">=</span> <span class="n">df_filter</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        <span class="n">df_train</span> <span class="o">=</span> <span class="n">df_filter</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">]</span>
+        <span class="c1">#creamos datos entrenamiento y test lineales .reshape(-1, 1) </span>
+        <span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>   
+        <span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">feature_to_predict</span><span class="p">)])</span>
+        <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">y_test_l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_test</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">feature_to_predict</span><span class="p">)])</span>
+        <span class="n">X_train</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+        <span class="n">y_train</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="n">X_test</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="c1">#modelo regresion lineal</span>
+        <span class="c1">#en regresion lineal no funciona debido a que hay que ir variable a variable sino no encajan el numero de x_train e y_train, hacer for o algo</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="n">y_pred_lineal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+        <span class="n">y_true_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_test_l</span><span class="p">)</span>
+        <span class="c1">#creamos test  y training de random forest y vamos viendo lo que ocurre  X_test = np.squeeze(np.asarray(X_test))</span>
+        <span class="c1">#modelo random forest</span>
+        <span class="n">model_rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">max_depth</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+        <span class="n">model_rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">y_pred_rf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model_rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -286,7 +328,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="5-ProcesamientoVaribalesCualitativas.html" title="previous page">5. Procesamiento de Variables Cualitativas</a>
+    <a class='left-prev' id="prev-link" href="2-AnalisisExploratorioInicial.html" title="previous page">2. Análisis Exploratorio Inicial (EDA)</a>
     <a class='right-next' id="next-link" href="7-AjusteDelModelosdeRegresionLineal.html" title="next page">7. Ajuste del Modelo de Regresión Lineal</a>
 
     </div>
