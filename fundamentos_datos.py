@@ -19,9 +19,11 @@ import pwlf
 from sklearn.model_selection import train_test_split
 from statsmodels.stats.outliers_influence import OLSInfluence
 import itertools    
-
+from geopy import distance
 #import fancyimpute
-#statsmodels.regression.linear_model.OLSResults.aic     statsmodels.tools.eval_measures.aic
+#statsmodels.regression.linear_model.OLSResults.aic     statsmodels.tools.eval_measures.aic #categorizar las variables
+#mirar f test en el modelo   anova_lv mirarlo a ver que podemos hacer al comparar los modelos
+
 '''
 name = ['Jarque-Bera', 'Chi^2 two-tail prob.', 'Skew', 'Kurtosis']
 test = sms.jarque_bera(mod.fit().resid)
@@ -67,7 +69,7 @@ def clasificar_variables(dataframe):
                     else:
                         tipos_columnas[str(i)]='Cuantitativa Discreta de Proporcion Politomizada No Acotada'
                 else:
-                    if(esAcotada(dataframe[str(i)])):
+                    if(esAcotada(minimo,maximo)):
                         tipos_columnas[str(i)]='Cuantitativa Discreta de Intervalo Politomizada Acotada'
                     else:
                         tipos_columnas[str(i)]='Cuantitativa Discreta de Intervalo Politomizada No Acotada'
@@ -87,7 +89,7 @@ def clasificar_variables(dataframe):
                     else:
                         tipos_columnas[str(i)]='Cuantitativa Continua de Proporcion Politomizada No Acotada'
             else:
-                if(esAcotada(dataframe[str(i)])):
+                if(esAcotada(minimo,maximo)):
                         tipos_columnas[str(i)]='Cuantitativa Continua de Intervalo Politomizada Acotada'
                 else:
                         tipos_columnas[str(i)]='Cuantitativa Continua de Intervalo Politomizada No Acotada'
@@ -144,7 +146,7 @@ def alfa_optima(X,y):
     cv = RepeatedKFold(n_splits=10, n_repeats=3, random_state=1)
     grid = dict()
     import pdb;pdb.set_trace() 
-    grid['alpha'] = np.arange(0, 100000, 1000)
+    grid['alpha'] = np.arange(0, 1, 0.01)
     busqueda = GridSearchCV(modelo_lasso, grid, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
     results = busqueda.fit(X, y)
     import pdb;pdb.set_trace()
@@ -152,8 +154,8 @@ def alfa_optima(X,y):
     
 def lasso_prueba(X,y,lista_parametros):
     import pdb;pdb.set_trace()
-    #alfa_op, alfa_score=alfa_optima(X,y)
-    clf = Lasso(alpha=20000)
+    alfa_op, alfa_score=alfa_optima(X,y)
+    clf = Lasso(alpha=alfa_op)
     clf.fit(X,y)
     coeficientes=clf.coef_
     for index,i in enumerate(coeficientes):
@@ -169,7 +171,7 @@ def info_del_modelo(dataframe,feature_to_predict,X,y):
     mod = smf.ols(formula='Price ~ Bathroom_times_rooms +Car+ Distance +Lattitude+Longtitude', data=dataframe)
     res = mod.fit()
     #print(mod.fvalue, mod.f_pvalue)
-    #probablemente no es normal asi que hay que recurrir a un test de permutaciones, seguir indagando.   best score -341640.2872449162
+    #probablemente no es normal asi que hay que recurrir a un test de permutaciones, seguir indagando.   best score -341640.2872449162  dataframe['Bathroom']
     print(res.summary())
 def prediccion_por_intervalos(x,y):
     import pdb;pdb.set_trace()
@@ -188,8 +190,15 @@ def processSubset(X,y,feature_set):
     model = sm.OLS(y,X[list(feature_set)])
     regr = model.fit()
     RSS = ((regr.predict(X[list(feature_set)]) - y) ** 2).sum()
-    return {"model":regr, "RSS":RSS}
-
+    aic=regr.aic
+    return {"model":regr, "RSS":RSS,'AIC':aic}
+def processSubset_tr(y,X,tr):
+    # Fit model on feature_set and calculate RSS
+    model = sm.OLS(y,X)
+    regr = model.fit()
+    RSS = (regr.predict(X - y) ** 2).sum()
+    aic=regr.aic
+    return {"model":regr, "RSS":RSS,'AIC':abs(aic),'transformacion':tr}
 def getBest(dataframe,y,k):
     results = []
     for combo in itertools.combinations(dataframe.columns, k):
@@ -212,13 +221,13 @@ def Best_stepwise_selection(dataframe,X):
                 break
     import pdb;pdb.set_trace()
 #lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Landsize', 'Propertycount'] X=dataframe[lista_parametros]
- #X=dataframe[lista_parametros]
+ #X=dataframe[lista_parametros] 
 def modelo_lineal(dataframe,features):
-    X=dataframe[features]
-    y=dataframe['Price']
+    X=dataframe[features].reshape(-1, 1) 
+    y=dataframe['Price'].reshape(-1, 1) 
     import pdb;pdb.set_trace()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50)
-    #features=lasso_prueba(X,y,features)
+    features=lasso_prueba(X,y,features)
     import pdb;pdb.set_trace()
     #prediccion_por_intervalos(X,y)
     import pdb;pdb.set_trace()
@@ -234,6 +243,17 @@ def modelo_lineal(dataframe,features):
     info_del_modelo(dataframe,'Price',X_train,y_train)
     import pdb;pdb.set_trace()
     features=lasso_prueba(X_train,y_train,features)
+def distancia_optimizada(dataframe):
+    #suburbio mas caro
+    data_frameKoyong=dataframe[dataframe["Suburb"]=='Kooyong']
+    Koyong_lat_mean=data_frameKoyong["Lattitude"].mean()
+    Koyong_lon_mean=data_frameKoyong["Longtitude"].mean()
+    
+    #Calculamos la nueva distancia
+    arr=[]
+    for lat, lon in zip(dataframe['Lattitude'],dataframe['Longtitude']):
+        arr.append(distance((lat,lon), (Koyong_lat_mean,Koyong_lon_mean)).km)
+    return(arr)
 def visualizacion_missings(dataframe):
     #ELIMINACION VISUALIZACION Y SUSTITUCION DE LOS MISSINGS
     print(dataframe.isnull().sum())
@@ -247,7 +267,7 @@ def visualizacion_missings(dataframe):
 '''import pdb;pdb.set_trace()
 lista_true=[[5,7,9,11,13],[2,4,6,8,10]]
 lista_pred=[[19/4,40/6,8,12,13],[5/2,7/2,13/2,17/2,9]]
-ec_prueba=error_cuadratico(lista_true,lista_pred)'''
+ec_prueba=error_cuadratico(lista_true,lista_pred)'''   
 dataframe_cualitativas = pd.read_csv('precios_casas_Cualitativas.csv')
 dataframe_cualitativas2=pd.read_csv('precios_casas.csv')
 dataframe3 = pd.read_csv('precios_casas_full.csv')
@@ -284,14 +304,39 @@ mod = sm.OLS(X_train.endog, y_train.exog)
 
 res = mod.fit()
 '''
+def lista_transformaciones(dataframe,y,feature):
+    tr=list()
+    tr.append(processSubset_tr(y,dataframe[feature],'none'))
+    tr.append(processSubset_tr(y,np.log(dataframe[feature]),'ln'))
+    tr.append(processSubset_tr(y,np.log10(dataframe[feature]),'log10'))
+    tr.append(processSubset_tr(y,1/dataframe[feature],'inversa'))
+    tr.append(processSubset_tr(y,1/np.sqrt(dataframe[feature]),'inversa_sqrt'))
+    tr.append(processSubset_tr(y,np.sqrt(dataframe[feature]),'sqrt'))
+    return(tr)
+def transformaciones_variables(dataframe):
+    dict_tr=dict()
+    for  i in dataframe.keys():
+        if((isinstance(dataframe[str(i)].iloc[0], ( np.int64))  or isinstance(dataframe[str(i)].iloc[0],(np.float64))) and i!='Lattitude' and i!='Location_TRA' ):
+            transformaciones=lista_transformaciones(dataframe,dataframe['Price'],str(i))
+            models_tr = pd.DataFrame(transformaciones)
+            best_model_aic = models_tr.loc[models_tr['AIC'].argmin()]
+            best_model_RS = models_tr.loc[models_tr['RSS'].argmin()]
+            dict_tr[str(i)+'_aic']=best_model_aic
+            dict_tr[str(i)+'_rss']=best_model_RS
+            import pdb;pdb.set_trace()
+
+    import pdb;pdb.set_trace()
+
+    return(dict_tr)
 def prediccion_varias_variables(dataframe,df_filter,feature_to_predict,features,df_missings):
     kf = KFold(n_splits=5, random_state = 42,shuffle=True)
     y_pred_lineal=[]
     y_true_l=[]
     y_true_r=[]
     y_pred_rf=[]
-    #kfold para dividir el dataframe en 10 partes y utilizar 9 como training y la otra como test
+    #kfold para dividir el dataframe en 5 partes y utilizar 4 como training y la otra como test
     for train_index, test_index in kf.split(df_filter):
+        import pdb;pdb.set_trace()
         df_test = df_filter.iloc[test_index]
         df_train = df_filter.iloc[train_index]
         #creamos datos entrenamiento y test lineales .reshape(-1, 1) 
@@ -340,6 +385,7 @@ def prediccion_varias_variables(dataframe,df_filter,feature_to_predict,features,
 
 #visualizacion_missings(dataframe)
 '''
+import pdb;pdb.set_trace()
 for index, j in enumerate(lista_missings):
     #deter_data["Det" + str(j)] = dataframe[str(j) + "_imp"]      
     df_missings=dataframe[dataframe[j].isnull()].copy()
@@ -348,6 +394,7 @@ for index, j in enumerate(lista_missings):
     df_filter = dataframe[dataframe[str(j)] != np.nan].copy()
     corr_matrix=dataframe.corr(method='pearson')         
     max_corr=corr_matrix[str(j)].sort_values(ascending=False)
+    import pdb;pdb.set_trace()
     prediccion=prediccion_varias_variables(dataframe,df_filter,str(j),lista_parametros,df_missings)
     prediccion_redondeada = [round(num, 1) for num in prediccion]
     prediccion_redondeada = [round(num, 0) for num in prediccion_redondeada]
@@ -359,7 +406,7 @@ for index, j in enumerate(lista_missings):
     
 dataframe=eliminar_duplicados(dataframe)
 visualizacion_missings(dataframe)
-
+'''
 
 
 
@@ -372,11 +419,14 @@ visualizacion_missings(dataframe)
 #attributes = ['Price',"Rooms", "Bedroom2", "Bathroom","Car",'Lattitude','YearBuilt']
 #scatter_matrix(dataframe[attributes], figsize=(12, 8))
 #plt.show()
-'''
-dataframe= pd.read_csv('precios_casas_sinduplicados.csv')
-dataframe['Price']=dataframe3['Price']
-dataframe=eliminar_duplicados(dataframe)
 
+dataframe= pd.read_csv('precios_casas_sinduplicados.csv')
+#dataframe['Price']=dataframe3['Price']
+dataframe=eliminar_duplicados(dataframe)
+#dataframe["Distancia_NEW"]=distancia_optimizada(dataframe)
+dataframe["Location_TRA"]=dataframe.Longtitude/dataframe.Lattitude
+dataframe_less=dataframe[(dataframe["Location_TRA"]>=dataframe["Location_TRA"].mean()) ]
+dataframe_over=dataframe[(dataframe["Location_TRA"]<dataframe["Location_TRA"].mean()) ]
 
 dataframe=dataframe.dropna(subset=['Price']) 
 dataframe=dataframe.dropna(subset=['Distance']) 
@@ -391,8 +441,12 @@ dataframe=dataframe.dropna(subset=['Postcode'])
 #hacer una funcion que pase el nombre de la columna y el valor a partir del cual quiere borrar y eliminar todos los datos
 #dataframe_aux=dataframe[dataframe.YearBuilt <1800]
 #dataframe=dataframe.drop(dataframe_aux.index) 
-#DESPUES DE VERLAS TODAS NOS CENTRAMOS EN LA QUE TIENE MAS RELACION CON EL PRECIO Y HACEMOS LO SIGUIENTE       
-#OBSERVAR SI HAY LINEAS HORIZONTALES EN LA GRAFICA Y ANALIZAR SI ES CONVENIENTE ELIMINAR CIERTOS DATOS DE AHI
+#DESPUES DE VERLAS TODAS NOS CENTRAMOS EN LA QUE TIENE MAS RELACION CON EL PRECIO Y HACEMOS LO SIGUIENTE    dataframe=dataframe[dataframe['Rooms']>10]
+   
+#OBSERVAR SI HAY LINEAS HORIZONTALES EN LA GRAFICA Y ANALIZAR SI ES CONVENIENTE ELIMINAR CIERTOS DATOS DE AHI dataframe_aux=dataframe[dataframe['Bathroom']>4]
+
+dataframe['Price']=np.sqrt(np.log10(dataframe['Price']))
+#ataframe['Price']=1/np.log(np.sqrt(dataframe['Price']))
 
 dataframe=dataframe[dataframe['Distance']<40]
 dataframe=dataframe[dataframe['Rooms']<10]
@@ -414,8 +468,17 @@ for i in dataframe['Suburb'].value_counts().index:
     frames = [dataframe_bueno, dataframe_aux]
     dataframe_bueno = pd.concat(frames)
     dataframe_bueno=dataframe_bueno.reset_index(drop=True)
-
+dataframe=dataframe[dataframe['Landsize']>=0] 
+dataframe['Landsize']=dataframe['Landsize'].replace(0, 1)
+dataframe['Bathroom']=dataframe['Bathroom'].replace(0, 1)
+dataframe['Bathroom_times_rooms']=dataframe['Bathroom_times_rooms'].replace(0, 1)
+dataframe['Lattitude']=dataframe['Lattitude'].replace(0, 1)
+dataframe['Longtitude']=dataframe['Longtitude'].replace(0, 1)
+dataframe['Car']=dataframe['Car'].replace(0, 1)
 import pdb;pdb.set_trace()
+transformaciones_variables(dataframe)
+import pdb;pdb.set_trace()
+
 '''
 dataframe_bueno['Rooms']=dataframe_bueno['Rooms'].replace(0, 1)
 dataframe_bueno['Rooms']=np.log(dataframe_bueno['Rooms'])
@@ -427,7 +490,9 @@ dataframe_bueno['Landsize']=np.log(dataframe_bueno['Landsize'])
 dataframe_bueno['Longtitude']=dataframe_bueno['Longtitude'].replace(0, 1)
 dataframe_bueno['Longtitude']=np.log(dataframe_bueno['Longtitude'])
 '''
-lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount','rooms_per_Suburb','pr_rooms_Suburb']
+lista_parametros=['Rooms', 'Distance', 'Bathroom']
+
+#lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount','rooms_per_Suburb','pr_rooms_Suburb']
 X=dataframe_bueno[lista_parametros]
 #lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
 #Bathroom_times_rooms + Distance   Bathroom_times_rooms +Car+ Landsize +Propertycount    model = sm.OLS(y, sm.add_constant(X, prepend=False))
