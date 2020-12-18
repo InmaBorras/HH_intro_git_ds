@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1. Definición de Objetivos &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Análisis Exploratorio Inicial" href="2-AnalisisExploratorioInicial.html" />
+    <link rel="next" title="2. Análisis Exploratorio Inicial (EDA)" href="2-AnalisisExploratorioInicial.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -97,17 +97,43 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="2-AnalisisExploratorioInicial.html">
-   2. Análisis Exploratorio Inicial
+   2. Análisis Exploratorio Inicial (EDA)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="3-DeteccionImputacionDatosFaltantes.html">
-   3. Detección e Imputación de Datos Faltantes
+  <a class="reference internal" href="3-TransformacionVariablesCuantitativas.html">
+   3. Análisis y Transformación de Variables Cualitativas
   </a>
  </li>
+<<<<<<< HEAD
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html">
+   3.Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#resumen-numerico-de-variables-cualitativas">
+   3.1 Resumen Numérico de Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#seleccion-de-variables-categoricas">
+   3.3 Selección de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#correlacion-de-variables-categoricas">
+   3.4 Correlación de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#transformacion-de-variables-categoricas">
+   3.5 Transformación de variables categóricas
+=======
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="4-TransformacionVariablesCuantitativas.html">
    4. Análisis y Transformación de Variables Cualitativas
+>>>>>>> 000807e021c0d23a9c82143670d32e6db87c56bc
   </a>
   <ul class="simple collapse-ul">
   </ul>
@@ -115,8 +141,8 @@
   </i>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
-   5. Procesamiento de Variables Cualitativas
+  <a class="reference internal" href="5-DeteccionImputacionDatosFaltantes.html">
+   5. Limpieza de los datos
   </a>
  </li>
  <li class="toctree-l1">
@@ -246,6 +272,25 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduccion">
+   1.1. Introducción.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#objetivos">
+   1.2. Objetivos
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -255,7 +300,20 @@
                 
   <div class="section" id="definicion-de-objetivos">
 <h1>1. Definición de Objetivos<a class="headerlink" href="#definicion-de-objetivos" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduccion">
+<h2>1.1. Introducción.<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
+<p>Los precios de las viviendas en algunas capitales australianas han aumentado recientemente hasta el punto de que algunos describen esto como una burbuja emergente, pero esta afirmación sigue sin ser comprobada oficialmente.(1)</p>
+</div>
+<div class="section" id="objetivos">
+<h2>1.2. Objetivos<a class="headerlink" href="#objetivos" title="Permalink to this headline">¶</a></h2>
+<p>El trabajo para las asignatura de Fundamentos de Análisis de Datos consistirá en estimar el precio de las viviendas en el área de la ciudad de Melburne (Australia) en función de las caracteristicas de la vivienda.</p>
+<p>Los datos fueron obtenidos de la página de Kaggle “https://www.kaggle.com/anthonypino/melbourne-housing-market”.</p>
+<p>Referencias</p>
+<ol class="simple">
+<li><p>https://onlinelibrary.wiley.com/doi/abs/10.1111/1475-4932.12284</p></li>
+</ol>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
@@ -287,7 +345,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="2-AnalisisExploratorioInicial.html" title="next page">2. Análisis Exploratorio Inicial</a>
+    <a class='right-next' id="next-link" href="2-AnalisisExploratorioInicial.html" title="next page">2. Análisis Exploratorio Inicial (EDA)</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

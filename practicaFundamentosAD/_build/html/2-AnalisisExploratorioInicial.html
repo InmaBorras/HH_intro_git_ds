@@ -4,8 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Análisis Exploratorio Inicial &#8212; Práctica de Fundamentos de Análisis de Datos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. Análisis Exploratorio Inicial (EDA) &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Detección e Imputación de Datos Faltantes" href="3-DeteccionImputacionDatosFaltantes.html" />
+    <link rel="next" title="6. Selección de Variables" href="6-SelecciondeVariables.html" />
     <link rel="prev" title="1. Definición de Objetivos" href="1-DefinicionObjetivos.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -98,6 +98,9 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+<<<<<<< HEAD
+   2. Análisis Exploratorio Inicial (EDA)
+=======
    2. Análisis Exploratorio Inicial
   </a>
  </li>
@@ -118,6 +121,7 @@
  <li class="toctree-l1">
   <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
    5. Procesamiento de Variables Cualitativas
+>>>>>>> 000807e021c0d23a9c82143670d32e6db87c56bc
   </a>
  </li>
  <li class="toctree-l1">
@@ -254,8 +258,747 @@
         
               <div>
                 
-  <div class="section" id="analisis-exploratorio-inicial">
-<h1>2. Análisis Exploratorio Inicial<a class="headerlink" href="#analisis-exploratorio-inicial" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="analisis-exploratorio-inicial-eda">
+<h1>2. Análisis Exploratorio Inicial (EDA)<a class="headerlink" href="#analisis-exploratorio-inicial-eda" title="Permalink to this headline">¶</a></h1>
+<p>Trás definir el objetivo de la práctica procedemos a hacer el analisis exploratorio de los datos.</p>
+<p>En primer luga cargamos todas las librerias que necesitaremos y hacemos una visualización general de dataframe, de su composición y del tipo de datos que contiene cada columna.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">scatter_matrix</span>
+<span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">pwlf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>Rooms</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>SellerG</th>
+      <th>Date</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>...</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>BuildingArea</th>
+      <th>YearBuilt</th>
+      <th>CouncilArea</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Regionname</th>
+      <th>Propertycount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abbotsford</td>
+      <td>68 Studley St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>SS</td>
+      <td>Jellis</td>
+      <td>3/09/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>126.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.8014</td>
+      <td>144.9958</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Abbotsford</td>
+      <td>85 Turner St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1480000.0</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>3/12/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>202.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.7996</td>
+      <td>144.9984</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Abbotsford</td>
+      <td>25 Bloomburg St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1035000.0</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>4/02/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>156.0</td>
+      <td>79.0</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8079</td>
+      <td>144.9934</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abbotsford</td>
+      <td>18/659 Victoria St</td>
+      <td>3</td>
+      <td>u</td>
+      <td>NaN</td>
+      <td>VB</td>
+      <td>Rounds</td>
+      <td>4/02/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.8114</td>
+      <td>145.0116</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Abbotsford</td>
+      <td>5 Charles St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1465000.0</td>
+      <td>SP</td>
+      <td>Biggin</td>
+      <td>4/03/2017</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>134.0</td>
+      <td>150.0</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8093</td>
+      <td>144.9944</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Abbotsford</td>
+      <td>40 Federation La</td>
+      <td>3</td>
+      <td>h</td>
+      <td>850000.0</td>
+      <td>PI</td>
+      <td>Biggin</td>
+      <td>4/03/2017</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>94.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.7969</td>
+      <td>144.9969</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Abbotsford</td>
+      <td>55a Park St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>1600000.0</td>
+      <td>VB</td>
+      <td>Nelson</td>
+      <td>4/06/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>120.0</td>
+      <td>142.0</td>
+      <td>2014.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8072</td>
+      <td>144.9941</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Abbotsford</td>
+      <td>16 Maugie St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>SN</td>
+      <td>Nelson</td>
+      <td>6/08/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>400.0</td>
+      <td>220.0</td>
+      <td>2006.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.7965</td>
+      <td>144.9965</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Abbotsford</td>
+      <td>53 Turner St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>6/08/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>201.0</td>
+      <td>NaN</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.7995</td>
+      <td>144.9974</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Abbotsford</td>
+      <td>99 Turner St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>S</td>
+      <td>Collins</td>
+      <td>6/08/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>202.0</td>
+      <td>NaN</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.7996</td>
+      <td>144.9989</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Abbotsford</td>
+      <td>129 Charles St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>941000.0</td>
+      <td>S</td>
+      <td>Jellis</td>
+      <td>7/05/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>181.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.8041</td>
+      <td>144.9953</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Abbotsford</td>
+      <td>124 Yarra St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1876000.0</td>
+      <td>S</td>
+      <td>Nelson</td>
+      <td>7/05/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>245.0</td>
+      <td>210.0</td>
+      <td>1910.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8024</td>
+      <td>144.9993</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Abbotsford</td>
+      <td>121/56 Nicholson St</td>
+      <td>2</td>
+      <td>u</td>
+      <td>NaN</td>
+      <td>PI</td>
+      <td>Biggin</td>
+      <td>7/11/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>4292.0</td>
+      <td>82.0</td>
+      <td>2009.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8078</td>
+      <td>144.9965</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Abbotsford</td>
+      <td>17 Raphael St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>W</td>
+      <td>Biggin</td>
+      <td>7/11/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>230.0</td>
+      <td>147.0</td>
+      <td>1860.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8066</td>
+      <td>144.9936</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Abbotsford</td>
+      <td>98 Charles St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1636000.0</td>
+      <td>S</td>
+      <td>Nelson</td>
+      <td>8/10/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>256.0</td>
+      <td>107.0</td>
+      <td>1890.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8060</td>
+      <td>144.9954</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Abbotsford</td>
+      <td>217 Langridge St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1000000.0</td>
+      <td>S</td>
+      <td>Jellis</td>
+      <td>8/10/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Abbotsford</td>
+      <td>18a Mollison St</td>
+      <td>2</td>
+      <td>t</td>
+      <td>745000.0</td>
+      <td>S</td>
+      <td>Jellis</td>
+      <td>8/10/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Abbotsford</td>
+      <td>6/241 Nicholson St</td>
+      <td>1</td>
+      <td>u</td>
+      <td>300000.0</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>8/10/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.8008</td>
+      <td>144.9973</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Abbotsford</td>
+      <td>10 Valiant St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1097000.0</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>8/10/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>220.0</td>
+      <td>75.0</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8010</td>
+      <td>144.9989</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Abbotsford</td>
+      <td>403/609 Victoria St</td>
+      <td>2</td>
+      <td>u</td>
+      <td>542000.0</td>
+      <td>S</td>
+      <td>Dingle</td>
+      <td>8/10/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>20 rows × 21 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad de Filas y de Columnas&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de Filas y de Columnas (34857, 21)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 34857 entries, 0 to 34856
+Data columns (total 21 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   Suburb         34857 non-null  object 
+ 1   Address        34857 non-null  object 
+ 2   Rooms          34857 non-null  int64  
+ 3   Type           34857 non-null  object 
+ 4   Price          27247 non-null  float64
+ 5   Method         34857 non-null  object 
+ 6   SellerG        34857 non-null  object 
+ 7   Date           34857 non-null  object 
+ 8   Distance       34856 non-null  float64
+ 9   Postcode       34856 non-null  float64
+ 10  Bedroom2       26640 non-null  float64
+ 11  Bathroom       26631 non-null  float64
+ 12  Car            26129 non-null  float64
+ 13  Landsize       23047 non-null  float64
+ 14  BuildingArea   13742 non-null  float64
+ 15  YearBuilt      15551 non-null  float64
+ 16  CouncilArea    34854 non-null  object 
+ 17  Lattitude      26881 non-null  float64
+ 18  Longtitude     26881 non-null  float64
+ 19  Regionname     34854 non-null  object 
+ 20  Propertycount  34854 non-null  float64
+dtypes: float64(12), int64(1), object(8)
+memory usage: 5.6+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Durante estas primeras observaciones ya se puede identificar que el dataset  es bastante grande con 34857 y 21 vcolumnas, pero también contiene datos faltantes en bastantes variables incluyendo la varibable objetivo “Price”.</p>
+<p>Además, cuenta que  varibles cualitativas y cuantitivas.
+Para poder clasificar los tipo de varibles vamos a realizar una función que lo identifique.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">esDeProporcion</span><span class="p">(</span><span class="n">minimo</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">minimo</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">esAcotada</span><span class="p">(</span><span class="n">minimo</span><span class="p">,</span><span class="n">maximo</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">minimo</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">maximo</span> <span class="o">==</span><span class="mi">100</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">clasificar_variables</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+        
+    <span class="n">tipos_columnas</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))):</span>
+            <span class="c1">#variable cuantitativa discreta</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1">#politomizada</span>
+                <span class="n">minimo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+                <span class="n">maximo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">esDeProporcion</span><span class="p">(</span><span class="n">minimo</span><span class="p">)):</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">minimo</span><span class="p">,</span><span class="n">maximo</span><span class="p">)):</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Proporcion Politomizada Acotada&#39;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Proporcion Politomizada No Acotada&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)])):</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Intervalo Politomizada Acotada&#39;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Intervalo Politomizada No Acotada&#39;</span>
+
+            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1">#dicotomizada</span>
+                <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuanitativa Dicotoma&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;deberias borrar la variable &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="k">elif</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))):</span>
+            <span class="n">minimo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">maximo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="c1">#variable cuantitativa continua</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">esDeProporcion</span><span class="p">(</span><span class="n">minimo</span><span class="p">)):</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">minimo</span><span class="p">,</span><span class="n">maximo</span><span class="p">)):</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Proporcion Politomizada Acotada&#39;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)])):</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Intervalo Politomizada Acotada&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Intervalo Politomizada No Acotada&#39;</span>
+        <span class="k">elif</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span><span class="nb">bool</span><span class="p">)):</span>
+            <span class="c1">#variable cualitativva dicotoma</span>
+            <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Dicotoma&#39;</span>
+        <span class="k">elif</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span><span class="nb">str</span><span class="p">)):</span>
+            <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&gt;</span><span class="mi">2</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">):</span>
+                <span class="c1">#politomizada y alomejor ordinal</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+                <span class="n">ordinal</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;¿Es ordinal?(seleccionar si o no): &#39;</span><span class="p">)</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">ordinal</span><span class="o">==</span><span class="s1">&#39;si&#39;</span><span class="p">):</span>
+                    <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma Ordinal&#39;</span>
+                <span class="k">elif</span><span class="p">(</span><span class="n">ordinal</span><span class="o">==</span><span class="s1">&#39;no&#39;</span><span class="p">):</span>
+                    <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma No ordinal&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma Nan&#39;</span>
+            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">):</span>
+                 <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma&#39;</span>
+            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
+                <span class="c1">#dicotomizada</span>
+                <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Dicotoma&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;deberias borrar la variable &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">tipos_columnas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">esDeProporcion</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">esAcotada</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h    23980
+u     7297
+t     3580
+Name: Type, dtype: int64
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">425</span><span class="n">c32751639</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">esDeProporcion</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">esAcotada</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+
+<span class="nn">&lt;ipython-input-5-7bd5fc9874df&gt;</span> in <span class="ni">clasificar_variables</span><span class="nt">(dataframe)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>                 <span class="c1">#politomizada y alomejor ordinal</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>                 <span class="nb">print</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>                 <span class="n">ordinal</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;¿Es ordinal?(seleccionar si o no): &#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>                 <span class="k">if</span><span class="p">(</span><span class="n">ordinal</span><span class="o">==</span><span class="s1">&#39;si&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>                     <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma Ordinal&#39;</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">--&gt; </span><span class="mi">857</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span><span class="s2">             )</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+<p>En funcion de la clasificación por parte de la función anterior procedemos a analizar las variables cualitativas y cuatitativas por separado.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -287,7 +1030,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="1-DefinicionObjetivos.html" title="previous page">1. Definición de Objetivos</a>
-    <a class='right-next' id="next-link" href="3-DeteccionImputacionDatosFaltantes.html" title="next page">3. Detección e Imputación de Datos Faltantes</a>
+    <a class='right-next' id="next-link" href="6-SelecciondeVariables.html" title="next page">6. Selección de Variables</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

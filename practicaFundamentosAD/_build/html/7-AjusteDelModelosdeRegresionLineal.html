@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7. Ajuste del Modelo de Regresión Lineal &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -98,6 +98,9 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="2-AnalisisExploratorioInicial.html">
+<<<<<<< HEAD
+   2. Análisis Exploratorio Inicial (EDA)
+=======
    2. Análisis Exploratorio Inicial
   </a>
  </li>
@@ -118,6 +121,7 @@
  <li class="toctree-l1">
   <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
    5. Procesamiento de Variables Cualitativas
+>>>>>>> 000807e021c0d23a9c82143670d32e6db87c56bc
   </a>
  </li>
  <li class="toctree-l1">
@@ -256,6 +260,242 @@
                 
   <div class="section" id="ajuste-del-modelo-de-regresion-lineal">
 <h1>7. Ajuste del Modelo de Regresión Lineal<a class="headerlink" href="#ajuste-del-modelo-de-regresion-lineal" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tratamiento de datos</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Gráficos</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">style</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Preprocesado y modelado</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.anova</span> <span class="kn">import</span> <span class="n">anova_lm</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="c1"># Configuración matplotlib</span>
+<span class="c1"># ==============================================================================</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bwr&quot;</span>
+<span class="c1">#plt.rcParams[&#39;figure.dpi&#39;] = &quot;100&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.bbox&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span>
+<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configuración warnings</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En primer lugar separamos los datos de training de los datos de test</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Funcion que separa el juego de datos entre datos de entrenamiento y datos de trainning</span>
+<span class="k">def</span> <span class="nf">split_model</span> <span class="p">(</span><span class="n">Dataset_features</span><span class="p">,</span><span class="n">Dataset_target</span><span class="p">):</span>
+<span class="c1"># realizamos la división entre test y trainning</span>
+    <span class="n">df_feat_train</span><span class="p">,</span><span class="n">df_feat_test</span><span class="p">,</span><span class="n">df_targ_train</span><span class="p">,</span><span class="n">df_targ_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+                                        <span class="n">Dataset_features</span><span class="p">,</span>
+                                        <span class="n">Dataset_target</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                                        <span class="n">train_size</span>   <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
+                                        <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">,</span>
+                                        <span class="n">shuffle</span>      <span class="o">=</span> <span class="kc">True</span>
+                                    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_feat_train</span><span class="p">,</span><span class="n">df_feat_test</span><span class="p">,</span><span class="n">df_targ_train</span><span class="p">,</span><span class="n">df_targ_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creamos el modelo de manera manual</span>
+<span class="c1"># Param in : </span>
+<span class="c1"># df_features --&gt; dataframe con la features para entrenae el modelo</span>
+<span class="k">def</span> <span class="nf">create_manual_model</span> <span class="p">(</span><span class="n">df_features_tr</span><span class="p">,</span><span class="n">df_target_tr</span><span class="p">):</span>
+    <span class="n">df_in_model</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">df_features_tr</span><span class="p">,</span> <span class="n">df_target_tr</span><span class="p">)),</span>
+                     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Distance_NEW&#39;</span><span class="p">,</span> <span class="s1">&#39;Rooms&#39;</span><span class="p">,</span> <span class="s1">&#39;Bathroom&#39;</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">]</span>
+               <span class="p">)</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;Price ~ Distance_NEW + Rooms + Bathroom&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df_in_model</span><span class="p">)</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">modelo</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creación del modelo utilizando matrices como en scikitlearn</span>
+<span class="c1"># A la matriz de predictores se le tiene que añadir una columna de 1s para el intercept del modelo</span>
+<span class="k">def</span> <span class="nf">create_model_scikitlearn</span><span class="p">(</span><span class="n">df_features_tr</span><span class="p">,</span><span class="n">df_target_tr</span><span class="p">):</span>
+    <span class="n">df_features</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df_features_tr</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">endog</span><span class="o">=</span><span class="n">df_target_tr</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="n">df_features_tr</span><span class="p">,)</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">modelo</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># funcion para calcular los intervalos de confianza</span>
+<span class="k">def</span> <span class="nf">calcular_intervalos_de_Confianza</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span><span class="n">al</span><span class="p">):</span>
+    <span class="n">intervalos_ci</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">intervalos_ci</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2.5%&#39;</span><span class="p">,</span> <span class="s1">&#39;97.5%&#39;</span><span class="p">]</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">intervalos_ci</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">intervalos_ci</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calcular_residuos</span><span class="p">(</span><span class="n">df_features_tr</span><span class="p">,</span><span class="n">df_target_tr</span><span class="p">):</span>
+    <span class="n">df_target</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">prediccion_train</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">exog</span> <span class="o">=</span> <span class="n">df_features_tr</span><span class="p">)</span>
+    <span class="n">residuos_train</span>   <span class="o">=</span> <span class="n">prediccion_train</span> <span class="o">-</span> <span class="n">df_target_tr</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Residuos&quot;</span><span class="p">,</span><span class="n">residuos_train</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">residuos_train</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inspeccion_visual_modelo</span><span class="p">(</span><span class="n">df_target_tr</span><span class="p">,</span><span class="n">prediccion_train</span><span class="p">,</span><span class="n">residuos_train</span><span class="p">):</span>
+    <span class="c1"># Gráficos</span>
+    <span class="c1"># ==============================================================================</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_target_tr</span><span class="p">,</span> <span class="n">prediccion_train</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">df_target_tr</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_target_tr</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">y_trdf_target_train</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_target_tr</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span>
+                <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valor predicho vs valor real&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Real&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicción&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_target_tr</span><span class="p">))),</span> <span class="n">residuos_train</span><span class="p">,</span>
+                   <span class="n">edgecolors</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuos del modelo&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuo&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span>    <span class="o">=</span> <span class="n">residuos_train</span><span class="p">,</span>
+    <span class="n">stat</span>    <span class="o">=</span> <span class="s2">&quot;density&quot;</span><span class="p">,</span>
+    <span class="n">kde</span>     <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">line_kws</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="n">color</span>   <span class="o">=</span> <span class="s2">&quot;firebrick&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span>   <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">ax</span>      <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución residuos del modelo&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                     <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Residuo&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+
+    <span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span>
+    <span class="n">residuos_train</span><span class="p">,</span>
+    <span class="n">fit</span>   <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">line</span>  <span class="o">=</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span>
+    <span class="n">ax</span>    <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;firebrick&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">lw</span>    <span class="o">=</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Q-Q residuos del modelo&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">prediccion_train</span><span class="p">,</span> <span class="n">residuos_train</span><span class="p">,</span>
+                   <span class="n">edgecolors</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuos del modelo vs predicción&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicción&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuo&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="c1"># Se eliminan los axes vacíos</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Diagnóstico residuos&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_normalidad_shapiro</span> <span class="p">(</span><span class="n">residuos_train</span><span class="p">):</span>
+    <span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">residuos_train</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">shapiro_test</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">shapiro_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_normalidad_Dagostino</span><span class="p">():</span>
+    <span class="n">k2</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">residuos_train</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estadítico= </span><span class="si">{</span><span class="n">k2</span><span class="si">}</span><span class="s2">, p-value = </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">k2</span><span class="p">,</span><span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predecir</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span><span class="n">intervalo_confianza</span><span class="p">):</span>
+    <span class="n">predicciones</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">exog</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">intervalo_confianza</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">predicciones</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">predicciones</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calcular_error_RMSE</span><span class="p">(</span><span class="n">df_features_test</span><span class="p">,</span><span class="n">df_target_test</span><span class="p">):</span>
+<span class="c1"># Error de test del modelo </span>
+<span class="c1"># ==============================================================================</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df_features_test</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">predicciones</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">exog</span> <span class="o">=</span> <span class="n">df_features_test</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span>
+        <span class="n">y_true</span>  <span class="o">=</span> <span class="n">df_target_test</span><span class="p">,</span>
+        <span class="n">y_pred</span>  <span class="o">=</span> <span class="n">predicciones</span><span class="p">,</span>
+        <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span>
+       <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El error (rmse) de test es: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">comparar_modelos_anova</span><span class="p">(</span><span class="n">model1</span><span class="p">,</span><span class="n">model2</span><span class="p">):</span>
+   <span class="n">anova_lm</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span> <span class="n">modelo_interacion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
