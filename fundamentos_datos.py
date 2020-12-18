@@ -146,7 +146,7 @@ def alfa_optima(X,y):
     cv = RepeatedKFold(n_splits=10, n_repeats=3, random_state=1)
     grid = dict()
     import pdb;pdb.set_trace() 
-    grid['alpha'] = np.arange(0, 1, 0.01)
+    grid['alpha'] = np.arange(0, 0.01, 0.0001)
     busqueda = GridSearchCV(modelo_lasso, grid, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
     results = busqueda.fit(X, y)
     import pdb;pdb.set_trace()
@@ -156,8 +156,10 @@ def lasso_prueba(X,y,lista_parametros):
     import pdb;pdb.set_trace()
     alfa_op, alfa_score=alfa_optima(X,y)
     clf = Lasso(alpha=alfa_op)
+    import pdb;pdb.set_trace()
     clf.fit(X,y)
     coeficientes=clf.coef_
+
     for index,i in enumerate(coeficientes):
         import pdb;pdb.set_trace()
         if(round(i,1)==0):
@@ -198,6 +200,7 @@ def processSubset_tr(y,X,tr):
     regr = model.fit()
     RSS = (regr.predict(X - y) ** 2).sum()
     aic=regr.aic
+    r_squared=regr.r_squared
     return {"model":regr, "RSS":RSS,'AIC':abs(aic),'transformacion':tr}
 def getBest(dataframe,y,k):
     results = []
@@ -217,16 +220,18 @@ def Best_stepwise_selection(dataframe,X):
     for i in range(1,len(X.columns)):
         models_best.loc[i] = getBest(X,y,i)
         if(len(models_best)>1):
-            if(round(models_best.loc[i, "model"].rsquared-models_best.loc[i-1, "model"].rsquared,4)<0.01):
+            if(round(models_best.loc[i, "model"].rsquared-models_best.loc[i-1, "model"].rsquared,4)<0.001):
                 break
     import pdb;pdb.set_trace()
 #lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Landsize', 'Propertycount'] X=dataframe[lista_parametros]
- #X=dataframe[lista_parametros] 
+ #X=dataframe[lista_parametros]    y=np.sqrtdataframe['Price']
 def modelo_lineal(dataframe,features):
-    X=dataframe[features].reshape(-1, 1) 
-    y=dataframe['Price'].reshape(-1, 1) 
+    X=dataframe[features] 
+    y=np.sqrt(dataframe['Price'])
+    X=np.nan_to_num(X)
+    y=np.nan_to_num(y)
     import pdb;pdb.set_trace()
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=50)
     features=lasso_prueba(X,y,features)
     import pdb;pdb.set_trace()
     #prediccion_por_intervalos(X,y)
@@ -424,9 +429,10 @@ dataframe= pd.read_csv('precios_casas_sinduplicados.csv')
 #dataframe['Price']=dataframe3['Price']
 dataframe=eliminar_duplicados(dataframe)
 #dataframe["Distancia_NEW"]=distancia_optimizada(dataframe)
-dataframe["Location_TRA"]=dataframe.Longtitude/dataframe.Lattitude
-dataframe_less=dataframe[(dataframe["Location_TRA"]>=dataframe["Location_TRA"].mean()) ]
-dataframe_over=dataframe[(dataframe["Location_TRA"]<dataframe["Location_TRA"].mean()) ]
+#dataframe["Location_TRA"]=dataframe.Longtitude/dataframe.Lattitude
+#dataframe_less=dataframe[(dataframe["Location_TRA"]>=dataframe["Location_TRA"].mean()) ]
+#
+# dataframe_over=dataframe[(dataframe["Location_TRA"]<dataframe["Location_TRA"].mean()) ]
 
 dataframe=dataframe.dropna(subset=['Price']) 
 dataframe=dataframe.dropna(subset=['Distance']) 
@@ -444,18 +450,33 @@ dataframe=dataframe.dropna(subset=['Postcode'])
 #DESPUES DE VERLAS TODAS NOS CENTRAMOS EN LA QUE TIENE MAS RELACION CON EL PRECIO Y HACEMOS LO SIGUIENTE    dataframe=dataframe[dataframe['Rooms']>10]
    
 #OBSERVAR SI HAY LINEAS HORIZONTALES EN LA GRAFICA Y ANALIZAR SI ES CONVENIENTE ELIMINAR CIERTOS DATOS DE AHI dataframe_aux=dataframe[dataframe['Bathroom']>4]
+import pdb;pdb.set_trace()
+dataframe['Price']=np.log10(dataframe['Price'])
 
-dataframe['Price']=np.sqrt(np.log10(dataframe['Price']))
+#dataframe['Price']=np.sqrt(np.log10(dataframe['Price']))
 #ataframe['Price']=1/np.log(np.sqrt(dataframe['Price']))
 
 dataframe=dataframe[dataframe['Distance']<40]
 dataframe=dataframe[dataframe['Rooms']<10]
 dataframe=dataframe[dataframe['Bathroom']<5]
-dataframe=dataframe[dataframe['Type']=='h']
-dataframe=dataframe[dataframe['Regionname']=='Southern Metropolitan']
+#dataframe=dataframe[dataframe['Type']=='h']
+#dataframe=dataframe[dataframe['Regionname']=='Southern Metropolitan']
 #el aic se ha reducido con esto de 70000 a 13000
 
 dataframe=dataframe.assign(Bathroom_times_rooms=dataframe['Bathroom']*dataframe['Rooms'])
+dataframe=dataframe[dataframe['Landsize']>0] 
+#dataframe['Bathroom']=dataframe['Bathroom'].replace(0, 1)
+#dataframe['Bathroom_times_rooms']=dataframe['Bathroom_times_rooms'].replace(0, 1)
+#dataframe['Lattitude']=dataframe['Lattitude'].replace(0, 1)
+dataframe['Longtitude']=dataframe['Longtitude'].replace(0, 1)
+#dataframe['Car']=dataframe['Car'].replace(0, 1)
+#dataframe['Rooms']=np.sqrt(dataframe['Rooms'])
+#dataframe['Distance']=np.sqrt(dataframe['Distance'])
+dataframe['Landsize']=np.log(dataframe['Landsize'])
+dataframe['Longtitude']=np.log(dataframe['Longtitude'])
+dataframe['Propertycount']=np.log(dataframe['Propertycount'])
+dataframe['Propertycount']=np.log(dataframe['Propertycount'])
+#dataframe['Bathroom_times_rooms']=np.sqrt(dataframe['Bathroom_times_rooms'])
 #despues experimentar combinando diferentes tipos de datos a ver cual es la correlacion con estos  Bathroom
 #df_comunidad = df_comunidad.assign(num_casos_prueba_pcr=df_aux2['num_casos_prueba_pcr'])    "Regionname_Southern Metropolitan"   
 
@@ -468,15 +489,18 @@ for i in dataframe['Suburb'].value_counts().index:
     frames = [dataframe_bueno, dataframe_aux]
     dataframe_bueno = pd.concat(frames)
     dataframe_bueno=dataframe_bueno.reset_index(drop=True)
-dataframe=dataframe[dataframe['Landsize']>=0] 
-dataframe['Landsize']=dataframe['Landsize'].replace(0, 1)
-dataframe['Bathroom']=dataframe['Bathroom'].replace(0, 1)
-dataframe['Bathroom_times_rooms']=dataframe['Bathroom_times_rooms'].replace(0, 1)
-dataframe['Lattitude']=dataframe['Lattitude'].replace(0, 1)
-dataframe['Longtitude']=dataframe['Longtitude'].replace(0, 1)
-dataframe['Car']=dataframe['Car'].replace(0, 1)
+
+
 import pdb;pdb.set_trace()
-transformaciones_variables(dataframe)
+lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount','rooms_per_Suburb','pr_rooms_Suburb']
+modelo_lineal(dataframe_bueno,lista_parametros)
+
+#transformaciones_variables(dataframe)
+import pdb;pdb.set_trace()
+X=dataframe_bueno[lista_parametros]
+#lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
+#Bathroom_times_rooms + Distance   Bathroom_times_rooms +Car+ Landsize +Propertycount    model = sm.OLS(y, sm.add_constant(X, prepend=False))
+Best_stepwise_selection(dataframe_bueno,X)
 import pdb;pdb.set_trace()
 
 '''
@@ -492,7 +516,7 @@ dataframe_bueno['Longtitude']=np.log(dataframe_bueno['Longtitude'])
 '''
 lista_parametros=['Rooms', 'Distance', 'Bathroom']
 
-#lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount','rooms_per_Suburb','pr_rooms_Suburb']
+lista_parametros=['Rooms', 'Distance','Bathroom_times_rooms', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount','rooms_per_Suburb','pr_rooms_Suburb']
 X=dataframe_bueno[lista_parametros]
 #lista_parametros=['Rooms', 'Distance', 'Bathroom', 'Car', 'Lattitude', 'Longtitude', 'Total_rooms_Suburb', 'Landsize', 'Propertycount']
 #Bathroom_times_rooms + Distance   Bathroom_times_rooms +Car+ Landsize +Propertycount    model = sm.OLS(y, sm.add_constant(X, prepend=False))
