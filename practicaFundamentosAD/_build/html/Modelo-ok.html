@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&lt;no title&gt; &#8212; Práctica de Fundamentos de Análisis de Datos</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/HH-Logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Práctica de Fundamentos de Análisis de Datos</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-DefinicionObjetivos.html">
+   1. Definición de Objetivos
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-AnalisisExploratorioInicial.html">
+   2. Análisis Exploratorio Inicial (EDA)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-TransformacionVariablesCuantitativas.html">
+   3. Variables Cuantitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html">
+   4.Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-DeteccionImputacionDatosFaltantes.html">
+   5. Limpieza de los datos
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6-SelecciondeVariables.html">
+   6.  Variables seleccionadas
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Modelo-ok.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FModelo-ok.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Modelo-ok.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="simple nav section-nav flex-column">
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default=&#39;warn&#39;</span>
+<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default=&#39;warn&#39;</span>
+<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
+<span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/ruben/tmp/HH_intro_git_ds/practicaFundamentosAD/dataframe-ruben2.csv&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plot</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sb</span>
+<span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">kdeplot</span>
+<span class="k">def</span> <span class="nf">quartile_skew</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="o">.</span><span class="mi">50</span><span class="p">,</span> <span class="o">.</span><span class="mi">75</span><span class="p">])</span> 
+  <span class="k">return</span> <span class="p">((</span><span class="n">q</span><span class="p">[</span><span class="mf">0.75</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mf">0.5</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mf">0.25</span><span class="p">]))</span> <span class="o">/</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mf">0.75</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mf">0.25</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">mostrar_analisis_var_cuantitativas</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1">#calcular coeficiente de variacion</span>
+ <span class="n">datos_variable</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">&quot;coeficiente de Variacion&quot;</span><span class="p">:(</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">/</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>\
+                 <span class="s2">&quot;rango de la variable&quot;</span><span class="p">:</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+                 <span class="s2">&quot;rango intercuartilico&quot;</span><span class="p">:</span><span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span>
+                 <span class="s2">&quot;coeficiente de asimetria&quot;</span><span class="p">:</span><span class="n">quartile_skew</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                 <span class="s2">&quot;Min&quot;</span><span class="p">:</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+                 <span class="s2">&quot;Max&quot;</span><span class="p">:</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+                 <span class="s2">&quot;Mean&quot;</span><span class="p">:</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()}])</span>
+ <span class="k">return</span><span class="p">(</span><span class="n">datos_variable</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">mostrar_graf_variables_continuas</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span><span class="n">column</span><span class="p">):</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span><span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">mostrar_graf_variables_discretas</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span><span class="n">column</span><span class="p">):</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+    <span class="n">sb</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+    <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">dataframe_old</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/ruben/tmp/HH_intro_git_ds/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plot</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sb</span>
+<span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">kdeplot</span>
+<span class="c1"># Tratamiento de datos</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Gráficos</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">style</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Preprocesado y modelado</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.anova</span> <span class="kn">import</span> <span class="n">anova_lm</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="c1"># Configuración matplotlib</span>
+<span class="c1"># ==============================================================================</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bwr&quot;</span>
+<span class="c1">#plt.rcParams[&#39;figure.dpi&#39;] = &quot;100&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.bbox&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span>
+<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configuración warnings</span>
+<span class="c1"># ==============================================================================</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="k">def</span> <span class="nf">quartile_skew</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="o">.</span><span class="mi">50</span><span class="p">,</span> <span class="o">.</span><span class="mi">75</span><span class="p">])</span> 
+  <span class="k">return</span> <span class="p">((</span><span class="n">q</span><span class="p">[</span><span class="mf">0.75</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mf">0.5</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mf">0.5</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mf">0.25</span><span class="p">]))</span> <span class="o">/</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mf">0.75</span><span class="p">]</span> <span class="o">-</span> <span class="n">q</span><span class="p">[</span><span class="mf">0.25</span><span class="p">])</span>
+<span class="c1">#dataframe[&#39;Price&#39;]=dataframe_old[&#39;Price&#39;]</span>
+
+<span class="n">duplicateRowsDF</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">duplicateRowsDF</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="n">dataframe</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s1">&#39;Suburb&#39;</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">,</span><span class="s1">&#39;Postcode&#39;</span><span class="p">,</span><span class="s1">&#39;CouncilArea&#39;</span><span class="p">,],</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
+<span class="n">duplicateRowsDF</span><span class="o">=</span><span class="n">duplicateRowsDF</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Address&#39;</span><span class="p">,</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="n">duplicateRowsDF</span><span class="o">=</span><span class="n">duplicateRowsDF</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">])</span>
+<span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Address&#39;</span><span class="p">,</span><span class="s1">&#39;Suburb&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duplicateRowsDF</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">])</span>
+<span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+
+<span class="c1">#dataframe[&#39;Price&#39;]=dataframe[&#39;Price&#39;].replace(0, 1)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataframe_old</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Rooms&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Rooms&#39;</span><span class="p">])</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Distance&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Distance&#39;</span><span class="p">])</span>
+
+
+<span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Distance&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Landsize&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Landsize&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Landsize&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;Distance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">)</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s2">&quot;Landsize&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">40</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Rooms&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Bathroom&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Landsize&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Landsize&#39;</span><span class="p">])</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">])</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Propertycount&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Propertycount&#39;</span><span class="p">])</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Propertycount&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Propertycount&#39;</span><span class="p">])</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Distance&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Landsize&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Longtitude&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;BathAndRooms&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s2">&quot;Rooms&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">])</span>
+<span class="n">dataframe_filtered</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">])</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Car_r_bt&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Car&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Rooms&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Bathroom&#39;</span><span class="p">]</span>
+<span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;BathAndRooms&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">861102</span><span class="n">d0d0a7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default=&#39;warn&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/ruben/tmp/HH_intro_git_ds/practicaFundamentosAD/dataframe-ruben2.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
+<span class="g g-Whitespace">    </span><span class="mi">686</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span> 
+<span class="ne">--&gt; </span><span class="mi">688</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">689</span> 
+<span class="g g-Whitespace">    </span><span class="mi">690</span> 
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">fp_or_buf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span> 
+<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span> 
+<span class="ne">--&gt; </span><span class="mi">948</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">949</span> 
+<span class="g g-Whitespace">    </span><span class="mi">950</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="k">def</span> <span class="nf">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1180</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="n">CParserWrapper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1181</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span>             <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2008</span>         <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;usecols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">usecols</span>
+<span class="g g-Whitespace">   </span><span class="mi">2009</span> 
+<span class="ne">-&gt; </span><span class="mi">2010</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="n">parsers</span><span class="o">.</span><span class="n">TextReader</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2011</span>         <span class="bp">self</span><span class="o">.</span><span class="n">unnamed_cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">unnamed_cols</span>
+<span class="g g-Whitespace">   </span><span class="mi">2012</span> 
+
+<span class="nn">pandas/_libs/parsers.pyx</span> in <span class="ni">pandas._libs.parsers.TextReader.__cinit__</span><span class="nt">()</span>
+
+<span class="nn">pandas/_libs/parsers.pyx</span> in <span class="ni">pandas._libs.parsers.TextReader._setup_parser_source</span><span class="nt">()</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/ruben/tmp/HH_intro_git_ds/practicaFundamentosAD/dataframe-ruben2.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># División de los datos en train y test</span>
+<span class="c1"># ==============================================================================</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dataframe_filtered</span><span class="p">[[</span><span class="s1">&#39;Rooms&#39;</span><span class="p">,</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+                                        <span class="n">X</span><span class="p">,</span>
+                                        <span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                                        <span class="n">train_size</span>   <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+                                        <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">,</span>
+                                        <span class="n">shuffle</span>      <span class="o">=</span> <span class="kc">True</span>
+                                    <span class="p">)</span>
+
+<span class="c1"># Creación del modelo utilizando el modo fórmula (similar a R)</span>
+<span class="c1"># ==============================================================================</span>
+<span class="sd">&#39;&#39;&#39;datos_train = pd.DataFrame(</span>
+<span class="sd">                     np.hstack((X_train, y_train)),</span>
+<span class="sd">                     columns=[&#39;Rooms&#39;, &#39;Bathroom&#39;, &#39;Distance&#39;, &#39;Price&#39;]</span>
+<span class="sd">               )</span>
+<span class="sd">modelo = smf.ols(formula = &#39;Price ~ BathAndRooms&#39;, data = datos_train)</span>
+<span class="sd">modelo = modelo.fit()</span>
+<span class="sd">print(modelo.summary())</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># Creación del modelo utilizando matrices como en scikitlearn</span>
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># A la matriz de predictores se le tiene que añadir una columna de 1s para el intercept del modelo</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">prepend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">modelo</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">endog</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="n">X_train</span><span class="p">,)</span>
+<span class="n">modelo</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modelo</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+
+<span class="c1"># Intervalos de confianza para los coeficientes del modelo</span>
+<span class="c1"># ==============================================================================</span>
+<span class="n">intervalos_ci</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">intervalos_ci</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1%&#39;</span><span class="p">,</span> <span class="s1">&#39;99%&#39;</span><span class="p">]</span>
+<span class="n">intervalos_ci</span>
+
+
+
+
+<span class="c1"># Diagnóstico errores (residuos) de las predicciones de entrenamiento</span>
+<span class="c1"># ==============================================================================</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">prediccion_train</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">exog</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">)</span>
+<span class="n">residuos_train</span>   <span class="o">=</span> <span class="n">prediccion_train</span> <span class="o">-</span> <span class="n">y_train</span>
+
+<span class="c1"># Gráficos</span>
+<span class="c1"># ==============================================================================</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">prediccion_train</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">y_train</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y_train</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="n">y_train</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y_train</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span>
+                <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valor predicho vs valor real&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Real&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicción&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">))),</span> <span class="n">residuos_train</span><span class="p">,</span>
+                   <span class="n">edgecolors</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuos del modelo&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuo&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span>    <span class="o">=</span> <span class="n">residuos_train</span><span class="p">,</span>
+    <span class="n">stat</span>    <span class="o">=</span> <span class="s2">&quot;density&quot;</span><span class="p">,</span>
+    <span class="n">kde</span>     <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">line_kws</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+    <span class="n">color</span>   <span class="o">=</span> <span class="s2">&quot;firebrick&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span>   <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">ax</span>      <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución residuos del modelo&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                     <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Residuo&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span>
+    <span class="n">residuos_train</span><span class="p">,</span>
+    <span class="n">fit</span>   <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">line</span>  <span class="o">=</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span>
+    <span class="n">ax</span>    <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;firebrick&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">lw</span>    <span class="o">=</span> <span class="mi">2</span>
+<span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Q-Q residuos del modelo&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">prediccion_train</span><span class="p">,</span> <span class="n">residuos_train</span><span class="p">,</span>
+                   <span class="n">edgecolors</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuos del modelo vs predicción&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicción&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuo&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="c1"># Se eliminan los axes vacíos</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Diagnóstico residuos&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.581
+Model:                            OLS   Adj. R-squared:                  0.581
+Method:                 Least Squares   F-statistic:                 1.122e+04
+Date:                Sat, 19 Dec 2020   Prob (F-statistic):               0.00
+Time:                        03:53:12   Log-Likelihood:                -5135.3
+No. Observations:               16201   AIC:                         1.028e+04
+Df Residuals:                   16198   BIC:                         1.030e+04
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const            12.1815      0.017    734.200      0.000      12.149      12.214
+Rooms             1.2027      0.010    123.225      0.000       1.184       1.222
+Distancia_NEW    -0.0375      0.000   -111.864      0.000      -0.038      -0.037
+==============================================================================
+Omnibus:                      485.929   Durbin-Watson:                   2.013
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              887.574
+Skew:                           0.242   Prob(JB):                    1.84e-193
+Kurtosis:                       4.039   Cond. No.                         114.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+<img alt="_images/Modelo-ok_1_1.png" src="_images/Modelo-ok_1_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.stats.api</span> <span class="k">as</span> <span class="nn">sms</span>
+<span class="kn">import</span> <span class="nn">statsmodels</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">sp</span>
+<span class="n">sms</span><span class="o">.</span><span class="n">linear_harvey_collier</span><span class="p">(</span><span class="n">modelo</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dataframe_filtered</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="n">sp</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">prediccion_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">pred_val</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">fittedvalues</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">true_val</span> <span class="o">=</span> <span class="n">dataframe_filtered</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">y_train</span> <span class="o">-</span> <span class="n">pred_val</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">__</span><span class="p">,</span> <span class="n">f_pval</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[[</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">,</span> <span class="s1">&#39;Rooms&#39;</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">prediccion_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">f_pval</span><span class="p">))</span>
+<span class="n">shapiro_test</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">residuos_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">shapiro_test</span><span class="p">)</span>
+
+
+
+<span class="c1"># ==============================================================================</span>
+<span class="n">k2</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">residuos_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estadítico= </span><span class="si">{</span><span class="n">k2</span><span class="si">}</span><span class="s2">, p-value = </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Unnamed: 0         Rooms         Price      Distance      Postcode  \
+count  20252.000000  20252.000000  20252.000000  20252.000000  20252.000000   
+mean   16944.388159      1.726942     13.760432      3.232323   3114.612384   
+std     9819.591153      0.275482      0.515405      0.965290    115.313190   
+min        1.000000      1.000000     11.350407      0.836660   3000.000000   
+25%     8566.750000      1.414214     13.398479      2.549510   3046.000000   
+50%    17097.500000      1.732051     13.721200      3.240370   3087.000000   
+75%    24763.250000      2.000000     14.100690      3.768289   3152.000000   
+max    34856.000000      4.000000     16.231424      6.877500   3978.000000   
+
+           Bathroom           Car       Landsize     Lattitude    Longtitude  \
+count  20252.000000  20252.000000   20252.000000  20252.000000  20252.000000   
+mean       1.588238      1.702548     559.173563    -37.807356    144.997831   
+std        0.698387      0.986105    3330.923816      0.091420      0.120211   
+min        0.000000      0.000000       1.000000    -38.190430    144.540220   
+25%        1.000000      1.000000     234.000000    -37.861263    144.925925   
+50%        1.000000      2.000000     493.000000    -37.800600    145.004050   
+75%        2.000000      2.000000     655.000000    -37.748600    145.069543   
+max        9.000000     18.000000  433014.000000    -37.397800    145.526350   
+
+       Propertycount  Distancia_NEW  BathsAndRooms  
+count   20252.000000   20252.000000   20252.000000  
+mean     7516.233458      13.279493       4.858730  
+std      4409.039015       8.030326      37.707487  
+min        83.000000       0.174520   -2371.446312  
+25%      4380.000000       7.412505       3.325793  
+50%      6567.000000      12.029130       4.191789  
+75%     10331.000000      17.223922       5.597734  
+max     21650.000000      49.578383    3435.223220  
+Ttest_indResult(statistic=2.1025340830497827e-12, pvalue=0.9999999999983225)
+0.00.0
+ShapiroResult(statistic=0.9922189712524414, pvalue=1.4792378179177025e-28)
+Estadítico= 485.92914510839125, p-value = 3.0326817775528733e-106
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/ruben/anaconda3/lib/python3.7/site-packages/scipy/stats/morestats.py:1681: UserWarning: p-value may not be accurate for N &gt; 5000.
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Inmaculada Borrás , Jose María Melero y Rubén Valle<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

@@ -91,7 +91,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-DefinicionObjetivos.html">
-   1. Definición de Objetivos
+   1.  Introducción.
   </a>
  </li>
 </ul>
@@ -120,30 +120,6 @@
   <a class="reference internal" href="6-SelecciondeVariables.html">
    6.  Variables seleccionadas
   </a>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
-   7. Ajuste del Modelo de Regresión Lineal
-  </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="markdown.html">
-     Markdown Files
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
 
@@ -278,7 +254,6 @@
 <p>En el análisis de las variables cualitativas obsevamos que algunos datos tenian la misma dirección y precio.
 Basándonos en este razonamiento, buscamos las  filas que tengan las variables ‘Suburb’, ‘Address’,’Postcode’y ‘CouncilArea’ iguales y también en las que las variables “Adress”, ” Prices” y “Date” coincidan.
 Con le objetivo de no eliminar datos que no estuvieran duplicados mantuvimos los que se encontraban solo en uno de los dataframes.</p>
-<p>((Esto hay que mirarlo bien por que no se si es así.))</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
@@ -480,6 +455,13 @@ dtype: int64
 <img alt="_images/5-DeteccionImputacionDatosFaltantes_6_1.png" src="_images/5-DeteccionImputacionDatosFaltantes_6_1.png" />
 <img alt="_images/5-DeteccionImputacionDatosFaltantes_6_2.png" src="_images/5-DeteccionImputacionDatosFaltantes_6_2.png" />
 <img alt="_images/5-DeteccionImputacionDatosFaltantes_6_3.png" src="_images/5-DeteccionImputacionDatosFaltantes_6_3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Seleccion_variables.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

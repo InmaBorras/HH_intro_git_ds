@@ -57,7 +57,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7. Ajuste del Modelo de Regresión Lineal" href="7-AjusteDelModelosdeRegresionLineal.html" />
     <link rel="prev" title="5. Limpieza de los datos" href="5-DeteccionImputacionDatosFaltantes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -91,7 +90,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-DefinicionObjetivos.html">
-   1. Definición de Objetivos
+   1.  Introducción.
   </a>
  </li>
 </ul>
@@ -120,30 +119,6 @@
   <a class="current reference internal" href="#">
    6.  Variables seleccionadas
   </a>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
-   7. Ajuste del Modelo de Regresión Lineal
-  </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="markdown.html">
-     Markdown Files
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
 
@@ -243,6 +218,25 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lasso">
+   6.1  Lasso
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stepwise">
+   6.2 Stepwise
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -255,10 +249,65 @@
 <p>Después, de tratar los datos y de haber analizado las variables por separado las hemos selecciondo en función de la correlación con el precio.</p>
 <p>Las variables con las que comenzaremos a realizar el modelo de regresión lineal son:</p>
 <p>Cualitativas: Regionname, Method y Type.
-Cuantitativas:  Distancia_NEW, Bathrooms, rooms</p>
-<p>Best_stepwise_selection</p>
-<p>lasso_prueba</p>
-<p>transformaciones_variables</p>
+Cuantitativas: Todas las variables son susceptibles de ser usasadas en el modelo excepto las que fueron eliminadas en la imputación de missings. “YearBuilt”, “BuildingArea” y “Bedroom2”.</p>
+<p>Aplicamos distintos métodos para reducir variables:</p>
+<div class="section" id="lasso">
+<h2>6.1  Lasso<a class="headerlink" href="#lasso" title="Permalink to this headline">¶</a></h2>
+<p>Hemos utilzado una función para encontrar el alpha optimo= 0.0002  y de eta forma encontramos el alpha optimo para aplicar Lasso y eliminar las variables correspondientes.</p>
+<p>aplicamos el algorimo Lasso y vmaos recorriendo todos los coeficientes y cuando los coeficientes son 0 imprimimos por pantalla que esa variable no debe ser seleccionada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/HH_intro_git_ds/practicaFundamentosAD/Variables_Cuantitativas_v2.csv&#39;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">run</span> -i Seleccion_Variables.py
+
+<span class="n">lista_parametros</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Rooms&#39;</span><span class="p">,</span><span class="s1">&#39;Distancia_NEW&#39;</span><span class="p">,</span><span class="s1">&#39;Distance&#39;</span><span class="p">,</span> <span class="s1">&#39;Bathroom&#39;</span><span class="p">,</span> <span class="s1">&#39;Car&#39;</span><span class="p">,</span> <span class="s1">&#39;Lattitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longtitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Landsize&#39;</span><span class="p">,</span> <span class="s1">&#39;Propertycount&#39;</span><span class="p">]</span>
+
+<span class="n">X</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="n">lista_parametros</span><span class="p">]</span>
+<span class="n">y</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span>
+
+<span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">lasso_prueba</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">lista_parametros</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/home/inma/HH_intro_git_ds/practicaFundamentosAD/Seleccion_Variables.py&quot;</span><span class="gt">, line </span><span class="mi">135</span>
+    <span class="k">def</span> <span class="nf">transformaciones_variables</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+                                              <span class="o">^</span>
+<span class="ne">IndentationError</span>: unindent does not match any outer indentation level
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~/</span><span class="n">HH_intro_git_ds</span><span class="o">/</span><span class="n">practicaFundamentosAD</span><span class="o">/</span><span class="n">Seleccion_Variables</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">y</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">lasso_prueba</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">lista_parametros</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stepwise">
+<h2>6.2 Stepwise<a class="headerlink" href="#stepwise" title="Permalink to this headline">¶</a></h2>
+<p>Hemos utilisado un algoritmo que crea modelos en funcion al numero de columnas.
+Cuando el r cuadrado entre el modelo anterior y el modelo actual es menor a 0.0001  pare de incluir varibales en el modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Best_stepwise_selection</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Las variables que se obtienen son ” Distania_NEW”, “Room” ” Latitude”, “Landsize” y ” Bathrooms”.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -290,7 +339,6 @@ Cuantitativas:  Distancia_NEW, Bathrooms, rooms</p>
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="5-DeteccionImputacionDatosFaltantes.html" title="previous page">5. Limpieza de los datos</a>
-    <a class='right-next' id="next-link" href="7-AjusteDelModelosdeRegresionLineal.html" title="next page">7. Ajuste del Modelo de Regresión Lineal</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -201,9 +201,9 @@ for lat, lon in zip(data_filtered['Lattitude'], data_filtered['Longtitude']):
     #print(Koyong_lat_mean,Koyong_lon_mean)
     #print(distance((lat,lon), (Koyong_lat_mean,Koyong_lon_mean)).km)
 
-#data_filtered["Distancia_NEW"]=arr
+data_filtered["Distancia_NEW"]=arr
 #Comprobamos si la correlaciñon mejora y verficamos que casi duplica 
-#data_filtered=data_filtered[data_filtered["Distancia_NEW"]<50]
+data_filtered=data_filtered[data_filtered["Distancia_NEW"]<50]
 #sb.scatterplot(data=data_filtered, x="Distancia_NEW", y="Price")
 #mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
 #plot.show()

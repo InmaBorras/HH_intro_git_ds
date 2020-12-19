@@ -91,7 +91,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-DefinicionObjetivos.html">
-   1. Definición de Objetivos
+   1.  Introducción.
   </a>
  </li>
 </ul>
@@ -120,30 +120,6 @@
   <a class="reference internal" href="6-SelecciondeVariables.html">
    6.  Variables seleccionadas
   </a>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
-   7. Ajuste del Modelo de Regresión Lineal
-  </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="markdown.html">
-     Markdown Files
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks.html">
-     Content with notebooks
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
 
@@ -631,11 +607,11 @@ Richmond          552
 Glen Iris         491
 Preston           485
                  ... 
-Monbulk             1
-Yarra Glen          1
-Guys Hill           1
-Belgrave            1
+Avonsleigh          1
 Wandin North        1
+Wildwood            1
+Belgrave            1
+Kalkallo            1
 Name: Suburb, Length: 351, dtype: int64
 </pre></div>
 </div>
@@ -653,17 +629,17 @@ Name: Suburb, Length: 351, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St        6
-25 William St       4
-1088 Toorak Rd      3
-21 May St           3
-13 George St        3
-                   ..
-25 View St          2
-30 Clifton St       2
-4/33 North Rd       2
-83 Gladstone Av     2
-23/14 Horizon Dr    2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St       6
+25 William St      4
+13 George St       3
+14 James St        3
+21 May St          3
+                  ..
+20 Butler St       2
+15 Lancaster St    2
+20 Fawkner St      2
+7 Brisbane St      2
+2 Celia St         2
 Name: Address, Length: 808, dtype: int64
 </pre></div>
 </div>
@@ -1585,17 +1561,17 @@ La Variable “Method” contiene un  alto grado de categorías, por lo que desp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis           3359
-Nelson           3236
-Barry            3235
-hockingstuart    2623
-Marshall         2027
-                 ... 
-Can                 1
-Aumeca              1
-Quinta              1
-Naison              1
-Create              1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis                 3359
+Nelson                 3236
+Barry                  3235
+hockingstuart          2623
+Marshall               2027
+                       ... 
+Harcourts/Barry           1
+hockingstuart/Barry       1
+Sprint                    1
+McGrath/First             1
+Naison                    1
 Name: SellerG, Length: 388, dtype: int64
 </pre></div>
 </div>
@@ -2036,6 +2012,7 @@ Por ejemplo haciendo una relacion entre el tipo de casa y al region en la que se
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
+<img alt="_images/4-ProcesamientoVaribalesCualitativas_51_1.png" src="_images/4-ProcesamientoVaribalesCualitativas_51_1.png" />
 </div>
 </div>
 <p>La Agencia de Venta son también contiene un número muy alto de  categorías 388, a priori parece que algunos de los “SellerG”, están mas relacionados con un precio  mas alto o mas bajo.
@@ -2082,214 +2059,7 @@ Sin embargo, estas agencias estan localizadas por zonas geograficas por lo tanto
 </div>
 <div class="section" id="correlacion-de-variables-categoricas">
 <h3>4.4.2 Correlación de variables categóricas<a class="headerlink" href="#correlacion-de-variables-categoricas" title="Permalink to this headline">¶</a></h3>
-<p>Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, dando un valor numérico a cada una de las categorías.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method&quot;</span><span class="p">,</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]]</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
-<span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">])</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">])</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">])</span>
-<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
-
-<span class="n">Variables_cualitativas_Corr</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-30-44ee247245d0&gt;:3: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas_Corr[&quot;Date&quot;]=Variables_cualitativas[&quot;Date&quot;].astype(&quot;str&quot;)
-&lt;ipython-input-30-44ee247245d0&gt;:4: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas_Corr[&quot;Regionname&quot;]=Variables_cualitativas_Corr[&quot;Regionname&quot;].astype(&quot;str&quot;)
-&lt;ipython-input-30-44ee247245d0&gt;:6: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas_Corr[&quot;Type&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Type&quot;])
-&lt;ipython-input-30-44ee247245d0&gt;:7: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas_Corr[&quot;Method&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Method&quot;])
-&lt;ipython-input-30-44ee247245d0&gt;:8: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas_Corr[&quot;Regionname&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Regionname&quot;])
-&lt;ipython-input-30-44ee247245d0&gt;:9: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas_Corr[&quot;Date&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Date&quot;])
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Price</th>
-      <th>Method</th>
-      <th>Type</th>
-      <th>Date</th>
-      <th>Regionname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>NaN</td>
-      <td>2</td>
-      <td>1</td>
-      <td>58</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1480000.0</td>
-      <td>4</td>
-      <td>1</td>
-      <td>60</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1035000.0</td>
-      <td>4</td>
-      <td>1</td>
-      <td>63</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>0</td>
-      <td>2</td>
-      <td>63</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1465000.0</td>
-      <td>5</td>
-      <td>1</td>
-      <td>64</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>970000.0</td>
-      <td>4</td>
-      <td>1</td>
-      <td>13</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>755000.0</td>
-      <td>3</td>
-      <td>1</td>
-      <td>13</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>985000.0</td>
-      <td>4</td>
-      <td>1</td>
-      <td>16</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>700000.0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>16</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>509500.0</td>
-      <td>5</td>
-      <td>2</td>
-      <td>16</td>
-      <td>6</td>
-    </tr>
-  </tbody>
-</table>
-<p>100 rows × 5 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_matrix</span><span class="o">=</span><span class="n">Variables_cualitativas_Corr</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
-<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price         1.000000
-Regionname    0.076071
-Date         -0.012643
-Method       -0.102035
-Type         -0.221462
-Name: Price, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fbd20a28c70&gt;
-</pre></div>
-</div>
-<img alt="_images/4-ProcesamientoVaribalesCualitativas_60_1.png" src="_images/4-ProcesamientoVaribalesCualitativas_60_1.png" />
-</div>
-</div>
-<p>La correlación de las variables es bastante baja. Debido a ello procedemos a observar las correlaciones por cada una de las categorias y ver si existen diferencias.</p>
-<p>Para ello transformamos las variables cualitativas en variables dummies.</p>
+<p>Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, creando variables dummies.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span>
@@ -3088,14 +2858,7 @@ Name: Price, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_T</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;precios_casas.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_Corr</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;precios_casas_labelencoder.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_T</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;precios_casas_cualitativas.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

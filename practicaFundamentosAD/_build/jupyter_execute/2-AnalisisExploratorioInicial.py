@@ -52,16 +52,17 @@ profile
 
 # De esta función obtenemos informacion muy relevante con respecto al dataset:
 # 
-#     -El dataset cuenta con 13 variaabels numéricas y 8 categóricas 
+# + El dataset cuenta con 13 variables numéricas y 8 categóricas 
 # 
-#     -Existe un pequeño porcentaje de datos duplicados, tomaremos esto en cuenta durante el análisis de variables para poder identificarlos y tratarlos. 
+# + Existe un pequeño porcentaje de datos duplicados, tomaremos esto en cuenta durante el análisis de variables para poder identificarlos y tratarlos. 
 # 
-#     -El pocetaje de datos faltantes corresponde a un 13,8%  y todo ellos se encuentran en las variables numéricas. (es alto es bajo). Siendo "YeatBuild" , "BuildingArea", y "Landsize".
-#     -Las variables con mayor correlación son: "rooms" y "Bedrrom2". Tambien podemos  observar que tanto ambas variables tienen una alta correlacion entre ellas y podrían producir colinealidad. 
+# + El pocetaje de datos faltantes corresponde a un 13,8%  y todo ellos se encuentran en las variables numéricas. (es alto es bajo). Siendo "YeatBuild" , "BuildingArea", y "Landsize".
+# 
+# + Las variables con mayor correlación son: "rooms" y "Bedrrom2". Tambien podemos  observar que tanto ambas variables tienen una alta correlacion entre ellas y podrían producir colinealidad. 
 # 
 # Para poder clasificar los tipo de varibles vamos a realizar una función que las identifique que tipo de varaibles es cada una en función del tipo de datos que contiene. 
 
-# In[8]:
+# In[ ]:
 
 
 get_ipython().run_line_magic('run', '-i fundamentos_datos_variables.py')

@@ -409,40 +409,7 @@ with sns.axes_style("white"):
 
 # ### 4.4.2 Correlación de variables categóricas 
 # 
-# Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, dando un valor numérico a cada una de las categorías. 
-
-# In[30]:
-
-
-Variables_cualitativas["Price"]=data["Price"]
-Variables_cualitativas_Corr=Variables_cualitativas[["Price","Method","Type","Date","Regionname"]]
-Variables_cualitativas_Corr["Date"]=Variables_cualitativas["Date"].astype("str")
-Variables_cualitativas_Corr["Regionname"]=Variables_cualitativas_Corr["Regionname"].astype("str")
-encoder = LabelEncoder()
-Variables_cualitativas_Corr["Type"]=encoder.fit_transform(Variables_cualitativas_Corr["Type"])
-Variables_cualitativas_Corr["Method"]=encoder.fit_transform(Variables_cualitativas_Corr["Method"])
-Variables_cualitativas_Corr["Regionname"]=encoder.fit_transform(Variables_cualitativas_Corr["Regionname"])
-Variables_cualitativas_Corr["Date"]=encoder.fit_transform(Variables_cualitativas_Corr["Date"])
-
-Variables_cualitativas_Corr.head(100)
-
-
-# In[31]:
-
-
-corr_matrix=Variables_cualitativas_Corr.corr(method='pearson')         
-corr_matrix["Price"].sort_values(ascending=False)
-
-
-# In[32]:
-
-
-sns.heatmap(corr_matrix.corr(), annot=True, fmt='.2f')
-
-
-# La correlación de las variables es bastante baja. Debido a ello procedemos a observar las correlaciones por cada una de las categorias y ver si existen diferencias.
-# 
-# Para ello transformamos las variables cualitativas en variables dummies. 
+# Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, creando variables dummies. 
 
 # In[33]:
 
@@ -630,17 +597,5 @@ Variables_cualitativas_T
 # In[55]:
 
 
-Variables_cualitativas_T.to_csv('precios_casas.csv', index=False)
-
-
-# In[54]:
-
-
-Variables_cualitativas_Corr.to_csv('precios_casas_labelencoder.csv', index=False)
-
-
-# In[ ]:
-
-
-
+Variables_cualitativas_T.to_csv('precios_casas_cualitativas.csv', index=False)
 
