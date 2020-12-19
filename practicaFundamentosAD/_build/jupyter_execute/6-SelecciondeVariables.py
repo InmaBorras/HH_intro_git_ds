@@ -23,7 +23,7 @@
 
 
 import pandas as pd 
-dataframe = pd.read_csv('/home/inma/HH_intro_git_ds/practicaFundamentosAD/Variables_Cuantitativas_v2.csv')
+dataframe = pd.read_csv('Variables_Cuantitativas_v2.csv')
 
 get_ipython().run_line_magic('run', '-i Seleccion_Variables.py')
 
@@ -36,8 +36,6 @@ X=np.nan_to_num(X)
 y=np.nan_to_num(y)
 lasso_prueba(X,y,lista_parametros)
 
-
-# 
 
 # 
 # 

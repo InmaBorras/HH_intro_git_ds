@@ -28,41 +28,43 @@ from geopy import distance
 
 def visualizacion_missings(dataframe):
     #ELIMINACION VISUALIZACION Y SUSTITUCION DE LOS MISSINGS
+    fig = plt.gcf()
+    fig.set_size_inches(3, 3.5, forward=True)
     print(dataframe.isnull().sum())
+    plt.show()
     msno.matrix(dataframe)
     plt.show()
     msno.heatmap(dataframe)
     plt.show()
     # Missingno library also provides heatmaps that show if there is any correlation between missing values in different columns.
     msno.bar(dataframe)
-    plt.show()
-'''import pdb;pdb.set_trace()
-lista_true=[[5,7,9,11,13],[2,4,6,8,10]]
-lista_pred=[[19/4,40/6,8,12,13],[5/2,7/2,13/2,17/2,9]]
-ec_prueba=error_cuadratico(lista_true,lista_pred)'''  
+    plt.plot()
+    '''import pdb;pdb.set_trace()
+    lista_true=[[5,7,9,11,13],[2,4,6,8,10]]
+    lista_pred=[[19/4,40/6,8,12,13],[5/2,7/2,13/2,17/2,9]]
+    ec_prueba=error_cuadratico(lista_true,lista_pred)'''  
 
  
-dataframe_cualitativas = pd.read_csv('/home/inma/HH_intro_git_ds/precios_casas_Cualitativas.csv')
-dataframe_cualitativas2=pd.read_csv('/home/inma/HH_intro_git_ds/precios_casas.csv')
-dataframe3 = pd.read_csv('/home/inma/HH_intro_git_ds/precios_casas_full.csv')
-dataframe_bueno=pd.DataFrame()
-#dataframe=dataframe[dataframe.BuildingArea.drop()]
-dataframe_final=pd.DataFrame()
-#dataframe=dataframe.dropna(subset=['Price'])
+    dataframe_cualitativas = pd.read_csv('precios_casas_Cualitativas.csv')
+    dataframe_cualitativas2=pd.read_csv('precios_casas.csv')
+    dataframe3 = pd.read_csv('precios_casas_full.csv')
+    dataframe_bueno=pd.DataFrame()
+    dataframe_final=pd.DataFrame()
+    dataframe=dataframe.dropna(subset=['Price'])
 
 
-for i in dataframe.keys():
-    if(i!='YearBuilt' and i!='BuildingArea' and i!='Bedroom2'):
-        dataframe_final[i]=dataframe[i]
-dataframe=dataframe_final
-lista_parametros=list()
-lista_missings=list()
-for index, i in enumerate(dataframe3.keys()):
-    if(isinstance(dataframe3.iloc[0][index], ( np.int64))  or isinstance(dataframe3.iloc[0][index],(np.float64)) ):
-        if(dataframe3[str(i)].isna().sum()>1000):
-            lista_missings.append(i)
-        else:
-            lista_parametros.append(i)
+    for i in dataframe.keys():
+        if(i!='YearBuilt' and i!='BuildingArea' and i!='Bedroom2'):
+            dataframe_final[i]=dataframe[i]
+    dataframe=dataframe_final
+    lista_parametros=list()
+    lista_missings=list()
+    for index, i in enumerate(dataframe3.keys()):
+        if(isinstance(dataframe3.iloc[0][index], ( np.int64))  or isinstance(dataframe3.iloc[0][index],(np.float64)) ):
+            if(dataframe3[str(i)].isna().sum()>1000):
+                lista_missings.append(i)
+            else:
+                lista_parametros.append(i)
 
 '''
 #deter_data = pd.DataFrame(columns = ["Det" + name for name in missing_columns])
@@ -159,12 +161,12 @@ def prediccion_varias_variables(dataframe,df_filter,feature_to_predict,features,
 
 
 
-dataframe=dataframe.dropna(subset=['Distance']) 
-dataframe=dataframe.dropna(subset=['Regionname']) 
-dataframe=dataframe.dropna(subset=['Regionname']) 
-dataframe=dataframe.dropna(subset=['CouncilArea']) 
-dataframe=dataframe.dropna(subset=['Propertycount']) 
-dataframe=dataframe.dropna(subset=['Postcode'])
+    dataframe=dataframe.dropna(subset=['Distance']) 
+    dataframe=dataframe.dropna(subset=['Regionname']) 
+    dataframe=dataframe.dropna(subset=['Regionname']) 
+    dataframe=dataframe.dropna(subset=['CouncilArea']) 
+    dataframe=dataframe.dropna(subset=['Propertycount']) 
+    dataframe=dataframe.dropna(subset=['Postcode'])
 #visualizacion_missings(dataframe3)
 
 '''

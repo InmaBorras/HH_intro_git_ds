@@ -57,7 +57,7 @@ def alfa_optima(X,y):
     return(results.best_params_['alpha'],results.best_score_)
     
 def lasso_prueba(X,y,lista_parametros):
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
    #alfa_op, alfa_score=alfa_optima(X,y)
     clf = Lasso(alpha=0.0002)
     #import pdb;pdb.set_trace()
@@ -132,7 +132,7 @@ def Best_stepwise_selection(dataframe,X):
  #X=dataframe[lista_parametros]    y=np.sqrtdataframe['Price'
  
  
- def transformaciones_variables(dataframe):
+def transformaciones_variables(dataframe):
     dict_tr=dict()
     for  i in dataframe.keys():
         if((isinstance(dataframe[str(i)].iloc[0], ( np.int64))  or isinstance(dataframe[str(i)].iloc[0],(np.float64))) and i!='Lattitude' and i!='Location_TRA' ):

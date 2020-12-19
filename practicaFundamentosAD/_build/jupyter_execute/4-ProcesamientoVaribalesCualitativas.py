@@ -20,8 +20,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
-
-data= pd.read_csv('/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv')
+import warnings
+warnings.filterwarnings('ignore')
+data= pd.read_csv('Melbourne_housing_FULL.csv')
 
 
 # In[2]:
@@ -411,7 +412,7 @@ with sns.axes_style("white"):
 # 
 # Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, creando variables dummies. 
 
-# In[33]:
+# In[30]:
 
 
 Variables_cualitativas["Price"]=data["Price"]
@@ -426,7 +427,7 @@ Variables_cualitativas_T.head()
 # 
 # ### Regionname 
 
-# In[34]:
+# In[31]:
 
 
 
@@ -435,7 +436,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[35]:
+# In[32]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_Northern Metropolitan"]]
@@ -443,7 +444,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[36]:
+# In[33]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_Northern Victoria"]]
@@ -451,7 +452,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[37]:
+# In[34]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_South-Eastern Metropolitan"]]
@@ -459,7 +460,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[38]:
+# In[35]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_Southern Metropolitan"]]
@@ -467,7 +468,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[39]:
+# In[36]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_Western Metropolitan"]]
@@ -475,7 +476,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[40]:
+# In[37]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_Western Victoria"]]
@@ -483,7 +484,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[41]:
+# In[38]:
 
 
 f=Variables_cualitativas_T[["Price","Regionname_Eastern Metropolitan"]]
@@ -494,7 +495,7 @@ corr_matrix["Price"].sort_values(ascending=False)
 # ### Type
 # 
 
-# In[42]:
+# In[39]:
 
 
 f=Variables_cualitativas_T[["Price","Type_Casa"]]
@@ -502,7 +503,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[43]:
+# In[40]:
 
 
 f=Variables_cualitativas_T[["Price","Type_Piso"]]
@@ -510,7 +511,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[44]:
+# In[41]:
 
 
 f=Variables_cualitativas_T[["Price","Type_Adosado"]]
@@ -521,7 +522,7 @@ corr_matrix["Price"].sort_values(ascending=False)
 # ### Method 
 # 
 
-# In[45]:
+# In[42]:
 
 
 f=Variables_cualitativas_T[["Price","Method_otro"]]
@@ -529,7 +530,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[46]:
+# In[43]:
 
 
 f=Variables_cualitativas_T[["Price","Method_sin_precio"]]
@@ -537,7 +538,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[47]:
+# In[44]:
 
 
 f=Variables_cualitativas_T[["Price","Method_traspasada"]]
@@ -545,7 +546,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[48]:
+# In[45]:
 
 
 f=Variables_cualitativas_T[["Price","Method_vend"]]
@@ -553,7 +554,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[49]:
+# In[46]:
 
 
 f=Variables_cualitativas_T[["Price","Method_vend_ant"]]
@@ -561,7 +562,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# In[50]:
+# In[47]:
 
 
 f=Variables_cualitativas_T[["Price","Method_oferta_vendedor"]]
@@ -579,7 +580,7 @@ corr_matrix["Price"].sort_values(ascending=False)
 # 
 # Despues de la selección de variables vamos a proceder a transformarlas para su uso porterior en el modelo. 
 
-# In[51]:
+# In[48]:
 
 
 Variables_cualitativas_T=pd.get_dummies(Variables_cualitativas,columns = ["Regionname"],drop_first= True)
@@ -588,13 +589,13 @@ Variables_cualitativas_T=pd.get_dummies(Variables_cualitativas_T,columns = ["Dat
 Variables_cualitativas_T=pd.get_dummies(Variables_cualitativas_T,columns = ["Method"],drop_first= True)
 
 
-# In[52]:
+# In[49]:
 
 
 Variables_cualitativas_T
 
 
-# In[55]:
+# In[50]:
 
 
 Variables_cualitativas_T.to_csv('precios_casas_cualitativas.csv', index=False)

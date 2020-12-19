@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2. Análisis Exploratorio Inicial (EDA) &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -121,6 +121,11 @@
    6.  Variables seleccionadas
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
+   7.Ajuste del Modelo
+  </a>
+ </li>
 </ul>
 
 </nav> <!-- To handle the deprecated key -->
@@ -234,7 +239,8 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 <span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">run</span> -i fundamentos_datos_variables.py
 </pre></div>
 </div>
 </div>
@@ -841,8 +847,21 @@ memory usage: 5.6+ MB
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "67406461fb5b46b385a45a5602e3534c"}
-</script></div>
+{"version_major": 2, "version_minor": 0, "model_id": "e21ee0e41cb04497aec2336d5ed9f8ab"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "709cbf53194a43389f1db81a0fc6862e"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "3c495265eba54005874adfc6ba2e9b95"}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>De esta función obtenemos informacion muy relevante con respecto al dataset:</p>
 <ul class="simple">
@@ -854,9 +873,61 @@ memory usage: 5.6+ MB
 <p>Para poder clasificar los tipo de varibles vamos a realizar una función que las identifique que tipo de varaibles es cada una en función del tipo de datos que contiene.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i fundamentos_datos_variables.py
-<span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h    23980
+u     7297
+t     3580
+Name: Type, dtype: int64
+¿Es ordinal?(seleccionar si o no): no
+S     19744
+SP     5095
+PI     4850
+VB     3108
+SN     1317
+PN      308
+SA      226
+W       173
+SS       36
+Name: Method, dtype: int64
+¿Es ordinal?(seleccionar si o no): no
+Southern Metropolitan         11836
+Northern Metropolitan          9557
+Western Metropolitan           6799
+Eastern Metropolitan           4377
+South-Eastern Metropolitan     1739
+Eastern Victoria                228
+Northern Victoria               203
+Western Victoria                115
+Name: Regionname, dtype: int64
+¿Es ordinal?(seleccionar si o no): no
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Suburb&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Address&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Rooms&#39;: &#39;Cuantitativa Discreta de Proporcion Politomizada No Acotada&#39;,
+ &#39;Type&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
+ &#39;Price&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Method&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
+ &#39;SellerG&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Date&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Distance&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Postcode&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Bedroom2&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Bathroom&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Car&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Landsize&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;BuildingArea&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;YearBuilt&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;CouncilArea&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Lattitude&#39;: &#39;Cuantitativa Continua de Intervalo Politomizada No Acotada&#39;,
+ &#39;Longtitude&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Regionname&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
+ &#39;Propertycount&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;}
 </pre></div>
 </div>
 </div>

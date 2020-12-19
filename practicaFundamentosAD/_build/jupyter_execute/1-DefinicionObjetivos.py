@@ -19,7 +19,12 @@
 # 
 # Para la gestion del control de cambios se ha utilizado un repositorio git que puede encontrarse en https://github.com/InmaBorras/HH_intro_git_ds. 
 # 
-# 
+
+# In[1]:
+
+
+gh repo clone InmaBorras/HH_intro_git_ds
+
 
 # 
 # 

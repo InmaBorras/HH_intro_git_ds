@@ -14,6 +14,8 @@ import numpy as np
 import folium
 import math
 import time
+import warnings
+warnings.filterwarnings('ignore')
 from scipy import stats
 pd.options.mode.chained_assignment = None  # default='warn'
 from plotnine import ggplot, aes, geom_line, geom_point, geom_bar, geom_boxplot
@@ -21,7 +23,7 @@ import scipy.stats as ss
 import matplotlib.pyplot as plot
 import seaborn as sb
 from seaborn import kdeplot
-dataframe = pd.read_csv('/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv')
+dataframe = pd.read_csv('Melbourne_housing_FULL.csv')
 get_ipython().run_line_magic('run', '-i Variablescuantitativas.py')
 
 
@@ -108,8 +110,7 @@ pd.value_counts(dataframe['Rooms'])/dataframe["Rooms"].count()
 mostrar_analisis_var_cuantitativas(dataframe["Rooms"])
 
 
-# Como se puede var en la tabla anterio la variable tiene un coeficiente de variacion del 32% con un coeficiente de asimetria igual a 0 por que la variable es simetrica.
-# 
+# Como se puede var en la tabla anterio la variable tiene un coeficiente de variacion del 32% con un coeficiente de asimetria igual a 0 por que la variable es simetrica. Como se puede ver en los graficos (Rooms_TRA) no hay una mejora significativa. Dejamos para la fase de implementacion del modelo como transformar esta variable.
 # 
 
 # In[9]:
@@ -117,11 +118,7 @@ mostrar_analisis_var_cuantitativas(dataframe["Rooms"])
 
 mostrar_graf_variables_discretas(dataframe,"Rooms")
 dataframe["Rooms_TR"]=dataframe["Rooms"].apply(np.sqrt)
-sb.scatterplot(data=dataframe, x="Rooms", y="Price")
-#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
-plot.show()
-sb.regplot(x="Rooms", y="Price", data=dataframe);
-plot.show()
+mostrar_graf_variables_discretas(dataframe,"Rooms_TR")
 
 
 # Como ya se habia comprobado numéricamente la variable es muy simetrica aunque se aprecia unos outliers, viviendas de mas de 7 dormitorios que posteriormente veremos que efecto tienen en los modelos.  
@@ -401,14 +398,6 @@ sb.scatterplot(data=df_filtered, x="BuildingArea_TRA", y="Price")
 plot.show()
 
 
-
-df_filtered=dataframe[dataframe["YearBuilt"]>1800]
-
-sb.scatterplot(data=df_filtered, x="YearBuilt", y="Price")
-#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
-plot.show()
-
-
 # Los datos sin ese registro tienen mejor aspecto y parecen muy concentrados.
 
 # ### 3.1.8 Análisis de la variable PropertyCountss
@@ -503,7 +492,7 @@ sb.heatmap(data_filtered.corr(), annot=True, fmt='.2f')
 # 
 # 
 
-# In[41]:
+# In[40]:
 
 
 data_filtered.to_csv("Variables_Cuantitativas_v2.csv")

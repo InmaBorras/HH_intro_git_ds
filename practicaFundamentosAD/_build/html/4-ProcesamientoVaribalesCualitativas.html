@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4.Variables Cualitativas &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -119,6 +119,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="6-SelecciondeVariables.html">
    6.  Variables seleccionadas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
+   7.Ajuste del Modelo
   </a>
  </li>
 </ul>
@@ -367,8 +372,9 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
-
-<span class="n">data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -607,11 +613,11 @@ Richmond          552
 Glen Iris         491
 Preston           485
                  ... 
-Avonsleigh          1
-Wandin North        1
-Wildwood            1
-Belgrave            1
-Kalkallo            1
+Guys Hill           1
+viewbank            1
+Menzies Creek       1
+croydon             1
+Bulla               1
 Name: Suburb, Length: 351, dtype: int64
 </pre></div>
 </div>
@@ -629,17 +635,17 @@ Name: Suburb, Length: 351, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St       6
-25 William St      4
-13 George St       3
-14 James St        3
-21 May St          3
-                  ..
-20 Butler St       2
-15 Lancaster St    2
-20 Fawkner St      2
-7 Brisbane St      2
-2 Celia St         2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St        6
+25 William St       4
+38 Stewart St       3
+12 Mirams St        3
+28 Blair St         3
+                   ..
+18 Molesworth Ct    2
+6 Rose St           2
+19 Gordon Gr        2
+3/94 Purinuan Rd    2
+15 Bank St          2
 Name: Address, Length: 808, dtype: int64
 </pre></div>
 </div>
@@ -1305,14 +1311,6 @@ Name: Bedroom2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-12-ddf859229450&gt;:1: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  Variables_cualitativas[&quot;Postcode&quot;]=Variables_cualitativas[&quot;Postcode&quot;].astype(&quot;object&quot;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3073.0    844
 3046.0    638
 3020.0    617
@@ -1358,13 +1356,6 @@ o res - other residential</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/inma/anaconda3/lib/python3.8/site-packages/pandas/core/series.py:4575: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  return super().replace(
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Casa       68.795364
 Piso       20.934102
 Adosado    10.270534
@@ -1561,17 +1552,17 @@ La Variable “Method” contiene un  alto grado de categorías, por lo que desp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis                 3359
-Nelson                 3236
-Barry                  3235
-hockingstuart          2623
-Marshall               2027
-                       ... 
-Harcourts/Barry           1
-hockingstuart/Barry       1
-Sprint                    1
-McGrath/First             1
-Naison                    1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis           3359
+Nelson           3236
+Barry            3235
+hockingstuart    2623
+Marshall         2027
+                 ... 
+Direct              1
+Luxe                1
+iHomes              1
+T                   1
+Malvern             1
 Name: SellerG, Length: 388, dtype: int64
 </pre></div>
 </div>

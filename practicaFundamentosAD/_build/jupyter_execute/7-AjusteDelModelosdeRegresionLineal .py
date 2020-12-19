@@ -9,26 +9,28 @@
 # In[1]:
 
 
+import warnings
+warnings.filterwarnings('ignore')
 get_ipython().run_line_magic('run', '-i 7-AjusteDelModelosdeRegresionLineal.py')
 
 
-# In[39]:
+# In[2]:
 
 
 # División de los datos en train y test
 # ==============================================================================
 
 x=dataframe_old[['Distance','Rooms','Landsize','Lattitude','Bathroom']]
-y = dataframe_old['Price']
+y=dataframe_old['Price']
 
 entrena_y_muestra_modelo(x,y)
 
 
-# In[40]:
+# In[3]:
 
 
 
-x = dataframe_filtered[['Distancia_NEW','Rooms','Landsize','Lattitude','Bathroom']]
+x = dataframe_filtered[['Distancia_NEW','Rooms','Lattitude','Landsize','Bathroom']]
 y = dataframe_filtered['Price']
 
 entrena_y_muestra_modelo(x,y)

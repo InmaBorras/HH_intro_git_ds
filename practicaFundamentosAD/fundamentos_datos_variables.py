@@ -119,7 +119,7 @@ def clasificar_variables(dataframe):
 
 
 def eliminar_duplicados(dataframe_bueno):
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
     duplicateRowsDF=pd.DataFrame()
     duplicateRowsDF = dataframe_bueno[dataframe_bueno.duplicated(['Suburb', 'Address','Postcode','CouncilArea',],keep=False)]
     duplicateRowsDF=duplicateRowsDF.drop_duplicates(subset=['Address','Price','Date'])

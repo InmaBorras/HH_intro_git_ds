@@ -12,7 +12,8 @@
 
 import pandas as pd 
 from pandas_profiling import ProfileReport
-data = pd.read_csv('/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv')
+data = pd.read_csv('Melbourne_housing_FULL.csv')
+get_ipython().run_line_magic('run', '-i fundamentos_datos_variables.py')
 
 
 # In[2]:
@@ -62,10 +63,10 @@ profile
 # 
 # Para poder clasificar los tipo de varibles vamos a realizar una función que las identifique que tipo de varaibles es cada una en función del tipo de datos que contiene. 
 
-# In[ ]:
+# In[7]:
 
 
-get_ipython().run_line_magic('run', '-i fundamentos_datos_variables.py')
+
 clasificar_variables(data)
    
 

@@ -14,7 +14,7 @@ import time
 from scipy import stats
 pd.options.mode.chained_assignment = None  # default='warn'
 from plotnine import ggplot, aes, geom_line, geom_point, geom_bar, geom_boxplot
-dataframe = pd.read_csv('/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv')
+dataframe = pd.read_csv('Melbourne_housing_FULL.csv')
 import scipy.stats as ss
 import matplotlib.pyplot as plot
 import seaborn as sb
@@ -48,7 +48,11 @@ def mostrar_graf_variables_discretas(df_data,column):
     sb.boxplot(data=df_data,x=column,ax=ax1)
     sb.countplot(data=df_data,x=column,ax=ax2)
     plot.show()
-    
+    #mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
+    plot.show()
+    sb.regplot(x=column, y="Price", data=dataframe)
+    plot.show()
+
     
  #visualizacion del mapa de precios
 import geopy.distance 
@@ -95,7 +99,7 @@ for i,v in  dataframe.iterrows():
             print(Loc)
             time.sleep(1)
 '''
-mapa = folium.Map(location=[-37.810634, 145.001851], zoom_start=11)
+mapa = folium.Map(location=[-37.810634, 145.001851], zoom_start=10)
 data_filtered=dataframe[dataframe['Lattitude'].notnull() & \
                         dataframe['Longtitude'].notnull() &\
                        dataframe['Rooms'].notnull() & \

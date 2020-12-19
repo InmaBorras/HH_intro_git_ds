@@ -19,7 +19,7 @@
 
 
 import pandas as pd 
-data = pd.read_csv('/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv')
+data = pd.read_csv('Melbourne_housing_FULL.csv')
 get_ipython().run_line_magic('run', '-i fundamentos_datos_variables.py')
 data_duplicados=eliminar_duplicados(data)
 print("El número de datos duplicados eliminados es", ((len(data))-(len(data_duplicados))))
@@ -32,7 +32,7 @@ print("El número de datos duplicados eliminados es", ((len(data))-(len(data_dup
 # Para ellos en primer lugar representamos gráficamente los datos faltantes en cada una de las variables realizando  una función de visualización. 
 # 
 
-# In[7]:
+# In[2]:
 
 
 get_ipython().run_line_magic('run', '-i fundamentos_datos_missings.py')
@@ -53,7 +53,7 @@ visualizacion_missings(data_duplicados)
 # In[3]:
 
 
-data_no_missings = pd.read_csv('/home/inma/HH_intro_git_ds/precios_casas_sinduplicados_indexTRUE.csv')
+data_no_missings = pd.read_csv('precios_casas_sinduplicados_indexTRUE.csv')
 
 data_no_missings["Price"]=data["Price"]
 
@@ -68,10 +68,34 @@ dataframe=dataframe.dropna(subset=['Postcode'])
 visualizacion_missings(dataframe)
 
 
-# In[5]:
+# In[4]:
 
 
 dataframe.to_csv("Seleccion_variables.csv")
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

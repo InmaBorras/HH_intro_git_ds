@@ -100,7 +100,7 @@ dataframe_filtered['BathAndRooms']=(dataframe_filtered["Rooms"]+dataframe_filter
 dataframe_filtered.describe()
 
 
-# In[8]:
+# In[2]:
 
 
 # División de los datos en train y test

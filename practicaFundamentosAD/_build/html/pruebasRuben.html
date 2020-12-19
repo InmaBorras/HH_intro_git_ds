@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>&lt;no title&gt; &#8212; Práctica de Fundamentos de Análisis de Datos</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
@@ -117,6 +117,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="6-SelecciondeVariables.html">
    6.  Variables seleccionadas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
+   7.Ajuste del Modelo
   </a>
  </li>
 </ul>
@@ -333,58 +338,283 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">ae920c4e58fb</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default=&#39;warn&#39;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/ruben/tmp/HH_intro_git_ds/precios_casas_sinduplicados.csv&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">dataframe_old</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/ruben/tmp/HH_intro_git_ds/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">ss</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           Suburb           Address  Rooms Type      Price Method  \
+0      Abbotsford      85 Turner St      2    h  1480000.0      S   
+1      Abbotsford   25 Bloomburg St      2    h  1035000.0      S   
+2      Abbotsford      5 Charles St      3    h  1465000.0     SP   
+3      Abbotsford  40 Federation La      3    h   850000.0     PI   
+4      Abbotsford       55a Park St      4    h  1600000.0     VB   
+...           ...               ...    ...  ...        ...    ...   
+26543  Yarraville       13 Burns St      4    h  1480000.0     PI   
+26544  Yarraville     29A Murray St      2    h   888000.0     SP   
+26545  Yarraville    147A Severn St      2    t   705000.0      S   
+26546  Yarraville  12/37 Stephen St      3    h  1140000.0     SP   
+26547  Yarraville  3 Tarrengower St      2    h  1020000.0     PI   
 
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
-<span class="g g-Whitespace">    </span><span class="mi">686</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">687</span> 
-<span class="ne">--&gt; </span><span class="mi">688</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">689</span> 
-<span class="g g-Whitespace">    </span><span class="mi">690</span> 
+             SellerG        Date  Distance  Postcode  Bathroom  Car  Landsize  \
+0             Biggin   3/12/2016       2.5    3067.0       1.0  1.0     202.0   
+1             Biggin   4/02/2016       2.5    3067.0       1.0  0.0     156.0   
+2             Biggin   4/03/2017       2.5    3067.0       2.0  0.0     134.0   
+3             Biggin   4/03/2017       2.5    3067.0       2.0  1.0      94.0   
+4             Nelson   4/06/2016       2.5    3067.0       1.0  2.0     120.0   
+...              ...         ...       ...       ...       ...  ...       ...   
+26543            Jas  24/02/2018       6.3    3013.0       1.0  3.0     593.0   
+26544        Sweeney  24/02/2018       6.3    3013.0       2.0  1.0      98.0   
+26545            Jas  24/02/2018       6.3    3013.0       1.0  2.0     220.0   
+26546  hockingstuart  24/02/2018       6.3    3013.0       1.0  1.0     211.0   
+26547             RW  24/02/2018       6.3    3013.0       1.0  0.0     250.0   
 
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">452</span> 
-<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">454</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">fp_or_buf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">455</span> 
-<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+                    CouncilArea  Lattitude  Longtitude             Regionname  \
+0            Yarra City Council  -37.79960   144.99840  Northern Metropolitan   
+1            Yarra City Council  -37.80790   144.99340  Northern Metropolitan   
+2            Yarra City Council  -37.80930   144.99440  Northern Metropolitan   
+3            Yarra City Council  -37.79690   144.99690  Northern Metropolitan   
+4            Yarra City Council  -37.80720   144.99410  Northern Metropolitan   
+...                         ...        ...         ...                    ...   
+26543  Maribyrnong City Council  -37.81053   144.88467   Western Metropolitan   
+26544  Maribyrnong City Council  -37.81551   144.88826   Western Metropolitan   
+26545  Maribyrnong City Council  -37.82286   144.87856   Western Metropolitan   
+26546  Maribyrnong City Council   -8.03276     0.00000   Western Metropolitan   
+26547  Maribyrnong City Council  -37.81810   144.89351   Western Metropolitan   
 
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">946</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">947</span> 
-<span class="ne">--&gt; </span><span class="mi">948</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">949</span> 
-<span class="g g-Whitespace">    </span><span class="mi">950</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       Propertycount  
+0             4019.0  
+1             4019.0  
+2             4019.0  
+3             4019.0  
+4             4019.0  
+...              ...  
+26543         6543.0  
+26544         6543.0  
+26545         6543.0  
+26546         6543.0  
+26547         6543.0  
 
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="k">def</span> <span class="nf">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1179</span>         <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1180</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="n">CParserWrapper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1181</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1182</span>             <span class="k">if</span> <span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+[26548 rows x 18 columns]
+Suburb            object
+Address           object
+Rooms              int64
+Type              object
+Price            float64
+Method            object
+SellerG           object
+Date              object
+Distance         float64
+Postcode         float64
+Bedroom2         float64
+Bathroom         float64
+Car              float64
+Landsize         float64
+BuildingArea     float64
+YearBuilt        float64
+CouncilArea       object
+Lattitude        float64
+Longtitude       float64
+Regionname        object
+Propertycount    float64
+dtype: object
+           Suburb           Address     Rooms Type      Price Method  \
+0      Abbotsford      85 Turner St  1.414214    h  1480000.0      S   
+1      Abbotsford   25 Bloomburg St  1.414214    h  1035000.0      S   
+2      Abbotsford      5 Charles St  1.732051    h  1465000.0     SP   
+3      Abbotsford  40 Federation La  1.732051    h   850000.0     PI   
+4      Abbotsford       55a Park St  2.000000    h  1600000.0     VB   
+...           ...               ...       ...  ...        ...    ...   
+26543  Yarraville       13 Burns St  2.000000    h  1480000.0     PI   
+26544  Yarraville     29A Murray St  1.414214    h   888000.0     SP   
+26545  Yarraville    147A Severn St  1.414214    t   705000.0      S   
+26546  Yarraville  12/37 Stephen St  1.732051    h  1140000.0     SP   
+26547  Yarraville  3 Tarrengower St  1.414214    h  1020000.0     PI   
 
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2008</span>         <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;usecols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">usecols</span>
-<span class="g g-Whitespace">   </span><span class="mi">2009</span> 
-<span class="ne">-&gt; </span><span class="mi">2010</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="n">parsers</span><span class="o">.</span><span class="n">TextReader</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2011</span>         <span class="bp">self</span><span class="o">.</span><span class="n">unnamed_cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">unnamed_cols</span>
-<span class="g g-Whitespace">   </span><span class="mi">2012</span> 
+             SellerG        Date  Distance  Postcode  Bathroom  Car  Landsize  \
+0             Biggin   3/12/2016  1.581139    3067.0       1.0  1.0     202.0   
+1             Biggin   4/02/2016  1.581139    3067.0       1.0  0.0     156.0   
+2             Biggin   4/03/2017  1.581139    3067.0       2.0  0.0     134.0   
+3             Biggin   4/03/2017  1.581139    3067.0       2.0  1.0      94.0   
+4             Nelson   4/06/2016  1.581139    3067.0       1.0  2.0     120.0   
+...              ...         ...       ...       ...       ...  ...       ...   
+26543            Jas  24/02/2018  2.509980    3013.0       1.0  3.0     593.0   
+26544        Sweeney  24/02/2018  2.509980    3013.0       2.0  1.0      98.0   
+26545            Jas  24/02/2018  2.509980    3013.0       1.0  2.0     220.0   
+26546  hockingstuart  24/02/2018  2.509980    3013.0       1.0  1.0     211.0   
+26547             RW  24/02/2018  2.509980    3013.0       1.0  0.0     250.0   
 
-<span class="nn">pandas/_libs/parsers.pyx</span> in <span class="ni">pandas._libs.parsers.TextReader.__cinit__</span><span class="nt">()</span>
+                    CouncilArea  Lattitude  Longtitude             Regionname  \
+0            Yarra City Council  -37.79960   144.99840  Northern Metropolitan   
+1            Yarra City Council  -37.80790   144.99340  Northern Metropolitan   
+2            Yarra City Council  -37.80930   144.99440  Northern Metropolitan   
+3            Yarra City Council  -37.79690   144.99690  Northern Metropolitan   
+4            Yarra City Council  -37.80720   144.99410  Northern Metropolitan   
+...                         ...        ...         ...                    ...   
+26543  Maribyrnong City Council  -37.81053   144.88467   Western Metropolitan   
+26544  Maribyrnong City Council  -37.81551   144.88826   Western Metropolitan   
+26545  Maribyrnong City Council  -37.82286   144.87856   Western Metropolitan   
+26546  Maribyrnong City Council   -8.03276     1.00000   Western Metropolitan   
+26547  Maribyrnong City Council  -37.81810   144.89351   Western Metropolitan   
 
-<span class="nn">pandas/_libs/parsers.pyx</span> in <span class="ni">pandas._libs.parsers.TextReader._setup_parser_source</span><span class="nt">()</span>
+       Propertycount  
+0             4019.0  
+1             4019.0  
+2             4019.0  
+3             4019.0  
+4             4019.0  
+...              ...  
+26543         6543.0  
+26544         6543.0  
+26545         6543.0  
+26546         6543.0  
+26547         6543.0  
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/ruben/tmp/HH_intro_git_ds/precios_casas_sinduplicados.csv&#39;
+[26300 rows x 18 columns]
 </pre></div>
 </div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rooms</th>
+      <th>Price</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Propertycount</th>
+      <th>BathAndRooms</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26240.000000</td>
+      <td>26238.000000</td>
+      <td>26240.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.710789</td>
+      <td>2.441154</td>
+      <td>3.237989</td>
+      <td>3114.557470</td>
+      <td>1.488491</td>
+      <td>1.583537</td>
+      <td>5.555090</td>
+      <td>-30.161956</td>
+      <td>3.864349</td>
+      <td>2.164320</td>
+      <td>1.825953</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.273295</td>
+      <td>0.045262</td>
+      <td>0.962917</td>
+      <td>111.957301</td>
+      <td>0.649195</td>
+      <td>0.917681</td>
+      <td>1.693516</td>
+      <td>14.355712</td>
+      <td>2.073337</td>
+      <td>0.078571</td>
+      <td>0.516985</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>2.220229</td>
+      <td>0.836660</td>
+      <td>3000.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-38.190430</td>
+      <td>0.000000</td>
+      <td>1.485877</td>
+      <td>0.464398</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.414214</td>
+      <td>2.409602</td>
+      <td>2.549510</td>
+      <td>3046.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>5.393628</td>
+      <td>-37.843735</td>
+      <td>4.974961</td>
+      <td>2.124053</td>
+      <td>1.441589</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.732051</td>
+      <td>2.437471</td>
+      <td>3.240370</td>
+      <td>3088.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>6.025866</td>
+      <td>-37.772200</td>
+      <td>4.976510</td>
+      <td>2.173593</td>
+      <td>1.717686</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2.000000</td>
+      <td>2.472301</td>
+      <td>3.768289</td>
+      <td>3156.000000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+      <td>6.429719</td>
+      <td>-37.642112</td>
+      <td>4.977075</td>
+      <td>2.223856</td>
+      <td>2.106562</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>3.162278</td>
+      <td>2.655036</td>
+      <td>6.935416</td>
+      <td>3978.000000</td>
+      <td>4.000000</td>
+      <td>18.000000</td>
+      <td>12.978525</td>
+      <td>0.000000</td>
+      <td>4.980357</td>
+      <td>2.300860</td>
+      <td>5.640373</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -509,7 +739,7 @@ Dep. Variable:                      y   R-squared:                       0.506
 Model:                            OLS   Adj. R-squared:                  0.505
 Method:                 Least Squares   F-statistic:                     3576.
 Date:                Sat, 19 Dec 2020   Prob (F-statistic):               0.00
-Time:                        00:28:24   Log-Likelihood:                 42513.
+Time:                        22:26:34   Log-Likelihood:                 42513.
 No. Observations:               20992   AIC:                        -8.501e+04
 Df Residuals:                   20985   BIC:                        -8.496e+04
 Df Model:                           6                                         
