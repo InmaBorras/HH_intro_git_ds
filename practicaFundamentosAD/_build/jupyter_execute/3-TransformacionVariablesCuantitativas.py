@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # 3. Análisis Variables Cuantitativas 
+# 
+# 
+
 # In[1]:
 
 
@@ -10,7 +14,7 @@ import math
 from scipy import stats
 pd.options.mode.chained_assignment = None  # default='warn'
 from plotnine import ggplot, aes, geom_line, geom_point, geom_bar, geom_boxplot
-dataframe = pd.read_csv('/home/ruben/Fundamentos-de-Analisis-de-DAtos-I/Practica/Melbourne_housing_FULL.csv')
+#dataframe = pd.read_csv('/home/ruben/Fundamentos-de-Analisis-de-DAtos-I/Practica/Melbourne_housing_FULL.csv')
 import scipy.stats as ss
 import matplotlib.pyplot as plot
 import seaborn as sb
@@ -40,6 +44,9 @@ def mostrar_graf_variables_discretas(df_data,column):
     sb.boxplot(data=df_data,x=column,ax=ax1)
     sb.countplot(data=df_data,x=column,ax=ax2)
     plot.show()
+    
+#import fundamentos_datos.py
+data = pd.read_csv('/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv')
 
 
 # En primer lugar vamos a realizar una inspeccion ocular del dataset:
@@ -61,8 +68,8 @@ dataframe2017.describe()
 dataframe.head()
 
 
-# Vemos que tenemos en total 21 variables algunas con aspecto de ser cualitativas y otras cuantitativas. En los proximos puntos iremos analizando las caracteristitcas de las mismas.
-# Vemos ne primer lugar el tipo de las variables:
+# Vemos que tenemos en total 21 variables algunas con aspecto de ser cualitativas y otras cuantitativas. En los próximos puntos iremos analizando las características de las mismas.
+# Vemos en primer lugar el tipo de las variables:
 
 # In[3]:
 
@@ -85,9 +92,9 @@ aux=pd.DataFrame({"Suburb":dataframe["Suburb"].describe(),"CouncilArea":datafram
 aux
 
 
-# ## 3. Análisis y Transformación de Variables Cualitativas
+# ## 3.1 Análisis  Variables Cuantitativas
 # 
-# para cada una de las variables cualitativas del dataframe comprobaremos sus medidas de centralidad y veremos cuales de ellas tiene sentido analizar
+# Para cada una de las variables cualitativas del dataframe comprobaremos sus medidas de centralidad y veremos cuales de ellas tiene sentido analizar
 # 
 # 
 

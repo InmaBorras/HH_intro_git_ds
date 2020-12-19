@@ -17,29 +17,34 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import pandas as pd 
+data = pd.read_csv('/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv')
+%run -i fundamentos_datos_variables.py
 data_duplicados=eliminar_duplicados(data)
-data_duplicados.head()
+print("El número de datos duplicados eliminados es", ((len(data))-(len(data_duplicados))))
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
-[0;32m<ipython-input-3-042da7bef8e4>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mdata_duplicados[0m[0;34m=[0m[0meliminar_duplicados[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0mdata_duplicados[0m[0;34m.[0m[0mhead[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/HH_intro_git_ds/practicaFundamentosAD/fundamentos_datos_variables.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m [0mdata[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0;34m'/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0mget_ipython[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mrun_line_magic[0m[0;34m([0m[0;34m'run'[0m[0;34m,[0m [0;34m'-i fundamentos_datos_variables.py'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 4[0;31m [0mdata_duplicados[0m[0;34m=[0m[0meliminar_duplicados[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      5[0m [0mprint[0m[0;34m([0m[0;34m"El número de datos duplicados eliminados es"[0m[0;34m,[0m [0;34m([0m[0;34m([0m[0mlen[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m)[0m[0;34m-[0m[0;34m([0m[0mlen[0m[0;34m([0m[0mdata_duplicados[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m<ipython-input-2-230f27a6db9a>[0m in [0;36meliminar_duplicados[0;34m(dataframe_bueno)[0m
-[1;32m      1[0m [0;32mdef[0m [0meliminar_duplicados[0m[0;34m([0m[0mdataframe_bueno[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m     [0;32mimport[0m [0mpdb[0m[0;34m;[0m[0mpdb[0m[0;34m.[0m[0mset_trace[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m     [0mduplicateRowsDF[0m[0;34m=[0m[0mpd[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m     [0mduplicateRowsDF[0m [0;34m=[0m [0mdataframe_bueno[0m[0;34m[[0m[0mdataframe_bueno[0m[0;34m.[0m[0mduplicated[0m[0;34m([0m[0;34m[[0m[0;34m'Suburb'[0m[0;34m,[0m [0;34m'Address'[0m[0;34m,[0m[0;34m'Postcode'[0m[0;34m,[0m[0;34m'CouncilArea'[0m[0;34m,[0m[0;34m][0m[0;34m,[0m[0mkeep[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m     [0mduplicateRowsDF[0m[0;34m=[0m[0mduplicateRowsDF[0m[0;34m.[0m[0mdrop_duplicates[0m[0;34m([0m[0msubset[0m[0;34m=[0m[0;34m[[0m[0;34m'Address'[0m[0;34m,[0m[0;34m'SellerG'[0m[0;34m,[0m[0;34m'Price'[0m[0;34m,[0m[0;34m'Date'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/HH_intro_git_ds/practicaFundamentosAD/fundamentos_datos_variables.py[0m in [0;36meliminar_duplicados[0;34m(dataframe_bueno)[0m
+[1;32m    121[0m [0;32mdef[0m [0meliminar_duplicados[0m[0;34m([0m[0mdataframe_bueno[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    122[0m     [0;32mimport[0m [0mpdb[0m[0;34m;[0m[0mpdb[0m[0;34m.[0m[0mset_trace[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 123[0;31m     [0mduplicateRowsDF[0m[0;34m=[0m[0mpd[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    124[0m     [0mduplicateRowsDF[0m [0;34m=[0m [0mdataframe_bueno[0m[0;34m[[0m[0mdataframe_bueno[0m[0;34m.[0m[0mduplicated[0m[0;34m([0m[0;34m[[0m[0;34m'Suburb'[0m[0;34m,[0m [0;34m'Address'[0m[0;34m,[0m[0;34m'Postcode'[0m[0;34m,[0m[0;34m'CouncilArea'[0m[0;34m,[0m[0;34m][0m[0;34m,[0m[0mkeep[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m    125[0m     [0mduplicateRowsDF[0m[0;34m=[0m[0mduplicateRowsDF[0m[0;34m.[0m[0mdrop_duplicates[0m[0;34m([0m[0msubset[0m[0;34m=[0m[0;34m[[0m[0;34m'Address'[0m[0;34m,[0m[0;34m'Price'[0m[0;34m,[0m[0;34m'Date'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m<ipython-input-2-230f27a6db9a>[0m in [0;36meliminar_duplicados[0;34m(dataframe_bueno)[0m
-[1;32m      1[0m [0;32mdef[0m [0meliminar_duplicados[0m[0;34m([0m[0mdataframe_bueno[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m     [0;32mimport[0m [0mpdb[0m[0;34m;[0m[0mpdb[0m[0;34m.[0m[0mset_trace[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m     [0mduplicateRowsDF[0m[0;34m=[0m[0mpd[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m     [0mduplicateRowsDF[0m [0;34m=[0m [0mdataframe_bueno[0m[0;34m[[0m[0mdataframe_bueno[0m[0;34m.[0m[0mduplicated[0m[0;34m([0m[0;34m[[0m[0;34m'Suburb'[0m[0;34m,[0m [0;34m'Address'[0m[0;34m,[0m[0;34m'Postcode'[0m[0;34m,[0m[0;34m'CouncilArea'[0m[0;34m,[0m[0;34m][0m[0;34m,[0m[0mkeep[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m     [0mduplicateRowsDF[0m[0;34m=[0m[0mduplicateRowsDF[0m[0;34m.[0m[0mdrop_duplicates[0m[0;34m([0m[0msubset[0m[0;34m=[0m[0;34m[[0m[0;34m'Address'[0m[0;34m,[0m[0;34m'SellerG'[0m[0;34m,[0m[0;34m'Price'[0m[0;34m,[0m[0;34m'Date'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/HH_intro_git_ds/practicaFundamentosAD/fundamentos_datos_variables.py[0m in [0;36meliminar_duplicados[0;34m(dataframe_bueno)[0m
+[1;32m    121[0m [0;32mdef[0m [0meliminar_duplicados[0m[0;34m([0m[0mdataframe_bueno[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    122[0m     [0;32mimport[0m [0mpdb[0m[0;34m;[0m[0mpdb[0m[0;34m.[0m[0mset_trace[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 123[0;31m     [0mduplicateRowsDF[0m[0;34m=[0m[0mpd[0m[0;34m.[0m[0mDataFrame[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    124[0m     [0mduplicateRowsDF[0m [0;34m=[0m [0mdataframe_bueno[0m[0;34m[[0m[0mdataframe_bueno[0m[0;34m.[0m[0mduplicated[0m[0;34m([0m[0;34m[[0m[0;34m'Suburb'[0m[0;34m,[0m [0;34m'Address'[0m[0;34m,[0m[0;34m'Postcode'[0m[0;34m,[0m[0;34m'CouncilArea'[0m[0;34m,[0m[0;34m][0m[0;34m,[0m[0mkeep[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m    125[0m     [0mduplicateRowsDF[0m[0;34m=[0m[0mduplicateRowsDF[0m[0;34m.[0m[0mdrop_duplicates[0m[0;34m([0m[0msubset[0m[0;34m=[0m[0;34m[[0m[0;34m'Address'[0m[0;34m,[0m[0;34m'Price'[0m[0;34m,[0m[0;34m'Date'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/anaconda3/lib/python3.8/bdb.py[0m in [0;36mtrace_dispatch[0;34m(self, frame, event, arg)[0m
 [1;32m     86[0m             [0;32mreturn[0m [0;31m# None[0m[0;34m[0m[0;34m[0m[0m

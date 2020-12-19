@@ -3,18 +3,9 @@
 #
 - file: 1-DefinicionObjetivos 
 - file: 2-AnalisisExploratorioInicial 
-<<<<<<< HEAD
 - file: 3-TransformacionVariablesCuantitativas
 - file: 4-ProcesamientoVaribalesCualitativas
 - file: 5-DeteccionImputacionDatosFaltantes
-=======
-- file: 3-DeteccionImputacionDatosFaltantes
-- file: 4-TransformacionVariablesCuantitativas
-  sections:
-     - file: culita1
-     - file: cualita2
-- file: 5-ProcesamientoVaribalesCualitativas
->>>>>>> 000807e021c0d23a9c82143670d32e6db87c56bc
 - file: 6-SelecciondeVariables
 - file: 7-AjusteDelModelosdeRegresionLineal 
   sections:
