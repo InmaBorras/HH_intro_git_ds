@@ -1,0 +1,44 @@
+Traceback (most recent call last):
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1087, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/inma/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 540, in async_execute
+    await self.async_execute_cell(
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 832, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+
+dataframe2016=dataframe[dataframe["Date"].str[-4:] =='2016']
+dataframe2016.describe()
+print("precio medio 2016 ",dataframe2016["Price"].mean())
+dataframe2017=dataframe[dataframe["Date"].str[-4:] =='2017']
+print("precio medio 2017 ",dataframe2017["Price"].mean())
+dataframe2017.describe()
+dataframe2018=dataframe[dataframe["Date"].str[-4:] =='2018']
+print("precio medio 2018 ",dataframe2018["Price"].mean())
+dataframe2017.describe()
+dataframe.head()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-2-660fb12ee4ba>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mdataframe2016[0m[0;34m=[0m[0mdataframe[0m[0;34m[[0m[0mdataframe[0m[0;34m[[0m[0;34m"Date"[0m[0;34m][0m[0;34m.[0m[0mstr[0m[0;34m[[0m[0;34m-[0m[0;36m4[0m[0;34m:[0m[0;34m][0m [0;34m==[0m[0;34m'2016'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mdataframe2016[0m[0;34m.[0m[0mdescribe[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0mprint[0m[0;34m([0m[0;34m"precio medio 2016 "[0m[0;34m,[0m[0mdataframe2016[0m[0;34m[[0m[0;34m"Price"[0m[0;34m][0m[0;34m.[0m[0mmean[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0mdataframe2017[0m[0;34m=[0m[0mdataframe[0m[0;34m[[0m[0mdataframe[0m[0;34m[[0m[0;34m"Date"[0m[0;34m][0m[0;34m.[0m[0mstr[0m[0;34m[[0m[0;34m-[0m[0;36m4[0m[0;34m:[0m[0;34m][0m [0;34m==[0m[0;34m'2017'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mprint[0m[0;34m([0m[0;34m"precio medio 2017 "[0m[0;34m,[0m[0mdataframe2017[0m[0;34m[[0m[0;34m"Price"[0m[0;34m][0m[0;34m.[0m[0mmean[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'dataframe' is not defined
+NameError: name 'dataframe' is not defined
+

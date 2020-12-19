@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Limpieza de los datos" href="5-DeteccionImputacionDatosFaltantes.html" />
-    <link rel="prev" title="3. Análisis Variables Cuantitativas" href="3-TransformacionVariablesCuantitativas.html" />
+    <link rel="prev" title="3. Variables Cuantitativas" href="3-TransformacionVariablesCuantitativas.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -103,7 +103,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="3-TransformacionVariablesCuantitativas.html">
-   3. Análisis Variables Cuantitativas
+   3. Variables Cuantitativas
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -118,7 +118,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="6-SelecciondeVariables.html">
-   6. Selección de Variables
+   6.  Variables seleccionadas
   </a>
  </li>
  <li class="toctree-l1 collapsible-parent">
@@ -311,10 +311,15 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#variables-relacionadas-con-la-localizacion">
-     Variables relacionadas con la localización
+    <a class="reference internal nav-link" href="#agrupacion-por-similitud">
+     4.3.1 Agrupación por similitud
     </a>
     <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#variables-relacionadas-con-la-localizacion">
+       Variables relacionadas con la localización
+      </a>
+     </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id1">
        Variable “Type”
@@ -337,13 +342,11 @@
      </li>
     </ul>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#correlacion-de-variables-categoricas">
-   4.4 Correlación de variables categóricas
-  </a>
-  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlacion-de-variables-categoricas">
+     4.4.2 Correlación de variables categóricas
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#regionname">
      Regionname
@@ -622,17 +625,17 @@ memory usage: 5.6+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reservoir          844
-Bentleigh East     583
-Richmond           552
-Glen Iris          491
-Preston            485
-                  ... 
-Cranbourne East      1
-Belgrave             1
-Kalkallo             1
-Hopetoun Park        1
-Bulla                1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reservoir         844
+Bentleigh East    583
+Richmond          552
+Glen Iris         491
+Preston           485
+                 ... 
+Monbulk             1
+Yarra Glen          1
+Guys Hill           1
+Belgrave            1
+Wandin North        1
 Name: Suburb, Length: 351, dtype: int64
 </pre></div>
 </div>
@@ -650,17 +653,17 @@ Name: Suburb, Length: 351, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St       6
-25 William St      4
-13 George St       3
-9 Margaret St      3
-21 May St          3
-                  ..
-21 Hatherley Gr    2
-9 Hill St          2
-10 Lauriston Ct    2
-36 Shaw St         2
-31 Cushing Av      2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St        6
+25 William St       4
+1088 Toorak Rd      3
+21 May St           3
+13 George St        3
+                   ..
+25 View St          2
+30 Clifton St       2
+4/33 North Rd       2
+83 Gladstone Av     2
+23/14 Horizon Dr    2
 Name: Address, Length: 808, dtype: int64
 </pre></div>
 </div>
@@ -1582,17 +1585,17 @@ La Variable “Method” contiene un  alto grado de categorías, por lo que desp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis                    3359
-Nelson                    3236
-Barry                     3235
-hockingstuart             2623
-Marshall                  2027
-                          ... 
-Karen                        1
-G&amp;H                          1
-Icon                         1
-CarlinSmith                  1
-hockingstuart/Marshall       1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis           3359
+Nelson           3236
+Barry            3235
+hockingstuart    2623
+Marshall         2027
+                 ... 
+Can                 1
+Aumeca              1
+Quinta              1
+Naison              1
+Create              1
 Name: SellerG, Length: 388, dtype: int64
 </pre></div>
 </div>
@@ -1973,8 +1976,11 @@ Por ejemplo haciendo una relacion entre el tipo de casa y al region en la que se
 </div>
 <div class="section" id="seleccion-de-variables-categoricas">
 <h2>4.3 Selección de variables categóricas<a class="headerlink" href="#seleccion-de-variables-categoricas" title="Permalink to this headline">¶</a></h2>
+<p>La selección de variables la hemos relizado mediante dos  prespectivas la agrupación por similitud entre las variables y la correlación con el precio.</p>
+<div class="section" id="agrupacion-por-similitud">
+<h3>4.3.1 Agrupación por similitud<a class="headerlink" href="#agrupacion-por-similitud" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="variables-relacionadas-con-la-localizacion">
-<h3>Variables relacionadas con la localización<a class="headerlink" href="#variables-relacionadas-con-la-localizacion" title="Permalink to this headline">¶</a></h3>
+<h4>Variables relacionadas con la localización<a class="headerlink" href="#variables-relacionadas-con-la-localizacion" title="Permalink to this headline">¶</a></h4>
 <p>Tras analizar las variables cualitativas podemos, obsevar que muchas de ellas se refieren a la localizacion del alojamiento.</p>
 <p>Tanto como “Suburb”,”Address”,”CouncilArea”,”Postcode” cuentan con un numero muy amplio de categorías por lo que complicaría el desarrollo del modelo. La variable “Regionname” cuenta con un número(8 categorías) más adecuado y puede ser usasda para relacionar la localización con el precio.</p>
 <div class="cell docutils container">
@@ -1993,6 +1999,7 @@ Por ejemplo haciendo una relacion entre el tipo de casa y al region en la que se
 </div>
 <p>Podemos observar que en las regiones metropolitanas el precio es ligeramente superior. Sobre todo en la “Southern Metropolitan”.</p>
 <p>Para poder decidir cual de ellas es  mejor utilizar en nuestra regresion lineal,  usamos la funcion get_dummies para transformarlas en varibles factoriales</p>
+</div>
 <div class="section" id="id1">
 <h4>Variable “Type”<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p>Analizamos la relacion entre la variables “Type” y la variables objetivo “Price”</p>
@@ -2073,10 +2080,9 @@ Sin embargo, estas agencias estan localizadas por zonas geograficas por lo tanto
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="correlacion-de-variables-categoricas">
-<h2>4.4 Correlación de variables categóricas<a class="headerlink" href="#correlacion-de-variables-categoricas" title="Permalink to this headline">¶</a></h2>
-<p>Observamos la relación del cada una delas variables categóricas con el precio.</p>
+<h3>4.4.2 Correlación de variables categóricas<a class="headerlink" href="#correlacion-de-variables-categoricas" title="Permalink to this headline">¶</a></h3>
+<p>Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, dando un valor numérico a cada una de las categorías.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span>
@@ -2282,6 +2288,8 @@ Name: Price, dtype: float64
 <img alt="_images/4-ProcesamientoVaribalesCualitativas_60_1.png" src="_images/4-ProcesamientoVaribalesCualitativas_60_1.png" />
 </div>
 </div>
+<p>La correlación de las variables es bastante baja. Debido a ello procedemos a observar las correlaciones por cada una de las categorias y ver si existen diferencias.</p>
+<p>Para ello transformamos las variables cualitativas en variables dummies.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span>
@@ -2462,7 +2470,7 @@ Name: Price, dtype: float64
 <p>5 rows × 101 columns</p>
 </div></div></div>
 </div>
-<p>Estudiamos la correlación ahora de cada una de las categóricas por Variable por separado.</p>
+</div>
 <div class="section" id="regionname">
 <h3>Regionname<a class="headerlink" href="#regionname" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -2743,7 +2751,8 @@ Name: Price, dtype: float64
 </div>
 </div>
 </div>
-<p>En general, la correlación de las categorias con la variable precio es baja, pero cabe destacar “Type_Casa” y “Regionname_South-Eastern Metropolitan” ambas superiores a 0,3.</p>
+<p>En general, la correlación de las categorías con la variable precio es baja, pero cabe destacar “Type_Casa” y “Regionname_South-Eastern Metropolitan” ambas superiores a 0,3.</p>
+<p>Selecionaremos por lo tanto las variables categóricas “Type”, “Regionname” y ” Method”</p>
 </div>
 </div>
 <div class="section" id="transformacion-de-variables-categoricas">
@@ -3122,7 +3131,7 @@ Name: Price, dtype: float64
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="3-TransformacionVariablesCuantitativas.html" title="previous page">3. Análisis Variables Cuantitativas</a>
+    <a class='left-prev' id="prev-link" href="3-TransformacionVariablesCuantitativas.html" title="previous page">3. Variables Cuantitativas</a>
     <a class='right-next' id="next-link" href="5-DeteccionImputacionDatosFaltantes.html" title="next page">5. Limpieza de los datos</a>
 
     </div>
