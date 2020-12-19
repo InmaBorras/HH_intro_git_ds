@@ -186,32 +186,19 @@ mostrar_graf_variables_continuas(dataframe,"Distance")
 # In[15]:
 
 
-#dataframe=dataframe[dataframe["Distance"].notna()] 
-
 dataframe["BathsAndRooms"]=(dataframe["Rooms"]+dataframe["Bathroom"])/dataframe["Distance"].apply(np.sqrt)
-
 dataframe_filtered=dataframe[dataframe["Distance"] >0]
-
 dataframe_filtered.reset_index(drop=True,inplace=True)
 sb.scatterplot(data=dataframe, x="Distance", y="Price")
-#mostrar_graf_variables_continuas(dataframe_filtered,"Distance_SQR")
 plot.show()
-#dataframe_filtered["Distance_TRA"]=stats.boxcox(dataframe_filtered["Distance"])[0]
 
 dataframe["Distance_TRA"]=dataframe["Distance"].apply(np.sqrt)
 
-
-#sb.displot(data=dataframe_filtered, x="Distance_TRA",y="Price")
-#plot.show()
-#dataframe["Distance_SQR"]=dataframe["Distance"].apply(np.sqrt)
-#sb.scatterplot(data=dataframe, x="Distance", y="Price")
-#plot.show()
 mostrar_graf_variables_continuas(dataframe_filtered,"Distance")
 sb.regplot(x="Distance_TRA", y="Price", data=dataframe);
 plot.show()
 sb.regplot(x="BathsAndRooms", y="Price", data=dataframe);
 plot.show()
-
 
 dataframe.corr()
 
@@ -281,7 +268,7 @@ plot.show()
 # Esta variable contiene el número de plazas de aparcamiento que tiene asociadas la vivienda. Como se puede ver en la tabla inicial la variable tiene valor en 26129 de la muestra y toma valores discretos en el rango 0 a 26 plazas de aparcamiento. El 75% de pisos tienen entre 0 y 2 plazas de aparcamiento . A continuacion vamos a ver las frecuencias de la variable:
 # 
 
-# In[40]:
+# In[21]:
 
 
 pd.value_counts(dataframe['Car'])/dataframe["Car"].count()
@@ -484,7 +471,7 @@ mapa
 # 
 # Finalmente localizamos el centro del suburbio y calculamos las nuevas distancias entre la localización de las viviendas y en centro. 
 # 
-# Llamaremos a la nueva variable "Disctancia_NEW".
+# Llamaremos a la nueva variable "Distancia_NEW".
 
 # In[37]:
 
@@ -509,10 +496,21 @@ data_filtered.corr()
 sb.heatmap(data_filtered.corr(), annot=True, fmt='.2f')
 
 
-# En primer lugar, se puede observar que la nueva variable "Distancia_NEW" tiene una correlación bastante más alta -0.390076	que la variable "Distance" -0.238312, con el precio.
+# En primer lugar, se puede observar que la nueva variable "Distancia_NEW" tiene una correlación bastante más alta -0.411055	que la variable "Distance" -0.238312, con el precio.
 # 
 # Además de las variable "Distancia_NEW"  hay otras dos variables que presentan un coeficiente de correlación alto "Bathrooms" 0.387676 y "rooms" 0.416335 que es la más alta. 
 # Es importante tener en cuenta que ambas variables presentan también alta correlación entre ellas y esto podría crear problemas en las prediciones. 
 # 
-# Finalemente, serán estas las 3 variables que tomaremos para la realización del modelo de regresión lineal en primera instancia. 
 # 
+
+# In[41]:
+
+
+data_filtered.to_csv("Variables_Cuantitativas_v2.csv")
+
+
+# In[ ]:
+
+
+
+
