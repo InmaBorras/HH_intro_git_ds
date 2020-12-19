@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Selección de Variables" href="6-SelecciondeVariables.html" />
+    <link rel="next" title="3. Variables Cuantitativas" href="3-TransformacionVariablesCuantitativas.html" />
     <link rel="prev" title="1. Definición de Objetivos" href="1-DefinicionObjetivos.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -98,35 +98,27 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-<<<<<<< HEAD
    2. Análisis Exploratorio Inicial (EDA)
-=======
-   2. Análisis Exploratorio Inicial
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="3-DeteccionImputacionDatosFaltantes.html">
-   3. Detección e Imputación de Datos Faltantes
+  <a class="reference internal" href="3-TransformacionVariablesCuantitativas.html">
+   3. Variables Cuantitativas
   </a>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="4-TransformacionVariablesCuantitativas.html">
-   4. Análisis y Transformación de Variables Cualitativas
-  </a>
-  <ul class="simple collapse-ul">
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="5-ProcesamientoVaribalesCualitativas.html">
-   5. Procesamiento de Variables Cualitativas
->>>>>>> 000807e021c0d23a9c82143670d32e6db87c56bc
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html">
+   4.Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-DeteccionImputacionDatosFaltantes.html">
+   5. Limpieza de los datos
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="6-SelecciondeVariables.html">
-   6. Selección de Variables
+   6.  Variables seleccionadas
   </a>
  </li>
  <li class="toctree-l1 collapsible-parent">
@@ -265,31 +257,15 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">geom_bar</span><span class="p">,</span> <span class="n">geom_boxplot</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">scatter_matrix</span>
-<span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedKFold</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
-<span class="kn">import</span> <span class="nn">pwlf</span>
+<span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/HH_intro_git_ds/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -872,93 +848,39 @@ memory usage: 5.6+ MB
 </div>
 </div>
 </div>
-<p>Durante estas primeras observaciones ya se puede identificar que el dataset  es bastante grande con 34857 y 21 vcolumnas, pero también contiene datos faltantes en bastantes variables incluyendo la varibable objetivo “Price”.</p>
-<p>Además, cuenta que  varibles cualitativas y cuantitivas.
-Para poder clasificar los tipo de varibles vamos a realizar una función que lo identifique.</p>
+<p>Durante estas primeras observaciones ya se puede identificar que el dataset  es bastante grande con 34857 y 21 vcolumnas, pero también contiene datos faltantes en bastantes variables incluyendo la varibable objetivo “Price”. Además, cuenta a priori con varibles cualitativas y cuantitivas.</p>
+<p>Por lo tanto, para hacer un análisis en profundidad usamos la función “profiling” de pandas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">esDeProporcion</span><span class="p">(</span><span class="n">minimo</span><span class="p">):</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">minimo</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">):</span>
-        <span class="k">return</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">esAcotada</span><span class="p">(</span><span class="n">minimo</span><span class="p">,</span><span class="n">maximo</span><span class="p">):</span>
-    <span class="k">if</span><span class="p">(</span> <span class="n">minimo</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">maximo</span> <span class="o">==</span><span class="mi">100</span><span class="p">):</span>
-        <span class="k">return</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">clasificar_variables</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
-        
-    <span class="n">tipos_columnas</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-        <span class="k">if</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))):</span>
-            <span class="c1">#variable cuantitativa discreta</span>
-            <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">):</span>
-                <span class="c1">#politomizada</span>
-                <span class="n">minimo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-                <span class="n">maximo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">esDeProporcion</span><span class="p">(</span><span class="n">minimo</span><span class="p">)):</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">minimo</span><span class="p">,</span><span class="n">maximo</span><span class="p">)):</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Proporcion Politomizada Acotada&#39;</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Proporcion Politomizada No Acotada&#39;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)])):</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Intervalo Politomizada Acotada&#39;</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Discreta de Intervalo Politomizada No Acotada&#39;</span>
-
-            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
-                <span class="c1">#dicotomizada</span>
-                <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuanitativa Dicotoma&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;deberias borrar la variable &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="k">elif</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))):</span>
-            <span class="n">minimo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-            <span class="n">maximo</span><span class="o">=</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-            <span class="c1">#variable cuantitativa continua</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">esDeProporcion</span><span class="p">(</span><span class="n">minimo</span><span class="p">)):</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">minimo</span><span class="p">,</span><span class="n">maximo</span><span class="p">)):</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Proporcion Politomizada Acotada&#39;</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">esAcotada</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)])):</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Intervalo Politomizada Acotada&#39;</span>
-                <span class="k">else</span><span class="p">:</span>
-                        <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cuantitativa Continua de Intervalo Politomizada No Acotada&#39;</span>
-        <span class="k">elif</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span><span class="nb">bool</span><span class="p">)):</span>
-            <span class="c1">#variable cualitativva dicotoma</span>
-            <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Dicotoma&#39;</span>
-        <span class="k">elif</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">index</span><span class="p">],</span><span class="nb">str</span><span class="p">)):</span>
-            <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&gt;</span><span class="mi">2</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">):</span>
-                <span class="c1">#politomizada y alomejor ordinal</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-                <span class="n">ordinal</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;¿Es ordinal?(seleccionar si o no): &#39;</span><span class="p">)</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">ordinal</span><span class="o">==</span><span class="s1">&#39;si&#39;</span><span class="p">):</span>
-                    <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma Ordinal&#39;</span>
-                <span class="k">elif</span><span class="p">(</span><span class="n">ordinal</span><span class="o">==</span><span class="s1">&#39;no&#39;</span><span class="p">):</span>
-                    <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma No ordinal&#39;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma Nan&#39;</span>
-            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">):</span>
-                 <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma&#39;</span>
-            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
-                <span class="c1">#dicotomizada</span>
-                <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Dicotoma&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;deberias borrar la variable &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">tipos_columnas</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">profile</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pandas Profiling Report&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">esDeProporcion</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">esAcotada</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">profile</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "98d6f0e600114e628ca1b3f36777fea3"}
+</script></div>
+</div>
+<p>De esta función obtenemos informacion muy relevante con respecto al dataset:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-El dataset cuenta con 13 variaabels numéricas y 8 categóricas 
+
+-Existe un pequeño porcentaje de datos duplicados, tomaremos esto en cuenta durante el análisis de variables para poder identificarlos y tratarlos. 
+
+-El pocetaje de datos faltantes corresponde a un 13,8%  y todo ellos se encuentran en las variables numéricas. (es alto es bajo). Siendo &quot;YeatBuild&quot; , &quot;BuildingArea&quot;, y &quot;Landsize&quot;.
+-Las variables con mayor correlación son: &quot;rooms&quot; y &quot;Bedrrom2&quot;. Tambien podemos  observar que tanto ambas variables tienen una alta correlacion entre ellas y podrían producir colinealidad. 
+</pre></div>
+</div>
+<p>Para poder clasificar los tipo de varibles vamos a realizar una función que las identifique que tipo de varaibles es cada una en función del tipo de datos que contiene.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i fundamentos_datos_variables.py
 <span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
    
 </pre></div>
@@ -969,36 +891,56 @@ Para poder clasificar los tipo de varibles vamos a realizar una función que lo 
 u     7297
 t     3580
 Name: Type, dtype: int64
+¿Es ordinal?(seleccionar si o no): no
+S     19744
+SP     5095
+PI     4850
+VB     3108
+SN     1317
+PN      308
+SA      226
+W       173
+SS       36
+Name: Method, dtype: int64
+¿Es ordinal?(seleccionar si o no): no
+Southern Metropolitan         11836
+Northern Metropolitan          9557
+Western Metropolitan           6799
+Eastern Metropolitan           4377
+South-Eastern Metropolitan     1739
+Eastern Victoria                228
+Northern Victoria               203
+Western Victoria                115
+Name: Regionname, dtype: int64
+¿Es ordinal?(seleccionar si o no): no
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">425</span><span class="n">c32751639</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">esDeProporcion</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">esAcotada</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-
-<span class="nn">&lt;ipython-input-5-7bd5fc9874df&gt;</span> in <span class="ni">clasificar_variables</span><span class="nt">(dataframe)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>                 <span class="c1">#politomizada y alomejor ordinal</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>                 <span class="nb">print</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-<span class="ne">---&gt; </span><span class="mi">60</span>                 <span class="n">ordinal</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;¿Es ordinal?(seleccionar si o no): &#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span>                 <span class="k">if</span><span class="p">(</span><span class="n">ordinal</span><span class="o">==</span><span class="s1">&#39;si&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>                     <span class="n">tipos_columnas</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="s1">&#39;Cualitativa Politoma Ordinal&#39;</span>
-
-<span class="nn">~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">    </span><span class="mi">855</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">856</span><span class="s2">         if not self._allow_stdin:</span>
-<span class="ne">--&gt; </span><span class="mi">857</span><span class="s2">             raise StdinNotImplementedError(</span>
-<span class="g g-Whitespace">    </span><span class="mi">858</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">859</span><span class="s2">             )</span>
-
-<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Suburb&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Address&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Rooms&#39;: &#39;Cuantitativa Discreta de Proporcion Politomizada No Acotada&#39;,
+ &#39;Type&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
+ &#39;Price&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Method&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
+ &#39;SellerG&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Date&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Distance&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Postcode&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Bedroom2&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Bathroom&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Car&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Landsize&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;BuildingArea&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;YearBuilt&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;CouncilArea&#39;: &#39;Cualitativa Politoma&#39;,
+ &#39;Lattitude&#39;: &#39;Cuantitativa Continua de Intervalo Politomizada No Acotada&#39;,
+ &#39;Longtitude&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
+ &#39;Regionname&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
+ &#39;Propertycount&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;}
 </pre></div>
 </div>
 </div>
 </div>
-<p>En funcion de la clasificación por parte de la función anterior procedemos a analizar las variables cualitativas y cuatitativas por separado.</p>
+<p>Esto nos será de mucha utilidad en el análisis de las que realizaremos a continuación y su posterior transformación.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1030,7 +972,7 @@ Name: Type, dtype: int64
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="1-DefinicionObjetivos.html" title="previous page">1. Definición de Objetivos</a>
-    <a class='right-next' id="next-link" href="6-SelecciondeVariables.html" title="next page">6. Selección de Variables</a>
+    <a class='right-next' id="next-link" href="3-TransformacionVariablesCuantitativas.html" title="next page">3. Variables Cuantitativas</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

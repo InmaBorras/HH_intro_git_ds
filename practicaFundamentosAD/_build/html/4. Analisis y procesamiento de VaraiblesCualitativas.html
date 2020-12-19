@@ -1,0 +1,3169 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.Variables Cualitativas &#8212; Práctica de Fundamentos de Análisis de Datos</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/HH-Logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Práctica de Fundamentos de Análisis de Datos</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-DefinicionObjetivos.html">
+   1. Definición de Objetivos
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-AnalisisExploratorioInicial.html">
+   2. Análisis Exploratorio Inicial (EDA)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-TransformacionVariablesCuantitativas.html">
+   4. Análisis Variables Cuantitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html">
+   3.Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#resumen-numerico-de-variables-cualitativas">
+   3.1 Resumen Numérico de Variables Cualitativas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#seleccion-de-variables-categoricas">
+   3.3 Selección de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#correlacion-de-variables-categoricas">
+   3.4 Correlación de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-ProcesamientoVaribalesCualitativas.html#transformacion-de-variables-categoricas">
+   3.5 Transformación de variables categóricas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-DeteccionImputacionDatosFaltantes.html">
+   5. Limpieza de los datos
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6-SelecciondeVariables.html">
+   6. Selección de Variables
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="7-AjusteDelModelosdeRegresionLineal.html">
+   7. Ajuste del Modelo de Regresión Lineal
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="markdown.html">
+     Markdown Files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebooks.html">
+     Content with notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebooks.html">
+     Content with notebooks
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/4. Analisis y procesamiento de VaraiblesCualitativas.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F4. Analisis y procesamiento de VaraiblesCualitativas.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/4. Analisis y procesamiento de VaraiblesCualitativas.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   3.Variables Cualitativas
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resumen-numerico-de-variables-cualitativas">
+   3.1 Resumen Numérico de Variables Cualitativas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-suburb">
+     Variable “Suburb”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-address">
+     Variable “Address”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-postcode">
+     Variable “PostCode”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-type">
+     Variable “Type”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-method">
+     Variable “Method”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-sellerg">
+     Variable “SellerG”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-date">
+     Variable “Date”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-councilarea">
+     Variable “CouncilArea’”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-regionname">
+     Variable “Regionname”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relacion-entre-las-variables-cualitativas">
+     3.2 Relación entre las variables cualitativas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seleccion-de-variables-categoricas">
+   3.3 Selección de variables categóricas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variables-relacionadas-con-la-localizacion">
+     Variables relacionadas con la localización
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Variable “Type”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Variable “SellerG”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Variable “Method”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Variable “Date”
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlacion-de-variables-categoricas">
+   3.4 Correlación de variables categóricas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regionname">
+     Regionname
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type">
+     Type
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method">
+     Method
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformacion-de-variables-categoricas">
+   3.5 Transformación de variables categóricas
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="variables-cualitativas">
+<h1>3.Variables Cualitativas<a class="headerlink" href="#variables-cualitativas" title="Permalink to this headline">¶</a></h1>
+<p>La forma mas sencilla de  resumir las varibales cualitativas es hacer una tabla de contigencia que resuma las distribuciones de frecuencia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="n">data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/inma/Master_Data_Science _Contenido/Fundamentos_de_Analisis _de_Datos/Practica/Datos/Melbourne_housing_FULL.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>Rooms</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>SellerG</th>
+      <th>Date</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>...</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>BuildingArea</th>
+      <th>YearBuilt</th>
+      <th>CouncilArea</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Regionname</th>
+      <th>Propertycount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abbotsford</td>
+      <td>68 Studley St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>SS</td>
+      <td>Jellis</td>
+      <td>3/09/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>126.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.8014</td>
+      <td>144.9958</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Abbotsford</td>
+      <td>85 Turner St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1480000.0</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>3/12/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>202.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.7996</td>
+      <td>144.9984</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Abbotsford</td>
+      <td>25 Bloomburg St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1035000.0</td>
+      <td>S</td>
+      <td>Biggin</td>
+      <td>4/02/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>156.0</td>
+      <td>79.0</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8079</td>
+      <td>144.9934</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abbotsford</td>
+      <td>18/659 Victoria St</td>
+      <td>3</td>
+      <td>u</td>
+      <td>NaN</td>
+      <td>VB</td>
+      <td>Rounds</td>
+      <td>4/02/2016</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Yarra City Council</td>
+      <td>-37.8114</td>
+      <td>145.0116</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Abbotsford</td>
+      <td>5 Charles St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1465000.0</td>
+      <td>SP</td>
+      <td>Biggin</td>
+      <td>4/03/2017</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>134.0</td>
+      <td>150.0</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.8093</td>
+      <td>144.9944</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span> <span class="c1">#añadimos post code como variable cualitativa</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 34857 entries, 0 to 34856
+Data columns (total 21 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   Suburb         34857 non-null  object 
+ 1   Address        34857 non-null  object 
+ 2   Rooms          34857 non-null  int64  
+ 3   Type           34857 non-null  object 
+ 4   Price          27247 non-null  float64
+ 5   Method         34857 non-null  object 
+ 6   SellerG        34857 non-null  object 
+ 7   Date           34857 non-null  object 
+ 8   Distance       34856 non-null  float64
+ 9   Postcode       34856 non-null  float64
+ 10  Bedroom2       26640 non-null  float64
+ 11  Bathroom       26631 non-null  float64
+ 12  Car            26129 non-null  float64
+ 13  Landsize       23047 non-null  float64
+ 14  BuildingArea   13742 non-null  float64
+ 15  YearBuilt      15551 non-null  float64
+ 16  CouncilArea    34854 non-null  object 
+ 17  Lattitude      26881 non-null  float64
+ 18  Longtitude     26881 non-null  float64
+ 19  Regionname     34854 non-null  object 
+ 20  Propertycount  34854 non-null  float64
+dtypes: float64(12), int64(1), object(8)
+memory usage: 5.6+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos observar que 8 de las variables  son cualitativas, pero añadiremos “Postcode” dentro del analisis de las variables cualitativas ya que apesar de estar compuesto por un valor numerico  son datos independientes que debe ser tratados como categorias.</p>
+</div>
+<div class="section" id="resumen-numerico-de-variables-cualitativas">
+<h1>3.1 Resumen Numérico de Variables Cualitativas<a class="headerlink" href="#resumen-numerico-de-variables-cualitativas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="variable-suburb">
+<h2>Variable “Suburb”<a class="headerlink" href="#variable-suburb" title="Permalink to this headline">¶</a></h2>
+<p>Esta variable  hace referencia al barrio donde se encuentra la casa. Procedemos a hacer un analisis de la distribución de densidad y podemos concluir que hay 351 suburbios diferentes.
+( podemos agruparlos por zonas pero no tine sentido si hacemos referencia a la localizacion mejor que a esto)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;Suburb&quot;</span><span class="p">,</span><span class="s2">&quot;Address&quot;</span><span class="p">,</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span><span class="s2">&quot;Method&quot;</span><span class="p">,</span><span class="s2">&quot;SellerG&quot;</span><span class="p">,</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="s2">&quot;CouncilArea&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname&quot;</span><span class="p">,</span><span class="s2">&quot;Postcode&quot;</span><span class="p">]]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Suburb&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reservoir          844
+Bentleigh East     583
+Richmond           552
+Glen Iris          491
+Preston            485
+                  ... 
+Cranbourne East      1
+Belgrave             1
+Ferny Creek          1
+Avonsleigh           1
+Kalkallo             1
+Name: Suburb, Length: 351, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="variable-address">
+<h2>Variable “Address”<a class="headerlink" href="#variable-address" title="Permalink to this headline">¶</a></h2>
+<p>La variable Address  indica la dirección donde se encuentran las casas. Al realizar el analisis  de distribución por densidad, podemos comprobar que hay direcciones repetidas, esto puede hacer referencia a la dirección de un edificio,  la venta de la misma casa en difrentes fechas o a duplicados. Para ello procedemos a analizar dichas categorias en profundidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Address</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Address&#39;</span><span class="p">])</span>
+<span class="n">Address</span><span class="p">[</span><span class="n">Address</span><span class="o">!=</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 Charles St       6
+25 William St      4
+38 Stewart St      3
+57 Bay Rd          3
+16 Smith St        3
+                  ..
+2 Louise Ct        2
+69 Chirnside St    2
+14 Glencairn Av    2
+11 Margaret St     2
+16 Hayes Pde       2
+Name: Address, Length: 808, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Analizamos individualmente  las primeras direcciones para ver si si efectivamente son una casa. </span>
+<span class="n">data_aux</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">Address</span> <span class="o">==</span> <span class="s1">&#39;118 Westgarth St&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_aux</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Suburb           Address  Rooms Type      Price Method SellerG  \
+7454   Northcote  118 Westgarth St      3    h  1500000.0     PI  Jellis   
+13335  Northcote  118 Westgarth St      4    h  1822000.0      S  Nelson   
+
+             Date  Distance  Postcode  ...  Bathroom  Car  Landsize  \
+7454   30/07/2016       5.5    3070.0  ...       1.0  8.0     727.0   
+13335  13/05/2017       5.5    3070.0  ...       1.0  8.0     728.0   
+
+       BuildingArea  YearBuilt           CouncilArea Lattitude  Longtitude  \
+7454            NaN     1900.0  Darebin City Council  -37.7825    145.0072   
+13335           NaN     1900.0  Darebin City Council  -37.7825    145.0072   
+
+                  Regionname Propertycount  
+7454   Northern Metropolitan       11364.0  
+13335  Northern Metropolitan       11364.0  
+
+[2 rows x 21 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">Address</span><span class="o">==</span><span class="s2">&quot;118 Westgarth St&quot;</span><span class="p">]</span>
+<span class="n">data_aux</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">data_aux</span><span class="p">[</span><span class="s2">&quot;Bedroom2&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7454     4.0
+13335    4.0
+Name: Bedroom2, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">Address</span><span class="o">==</span><span class="s2">&quot;5 Charles St&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>Rooms</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>SellerG</th>
+      <th>Date</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>...</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>BuildingArea</th>
+      <th>YearBuilt</th>
+      <th>CouncilArea</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Regionname</th>
+      <th>Propertycount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>Abbotsford</td>
+      <td>5 Charles St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1465000.0</td>
+      <td>SP</td>
+      <td>Biggin</td>
+      <td>4/03/2017</td>
+      <td>2.5</td>
+      <td>3067.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>134.0</td>
+      <td>150.0</td>
+      <td>1900.0</td>
+      <td>Yarra City Council</td>
+      <td>-37.80930</td>
+      <td>144.9944</td>
+      <td>Northern Metropolitan</td>
+      <td>4019.0</td>
+    </tr>
+    <tr>
+      <th>2289</th>
+      <td>Brunswick</td>
+      <td>5 Charles St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>SP</td>
+      <td>Nelson</td>
+      <td>26/07/2016</td>
+      <td>5.2</td>
+      <td>3056.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>179.0</td>
+      <td>NaN</td>
+      <td>1900.0</td>
+      <td>Moreland City Council</td>
+      <td>-37.77450</td>
+      <td>144.9634</td>
+      <td>Northern Metropolitan</td>
+      <td>11918.0</td>
+    </tr>
+    <tr>
+      <th>4575</th>
+      <td>Glen Iris</td>
+      <td>5 Charles St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>2010000.0</td>
+      <td>S</td>
+      <td>Marshall</td>
+      <td>10/12/2016</td>
+      <td>9.2</td>
+      <td>3146.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>659.0</td>
+      <td>212.0</td>
+      <td>1930.0</td>
+      <td>Boroondara City Council</td>
+      <td>-37.85090</td>
+      <td>145.0916</td>
+      <td>Southern Metropolitan</td>
+      <td>10412.0</td>
+    </tr>
+    <tr>
+      <th>9907</th>
+      <td>Sunshine North</td>
+      <td>5 Charles St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>705000.0</td>
+      <td>S</td>
+      <td>Douglas</td>
+      <td>25/02/2017</td>
+      <td>13.3</td>
+      <td>3020.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>570.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Brimbank City Council</td>
+      <td>-37.77490</td>
+      <td>144.8329</td>
+      <td>Western Metropolitan</td>
+      <td>4217.0</td>
+    </tr>
+    <tr>
+      <th>10018</th>
+      <td>Surrey Hills</td>
+      <td>5 Charles St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>S</td>
+      <td>Jellis</td>
+      <td>3/12/2016</td>
+      <td>11.2</td>
+      <td>3127.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>349.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Boroondara City Council</td>
+      <td>-37.82550</td>
+      <td>145.1116</td>
+      <td>Southern Metropolitan</td>
+      <td>5457.0</td>
+    </tr>
+    <tr>
+      <th>25584</th>
+      <td>Bentleigh East</td>
+      <td>5 Charles St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1700000.0</td>
+      <td>S</td>
+      <td>Buxton</td>
+      <td>28/10/2017</td>
+      <td>13.8</td>
+      <td>3165.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>649.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Glen Eira City Council</td>
+      <td>-37.91725</td>
+      <td>145.0559</td>
+      <td>Southern Metropolitan</td>
+      <td>10969.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>6 rows × 21 columns</p>
+</div></div></div>
+</div>
+<p>En este caso parece ser que todas son casas diferentes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">Address</span><span class="o">==</span><span class="s2">&quot;25 William St&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>Rooms</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>SellerG</th>
+      <th>Date</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>...</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>BuildingArea</th>
+      <th>YearBuilt</th>
+      <th>CouncilArea</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Regionname</th>
+      <th>Propertycount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2435</th>
+      <td>Bulleen</td>
+      <td>25 William St</td>
+      <td>4</td>
+      <td>h</td>
+      <td>1235000.0</td>
+      <td>S</td>
+      <td>Jellis</td>
+      <td>3/09/2016</td>
+      <td>11.8</td>
+      <td>3105.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>556.0</td>
+      <td>214.0</td>
+      <td>1957.0</td>
+      <td>Manningham City Council</td>
+      <td>-37.76570</td>
+      <td>145.09570</td>
+      <td>Eastern Metropolitan</td>
+      <td>4480.0</td>
+    </tr>
+    <tr>
+      <th>11315</th>
+      <td>Fawkner</td>
+      <td>25 William St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>NaN</td>
+      <td>SN</td>
+      <td>Barry</td>
+      <td>28/05/2016</td>
+      <td>12.4</td>
+      <td>3060.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>583.0</td>
+      <td>122.0</td>
+      <td>1960.0</td>
+      <td>Hume City Council</td>
+      <td>-37.70430</td>
+      <td>144.96720</td>
+      <td>Northern Metropolitan</td>
+      <td>5070.0</td>
+    </tr>
+    <tr>
+      <th>21258</th>
+      <td>Hawthorn</td>
+      <td>25 William St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1450000.0</td>
+      <td>VB</td>
+      <td>Marshall</td>
+      <td>16/09/2017</td>
+      <td>5.3</td>
+      <td>3122.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>216.0</td>
+      <td>104.0</td>
+      <td>1890.0</td>
+      <td>Boroondara City Council</td>
+      <td>-37.82031</td>
+      <td>145.04043</td>
+      <td>Southern Metropolitan</td>
+      <td>11308.0</td>
+    </tr>
+    <tr>
+      <th>34242</th>
+      <td>Fawkner</td>
+      <td>25 William St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>728000.0</td>
+      <td>S</td>
+      <td>Ray</td>
+      <td>24/02/2018</td>
+      <td>13.1</td>
+      <td>3060.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>584.0</td>
+      <td>122.0</td>
+      <td>1960.0</td>
+      <td>Hume City Council</td>
+      <td>-37.70428</td>
+      <td>144.96717</td>
+      <td>Northern Metropolitan</td>
+      <td>5070.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 21 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">Address</span><span class="o">==</span><span class="s2">&quot;28 Blair St&quot;</span><span class="p">]</span><span class="c1">#En este caso, las dos ultimas filas,  son un duplicado.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>Rooms</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>SellerG</th>
+      <th>Date</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>...</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>BuildingArea</th>
+      <th>YearBuilt</th>
+      <th>CouncilArea</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Regionname</th>
+      <th>Propertycount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2178</th>
+      <td>Brunswick</td>
+      <td>28 Blair St</td>
+      <td>2</td>
+      <td>h</td>
+      <td>1100000.0</td>
+      <td>S</td>
+      <td>Nelson</td>
+      <td>10/09/2016</td>
+      <td>5.2</td>
+      <td>3056.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>153.0</td>
+      <td>NaN</td>
+      <td>1900.0</td>
+      <td>Moreland City Council</td>
+      <td>-37.7705</td>
+      <td>144.9647</td>
+      <td>Northern Metropolitan</td>
+      <td>11918.0</td>
+    </tr>
+    <tr>
+      <th>6606</th>
+      <td>Maribyrnong</td>
+      <td>28 Blair St</td>
+      <td>2</td>
+      <td>t</td>
+      <td>440000.0</td>
+      <td>PI</td>
+      <td>Rendina</td>
+      <td>22/08/2016</td>
+      <td>8.7</td>
+      <td>3032.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>54.0</td>
+      <td>85.0</td>
+      <td>2000.0</td>
+      <td>Maribyrnong City Council</td>
+      <td>-37.7740</td>
+      <td>144.8797</td>
+      <td>Western Metropolitan</td>
+      <td>4918.0</td>
+    </tr>
+    <tr>
+      <th>6610</th>
+      <td>Maribyrnong</td>
+      <td>28 Blair St</td>
+      <td>2</td>
+      <td>t</td>
+      <td>400000.0</td>
+      <td>PI</td>
+      <td>Rendina</td>
+      <td>24/09/2016</td>
+      <td>8.7</td>
+      <td>3032.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>54.0</td>
+      <td>85.0</td>
+      <td>2000.0</td>
+      <td>Maribyrnong City Council</td>
+      <td>-37.7740</td>
+      <td>144.8797</td>
+      <td>Western Metropolitan</td>
+      <td>4918.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 21 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">Address</span><span class="o">==</span><span class="s2">&quot;36 Aberfeldie St&quot;</span><span class="p">]</span><span class="c1"># en este caso tambien tenemos datos duplicados y efectivamente es una casa </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>Rooms</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>SellerG</th>
+      <th>Date</th>
+      <th>Distance</th>
+      <th>Postcode</th>
+      <th>...</th>
+      <th>Bathroom</th>
+      <th>Car</th>
+      <th>Landsize</th>
+      <th>BuildingArea</th>
+      <th>YearBuilt</th>
+      <th>CouncilArea</th>
+      <th>Lattitude</th>
+      <th>Longtitude</th>
+      <th>Regionname</th>
+      <th>Propertycount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6920</th>
+      <td>Moonee Ponds</td>
+      <td>36 Aberfeldie St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1725000.0</td>
+      <td>PI</td>
+      <td>Nelson</td>
+      <td>24/09/2016</td>
+      <td>6.9</td>
+      <td>3039.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>596.0</td>
+      <td>203.0</td>
+      <td>1950.0</td>
+      <td>Moonee Valley City Council</td>
+      <td>-37.76090</td>
+      <td>144.90500</td>
+      <td>Western Metropolitan</td>
+      <td>6232.0</td>
+    </tr>
+    <tr>
+      <th>15145</th>
+      <td>Moonee Ponds</td>
+      <td>36 Aberfeldie St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1850000.0</td>
+      <td>SP</td>
+      <td>McDonald</td>
+      <td>3/06/2017</td>
+      <td>6.2</td>
+      <td>3039.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>596.0</td>
+      <td>203.0</td>
+      <td>1950.0</td>
+      <td>Moonee Valley City Council</td>
+      <td>-37.76086</td>
+      <td>144.90497</td>
+      <td>Western Metropolitan</td>
+      <td>6232.0</td>
+    </tr>
+    <tr>
+      <th>15799</th>
+      <td>Moonee Ponds</td>
+      <td>36 Aberfeldie St</td>
+      <td>3</td>
+      <td>h</td>
+      <td>1850000.0</td>
+      <td>SP</td>
+      <td>McDonald</td>
+      <td>17/06/2017</td>
+      <td>6.2</td>
+      <td>3039.0</td>
+      <td>...</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>596.0</td>
+      <td>203.0</td>
+      <td>1950.0</td>
+      <td>Moonee Valley City Council</td>
+      <td>-37.76086</td>
+      <td>144.90497</td>
+      <td>Western Metropolitan</td>
+      <td>6232.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 21 columns</p>
+</div></div></div>
+</div>
+<p>Al existir la sospecha de que algunos de los datos estan duplicados, procedemos a hacer una eliminacion de duplicados en nuestro data set por longitud, latitud , precio y numero de habitaciones.</p>
+</div>
+<div class="section" id="variable-postcode">
+<h2>Variable “PostCode”<a class="headerlink" href="#variable-postcode" title="Permalink to this headline">¶</a></h2>
+<p>La variable Postcode, como comentamos anteriormente, se incluye dentro del analisis de las variables cualitativas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Postcode&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Postcode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;object&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Postcode&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-12-ddf859229450&gt;:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas[&quot;Postcode&quot;]=Variables_cualitativas[&quot;Postcode&quot;].astype(&quot;object&quot;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3073.0    844
+3046.0    638
+3020.0    617
+3121.0    612
+3165.0    583
+         ... 
+3159.0      1
+3775.0      1
+3139.0      1
+3770.0      1
+3793.0      1
+Name: Postcode, Length: 211, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>La variables postcode cuenta con muchas categorias  y lo que dificultaria el modelo.</p>
+</div>
+<div class="section" id="variable-type">
+<h2>Variable “Type”<a class="headerlink" href="#variable-type" title="Permalink to this headline">¶</a></h2>
+<p>Esta variable cualitativa  es polítoma y presenta mas de dos valor no numéricos y corresponde con el tipo de vivienda.
+La descripción determinada por la base de datos es la siguiente:
+br - bedroom(s);
+h - house,cottage,villa, semi,terrace;
+u - unit, duplex;
+t - townhouse;
+dev site - development site;
+o res - other residential</p>
+<p>Sin embargo, procederemos al renombramiento de las categorias para su mejor comprensión.</p>
+<p>Dormitorio- bedroom(s);
+Casa - house,cottage,villa, semi,terrace;
+Piso  - unit, duplex;
+Adosado- townhouse;
+dev site - development site;
+o res - other residential</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#data.apply(pd.Series.replace, to_replace=&#39;br&#39;, value=&#39;Dormitorio&#39;)# hacer una lista  para todos </span>
+<span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;br&quot;</span><span class="p">:</span><span class="s2">&quot;Dormitorio&quot;</span><span class="p">,</span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="s2">&quot;Casa&quot;</span><span class="p">,</span><span class="s2">&quot;u&quot;</span><span class="p">:</span><span class="s2">&quot;Piso&quot;</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="s2">&quot;Adosado&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">])</span>
+<span class="mi">100</span><span class="o">*</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/inma/anaconda3/lib/python3.8/site-packages/pandas/core/series.py:4575: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  return super().replace(
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Casa       68.795364
+Piso       20.934102
+Adosado    10.270534
+Name: Type, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#data.apply(pd.Series.replace, to_replace=&#39;br&#39;, value=&#39;Dormitorio&#39;) #&amp;(to_replace=&#39;h&#39;, value=&#39;Casa&#39;))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto hace referencia a la cultura del pais, donde la mayoria de la viviendas son corresponden a edificios unifamiliares.</p>
+</div>
+<div class="section" id="variable-method">
+<h2>Variable “Method”<a class="headerlink" href="#variable-method" title="Permalink to this headline">¶</a></h2>
+<p>Esta variable cualitativa  es polítoma y presenta mas de dos valor no numéricos y corresponde a  tipo de venta por la que adquirio el precio que refleja el dataset de cada una de las propiedades.
+La descripción determinada por la base de datos es la siguiente:</p>
+<ul class="simple">
+<li><p>S - property sold( Vendida)–&gt; vend ;</p></li>
+<li><p>SP - property sold prior(vendida anteriormente)–&gt; vend_ant;</p></li>
+<li><p>PI - property passed in(propiedad traspasada) –&gt;traspasada;</p></li>
+<li><p>PN - sold prior not disclosed (Venta anterior no revelada)–&gt;Vent_ant_x;</p></li>
+<li><p>SN - sold not disclosed( Venta no revelada)–&gt;vent_x;</p></li>
+<li><p>NB - no bid ( Sin oferta)–&gt;sin_oferta;</p></li>
+<li><p>VB - vendor bid (oferta del vendedor)–&gt;oferta_vendedor;</p></li>
+<li><p>W - withdrawn prior to auction (Retirada antes de la subasta)–&gt;retirada_sub;</p></li>
+<li><p>SA - sold after auction( Vendida antes de la subasta)–&gt;pre_sub;</p></li>
+<li><p>SS - sold after auction price not disclosed (Vendido despues de la subasta, precio no revelado)–&gt;pre_sub_x.</p></li>
+<li><p>N/A - price or highest bid not available(Precio u oferta mas alta no disponible).</p></li>
+</ul>
+<p>Cambiamos el nombre de las variables, para hacerlas mas entendibles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;S&quot;</span><span class="p">:</span><span class="s2">&quot;vend&quot;</span><span class="p">,</span><span class="s2">&quot;SP&quot;</span><span class="p">:</span><span class="s2">&quot;vend_ant&quot;</span><span class="p">,</span><span class="s2">&quot;PI&quot;</span><span class="p">:</span><span class="s2">&quot;traspasada&quot;</span><span class="p">,</span><span class="s2">&quot;PN&quot;</span><span class="p">:</span><span class="s2">&quot;vent_ant_x&quot;</span><span class="p">,</span><span class="s2">&quot;SN&quot;</span><span class="p">:</span><span class="s2">&quot;vent_x&quot;</span><span class="p">,</span><span class="s2">&quot;NB&quot;</span><span class="p">:</span><span class="s2">&quot;sin_oferta&quot;</span><span class="p">,</span><span class="s2">&quot;VB&quot;</span><span class="p">:</span><span class="s2">&quot;oferta_vendedor&quot;</span><span class="p">,</span><span class="s2">&quot;W&quot;</span><span class="p">:</span><span class="s2">&quot;retirada_sub&quot;</span><span class="p">,</span><span class="s2">&quot;SA&quot;</span><span class="p">:</span><span class="s2">&quot;pre_sub&quot;</span><span class="p">,</span><span class="s2">&quot;SS&quot;</span><span class="p">:</span><span class="s2">&quot;pre_sub_x&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Method&#39;</span><span class="p">])</span>
+<span class="mi">100</span><span class="o">*</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vend               56.642855
+vend_ant           14.616863
+traspasada         13.913991
+oferta_vendedor     8.916430
+vent_x              3.778294
+vent_ant_x          0.883610
+pre_sub             0.648363
+retirada_sub        0.496314
+pre_sub_x           0.103279
+Name: Method, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Analizamos la relacion entre las variables que indican falta de precio  y la columna ” Price” para comprobar la relacion con de estas categorias y los datos faltantes en precio.</p>
+<ul class="simple">
+<li><p>vent_ant_x - sold prior not disclosed (Venta anterior no revelada);</p></li>
+<li><p>vent_x - sold not disclosed( Venta no revelada);</p></li>
+<li><p>sin_oferta - no bid ( Sin oferta);</p></li>
+<li><p>pre_sub_x - sold after auction price not disclosed (Vendido despues de la subasta, precio no revelado).</p></li>
+<li><p>N/A - price or highest bid not available(Precio u oferta mas alta no disponible).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Price_Method</span><span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="s2">&quot;Method&quot;</span><span class="p">]]</span>
+<span class="n">Price_Method</span><span class="o">=</span><span class="n">Price_Method</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">Method</span><span class="o">==</span><span class="s2">&quot;vent_ant_x&quot;</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Method</span><span class="o">==</span><span class="s2">&quot;vent_x&quot;</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Method</span><span class="o">==</span><span class="s2">&quot;sin_oferta&quot;</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Method</span><span class="o">==</span><span class="s2">&quot;pre_sub_x&quot;</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Method</span><span class="o">==</span><span class="s2">&quot;N/A&quot;</span><span class="p">)]</span>
+<span class="c1">#pd.crosstab(index=Price_Method[&quot;Price&quot;],columns=Price_Method[&quot;Method&quot;],margins=True)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Price_Method</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">])</span><span class="c1">#ordenamos para poder ver los precios mas altos.</span>
+<span class="n">Price_Method</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Price</th>
+      <th>Method</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Con este análisis podemos  observar categorías  mencionadas anteriormente presentan datos faltantes en la variables objetivo.
+Esto es interesante tenerlo en cuenta para el tratamiento de missings
+La Variable “Method” contiene un  alto grado de categorías, por lo que después de haberla analizado, procedemos a agruparla según 3 criterios:</p>
+<ul>
+<li><p>Categorias mas comunes: las 4 primera categorias acumulan más del 93% de todos los datos, que las dejaremos intactas.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  vend            56.642855
+  vend_ant        14.616863
+  trasp           13.913991
+  oferta_vend      8.916430
+</pre></div>
+</div>
+</li>
+<li><p>Categiras sin precio(sin_precio):  son todas aquellas que por su propia descripción y nuestra posterior comprobación no estan asociadas a un precio, nuestra variable target.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  vent_ant_x - sold prior not disclosed (Venta anterior no revelada);
+  vent_x - sold not disclosed( Venta no revelada); 
+  sin_oferta - no bid ( Sin oferta); 
+  pre_sub_x - sold after auction price not disclosed (Vendido despues de la subasta, precio no revelado).
+  N/A - price or highest bid not available(Precio u oferta mas alta no disponible).
+</pre></div>
+</div>
+</li>
+<li><p>Otros(otro): son el resto de categorias con poca incidencia.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  pre_sub          0.648363
+  retirada_sub     0.496314
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="o">=</span> <span class="n">Variables_cualitativas</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;vent_ant_x&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;vent_x&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;sin_oferta&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;pre_sub_x&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;N/A&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;pre_sub&quot;</span><span class="p">:</span><span class="s2">&quot;otro&quot;</span><span class="p">,</span><span class="s2">&quot;retirada_sub&quot;</span><span class="p">:</span><span class="s2">&quot;otro&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           Suburb             Address     Type           Method  \
+0      Abbotsford       68 Studley St     Casa       sin_precio   
+1      Abbotsford        85 Turner St     Casa             vend   
+2      Abbotsford     25 Bloomburg St     Casa             vend   
+3      Abbotsford  18/659 Victoria St     Piso  oferta_vendedor   
+4      Abbotsford        5 Charles St     Casa         vend_ant   
+...           ...                 ...      ...              ...   
+34852  Yarraville         13 Burns St     Casa       traspasada   
+34853  Yarraville       29A Murray St     Casa         vend_ant   
+34854  Yarraville      147A Severn St  Adosado             vend   
+34855  Yarraville    12/37 Stephen St     Casa         vend_ant   
+34856  Yarraville    3 Tarrengower St     Casa       traspasada   
+
+             SellerG        Date               CouncilArea  \
+0             Jellis   3/09/2016        Yarra City Council   
+1             Biggin   3/12/2016        Yarra City Council   
+2             Biggin   4/02/2016        Yarra City Council   
+3             Rounds   4/02/2016        Yarra City Council   
+4             Biggin   4/03/2017        Yarra City Council   
+...              ...         ...                       ...   
+34852            Jas  24/02/2018  Maribyrnong City Council   
+34853        Sweeney  24/02/2018  Maribyrnong City Council   
+34854            Jas  24/02/2018  Maribyrnong City Council   
+34855  hockingstuart  24/02/2018  Maribyrnong City Council   
+34856             RW  24/02/2018  Maribyrnong City Council   
+
+                  Regionname  Postcode  
+0      Northern Metropolitan    3067.0  
+1      Northern Metropolitan    3067.0  
+2      Northern Metropolitan    3067.0  
+3      Northern Metropolitan    3067.0  
+4      Northern Metropolitan    3067.0  
+...                      ...       ...  
+34852   Western Metropolitan    3013.0  
+34853   Western Metropolitan    3013.0  
+34854   Western Metropolitan    3013.0  
+34855   Western Metropolitan    3013.0  
+34856   Western Metropolitan    3013.0  
+
+[34857 rows x 9 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="variable-sellerg">
+<h2>Variable “SellerG”<a class="headerlink" href="#variable-sellerg" title="Permalink to this headline">¶</a></h2>
+<p>La variable SellerG indica la fecha de venta o de recogida del precio de dicho apartamento. En este caso podemos ver que la fechas se encuentran entre Enero de 2016 y Octubre de 2018.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;SellerG&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jellis                 3359
+Nelson                 3236
+Barry                  3235
+hockingstuart          2623
+Marshall               2027
+                       ... 
+Commercial                1
+Nicholas                  1
+hockingstuart/Barry       1
+Airport                   1
+Blue                      1
+Name: SellerG, Length: 388, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="variable-date">
+<h2>Variable “Date”<a class="headerlink" href="#variable-date" title="Permalink to this headline">¶</a></h2>
+<p>La variables fecha es muy importante para localizar en el tiempo el dataset. Para ellos determiandos la fecha maxima y minima.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convertimos el campo fecha  datetime de pandas</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La fecha mínima del data set es&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La fecha máxima del data set es&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La fecha mínima del data set es 2016-01-28 00:00:00
+La fecha máxima del data set es 2018-10-03 00:00:00
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28/10/2017    1119
+17/03/2018     970
+24/02/2018     941
+9/12/2017      927
+25/11/2017     902
+              ... 
+4/02/2016       44
+30/09/2017      22
+20/01/2018      19
+27/01/2018      12
+28/01/2016       3
+Name: Date, Length: 78, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="variable-councilarea">
+<h2>Variable “CouncilArea’”<a class="headerlink" href="#variable-councilarea" title="Permalink to this headline">¶</a></h2>
+<p>La variabe Counsil Area corresponde con al area municipal donde se encuentran cada una de las casas. Esta variable aporta una informacion parecida a la que aporta postcode o regionname, por lo tanto podria ser considerada una de las variables a descartar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;CouncilArea&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Boroondara City Council           3675
+Darebin City Council              2851
+Moreland City Council             2122
+Glen Eira City Council            2006
+Melbourne City Council            1952
+Banyule City Council              1861
+Moonee Valley City Council        1791
+Bayside City Council              1764
+Brimbank City Council             1593
+Monash City Council               1466
+Stonnington City Council          1460
+Maribyrnong City Council          1451
+Port Phillip City Council         1280
+Hume City Council                 1214
+Yarra City Council                1186
+Manningham City Council           1046
+Hobsons Bay City Council           942
+Kingston City Council              871
+Whittlesea City Council            828
+Wyndham City Council               624
+Whitehorse City Council            618
+Maroondah City Council             506
+Knox City Council                  371
+Greater Dandenong City Council     314
+Melton City Council                292
+Frankston City Council             290
+Casey City Council                 176
+Yarra Ranges Shire Council         102
+Nillumbik Shire Council             88
+Macedon Ranges Shire Council        46
+Cardinia Shire Council              41
+Mitchell Shire Council              20
+Moorabool Shire Council              7
+Name: CouncilArea, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="variable-regionname">
+<h2>Variable “Regionname”<a class="headerlink" href="#variable-regionname" title="Permalink to this headline">¶</a></h2>
+<p>Corresponde a la regiones de Melburne, principalmente  podemos obsevar que la mayoria de las viviendas se encuentran alrededor de la zona metropolitana, que tiene relacion con las zonas con mayor densidad de poblacion.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Regionname&#39;</span><span class="p">])</span>
+<span class="mi">100</span><span class="o">*</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Southern Metropolitan         33.955877
+Northern Metropolitan         27.417735
+Western Metropolitan          19.505408
+Eastern Metropolitan          12.557019
+South-Eastern Metropolitan     4.988955
+Eastern Victoria               0.654101
+Northern Victoria              0.582379
+Western Victoria               0.329919
+Name: Regionname, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="relacion-entre-las-variables-cualitativas">
+<h2>3.2 Relación entre las variables cualitativas<a class="headerlink" href="#relacion-entre-las-variables-cualitativas" title="Permalink to this headline">¶</a></h2>
+<p>Por otro lado, una vez analizado cada una de las variables podemos ver que es interesante  observar la relacion entre algunas de las variables.
+Por ejemplo haciendo una relacion entre el tipo de casa y al region en la que se encuentra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">],</span><span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1">#representacion de la distribucion de tipo de casas por region </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Regionname</th>
+      <th>Eastern Metropolitan</th>
+      <th>Eastern Victoria</th>
+      <th>Northern Metropolitan</th>
+      <th>Northern Victoria</th>
+      <th>South-Eastern Metropolitan</th>
+      <th>Southern Metropolitan</th>
+      <th>Western Metropolitan</th>
+      <th>Western Victoria</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adosado</th>
+      <td>391</td>
+      <td>5</td>
+      <td>1035</td>
+      <td>1</td>
+      <td>162</td>
+      <td>1332</td>
+      <td>654</td>
+      <td>0</td>
+      <td>3580</td>
+    </tr>
+    <tr>
+      <th>Casa</th>
+      <td>3438</td>
+      <td>216</td>
+      <td>6489</td>
+      <td>199</td>
+      <td>1356</td>
+      <td>6968</td>
+      <td>5199</td>
+      <td>113</td>
+      <td>23978</td>
+    </tr>
+    <tr>
+      <th>Piso</th>
+      <td>548</td>
+      <td>7</td>
+      <td>2033</td>
+      <td>3</td>
+      <td>221</td>
+      <td>3536</td>
+      <td>946</td>
+      <td>2</td>
+      <td>7296</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>4377</td>
+      <td>228</td>
+      <td>9557</td>
+      <td>203</td>
+      <td>1739</td>
+      <td>11836</td>
+      <td>6799</td>
+      <td>115</td>
+      <td>34854</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Regionname&#39;</span><span class="p">],</span>
+            <span class="n">columns</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">/</span><span class="n">r</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span><span class="mi">100</span><span class="p">,</span>
+                                              <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4. Analisis y procesamiento de VaraiblesCualitativas_40_0.png" src="_images/4. Analisis y procesamiento de VaraiblesCualitativas_40_0.png" />
+</div>
+</div>
+<p>En el grafico anterior observamos que  casi todos los tipos de casas que corresponden con piso en encuentran en las zonas centrales de la ciudad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">],</span><span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="c1"># ver tiene setido comprarlas variables.  hacer graficas por variable</span>
+<span class="c1">#Mirar como son los barrios caros,etc. </span>
+<span class="c1"># ver las proporciones de ventas entre  S y SA ( por ejemplo) en diferenctre regiones. </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Method</th>
+      <th>oferta_vendedor</th>
+      <th>otro</th>
+      <th>sin_precio</th>
+      <th>traspasada</th>
+      <th>vend</th>
+      <th>vend_ant</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>Regionname</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Eastern Metropolitan</th>
+      <td>408</td>
+      <td>53</td>
+      <td>357</td>
+      <td>677</td>
+      <td>2338</td>
+      <td>544</td>
+      <td>4377</td>
+    </tr>
+    <tr>
+      <th>Eastern Victoria</th>
+      <td>23</td>
+      <td>11</td>
+      <td>16</td>
+      <td>30</td>
+      <td>99</td>
+      <td>49</td>
+      <td>228</td>
+    </tr>
+    <tr>
+      <th>Northern Metropolitan</th>
+      <td>703</td>
+      <td>88</td>
+      <td>356</td>
+      <td>1271</td>
+      <td>5695</td>
+      <td>1444</td>
+      <td>9557</td>
+    </tr>
+    <tr>
+      <th>Northern Victoria</th>
+      <td>14</td>
+      <td>5</td>
+      <td>13</td>
+      <td>15</td>
+      <td>110</td>
+      <td>46</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>South-Eastern Metropolitan</th>
+      <td>99</td>
+      <td>38</td>
+      <td>98</td>
+      <td>263</td>
+      <td>980</td>
+      <td>261</td>
+      <td>1739</td>
+    </tr>
+    <tr>
+      <th>Southern Metropolitan</th>
+      <td>1369</td>
+      <td>109</td>
+      <td>562</td>
+      <td>1676</td>
+      <td>6699</td>
+      <td>1421</td>
+      <td>11836</td>
+    </tr>
+    <tr>
+      <th>Western Metropolitan</th>
+      <td>487</td>
+      <td>93</td>
+      <td>251</td>
+      <td>907</td>
+      <td>3753</td>
+      <td>1308</td>
+      <td>6799</td>
+    </tr>
+    <tr>
+      <th>Western Victoria</th>
+      <td>4</td>
+      <td>2</td>
+      <td>8</td>
+      <td>11</td>
+      <td>69</td>
+      <td>21</td>
+      <td>115</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>3107</td>
+      <td>399</td>
+      <td>1661</td>
+      <td>4850</td>
+      <td>19743</td>
+      <td>5094</td>
+      <td>34854</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En esta tabla, se observa que las regiones  con as ventas siempre corresponden a las de la zonas metropolitanas. Esto es logico debido a que son la areas con mayor densidad de población.</p>
+</div>
+</div>
+<div class="section" id="seleccion-de-variables-categoricas">
+<h1>3.3 Selección de variables categóricas<a class="headerlink" href="#seleccion-de-variables-categoricas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="variables-relacionadas-con-la-localizacion">
+<h2>Variables relacionadas con la localización<a class="headerlink" href="#variables-relacionadas-con-la-localizacion" title="Permalink to this headline">¶</a></h2>
+<p>Tras analizar las variables cualitativas podemos, obsevar que muchas de ellas se refieren a la localizacion del alojamiento.</p>
+<p>Tanto como “Suburb”,”Address”,”CouncilArea”,”Postcode” cuentan con un numero muy amplio de categorías por lo que complicaría el desarrollo del modelo. La variable “Regionname” cuenta con un número(8 categorías) más adecuado y puede ser usasda para relacionar la localización con el precio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;Regionname&#39;</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">],</span> <span class="n">Variables_cualitativas</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">R</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4. Analisis y procesamiento de VaraiblesCualitativas_45_0.png" src="_images/4. Analisis y procesamiento de VaraiblesCualitativas_45_0.png" />
+</div>
+</div>
+<p>Podemos observar que en las regiones metropolitanas el precio es ligeramente superior. Sobre todo en la “Southern Metropolitan”.</p>
+<p>Para poder decidir cual de ellas es  mejor utilizar en nuestra regresion lineal,  usamos la funcion get_dummies para transformarlas en varibles factoriales</p>
+</div>
+<div class="section" id="id1">
+<h2>Variable “Type”<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Analizamos la relacion entre la variables “Type” y la variables objetivo “Price”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Type&quot;</span><span class="p">]])</span>
+<span class="n">p</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;br&quot;</span><span class="p">:</span><span class="s2">&quot;Dormitorio&quot;</span><span class="p">,</span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="s2">&quot;Casa&quot;</span><span class="p">,</span><span class="s2">&quot;u&quot;</span><span class="p">:</span><span class="s2">&quot;Piso&quot;</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="s2">&quot;Adosado&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#b=Variables_cualitativas[[&quot;Type&quot;]]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>               
+<span class="n">ax</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4. Analisis y procesamiento de VaraiblesCualitativas_48_0.png" src="_images/4. Analisis y procesamiento de VaraiblesCualitativas_48_0.png" />
+</div>
+</div>
+<p>Se observa que  la categoría “Casa”  no solo  prenseta  mayor  proponcion si no que además es mas  tiene unos precios mas altos.</p>
+</div>
+<div class="section" id="id2">
+<h2>Variable “SellerG”<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Analizamos la relacion entre la variables “SellerG” y la variable objetivo “Price”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;SellerG&quot;</span><span class="p">]]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;SellerG&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">G</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>La Agencia de Venta son también contiene un número muy alto de  categorías 388, a priori parece que algunos de los “SellerG”, están mas relacionados con un precio  mas alto o mas bajo.
+Sin embargo, estas agencias estan localizadas por zonas geograficas por lo tanto descartamos esta variable como posible para la primera creación de nuestro modelo.</p>
+</div>
+<div class="section" id="id3">
+<h2>Variable “Method”<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;S&quot;</span><span class="p">:</span><span class="s2">&quot;vend&quot;</span><span class="p">,</span><span class="s2">&quot;SP&quot;</span><span class="p">:</span><span class="s2">&quot;vend_ant&quot;</span><span class="p">,</span><span class="s2">&quot;PI&quot;</span><span class="p">:</span><span class="s2">&quot;traspasada&quot;</span><span class="p">,</span><span class="s2">&quot;PN&quot;</span><span class="p">:</span><span class="s2">&quot;vent_ant_x&quot;</span><span class="p">,</span><span class="s2">&quot;SN&quot;</span><span class="p">:</span><span class="s2">&quot;vent_x&quot;</span><span class="p">,</span><span class="s2">&quot;NB&quot;</span><span class="p">:</span><span class="s2">&quot;sin_oferta&quot;</span><span class="p">,</span><span class="s2">&quot;VB&quot;</span><span class="p">:</span><span class="s2">&quot;oferta_vendedor&quot;</span><span class="p">,</span><span class="s2">&quot;W&quot;</span><span class="p">:</span><span class="s2">&quot;retirada_sub&quot;</span><span class="p">,</span><span class="s2">&quot;SA&quot;</span><span class="p">:</span><span class="s2">&quot;pre_sub&quot;</span><span class="p">,</span><span class="s2">&quot;SS&quot;</span><span class="p">:</span><span class="s2">&quot;pre_sub_x&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">M</span><span class="o">=</span><span class="n">M</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;vent_ant_x&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;vent_x&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;sin_oferta&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;pre_sub_x&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;N/A&quot;</span><span class="p">:</span><span class="s2">&quot;sin_precio&quot;</span><span class="p">,</span><span class="s2">&quot;pre_sub&quot;</span><span class="p">:</span><span class="s2">&quot;otro&quot;</span><span class="p">,</span><span class="s2">&quot;retirada_sub&quot;</span><span class="p">:</span><span class="s2">&quot;otro&quot;</span><span class="p">})</span>
+<span class="n">M</span> <span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method&quot;</span><span class="p">]]</span>
+<span class="c1">#fig, (ax1) = plot.subplots(1,figsize=(12,6)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Method&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">M</span><span class="p">,)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+<img alt="_images/4. Analisis y procesamiento de VaraiblesCualitativas_54_1.png" src="_images/4. Analisis y procesamiento de VaraiblesCualitativas_54_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>Variable “Date”<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Date&quot;</span><span class="p">]]</span>
+<span class="n">G</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4. Analisis y procesamiento de VaraiblesCualitativas_56_0.png" src="_images/4. Analisis y procesamiento de VaraiblesCualitativas_56_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="correlacion-de-variables-categoricas">
+<h1>3.4 Correlación de variables categóricas<a class="headerlink" href="#correlacion-de-variables-categoricas" title="Permalink to this headline">¶</a></h1>
+<p>Observamos la relación del cada una delas variables categóricas con el precio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method&quot;</span><span class="p">,</span><span class="s2">&quot;Type&quot;</span><span class="p">,</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]]</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Variables_cualitativas_Corr</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+
+<span class="n">Variables_cualitativas_Corr</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-30-44ee247245d0&gt;:3: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas_Corr[&quot;Date&quot;]=Variables_cualitativas[&quot;Date&quot;].astype(&quot;str&quot;)
+&lt;ipython-input-30-44ee247245d0&gt;:4: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas_Corr[&quot;Regionname&quot;]=Variables_cualitativas_Corr[&quot;Regionname&quot;].astype(&quot;str&quot;)
+&lt;ipython-input-30-44ee247245d0&gt;:6: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas_Corr[&quot;Type&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Type&quot;])
+&lt;ipython-input-30-44ee247245d0&gt;:7: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas_Corr[&quot;Method&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Method&quot;])
+&lt;ipython-input-30-44ee247245d0&gt;:8: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas_Corr[&quot;Regionname&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Regionname&quot;])
+&lt;ipython-input-30-44ee247245d0&gt;:9: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Variables_cualitativas_Corr[&quot;Date&quot;]=encoder.fit_transform(Variables_cualitativas_Corr[&quot;Date&quot;])
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Price</th>
+      <th>Method</th>
+      <th>Type</th>
+      <th>Date</th>
+      <th>Regionname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>2</td>
+      <td>1</td>
+      <td>58</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1480000.0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>60</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1035000.0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>63</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0</td>
+      <td>2</td>
+      <td>63</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1465000.0</td>
+      <td>5</td>
+      <td>1</td>
+      <td>64</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>970000.0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>13</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>755000.0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>13</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>985000.0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>16</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>700000.0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>16</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>509500.0</td>
+      <td>5</td>
+      <td>2</td>
+      <td>16</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_matrix</span><span class="o">=</span><span class="n">Variables_cualitativas_Corr</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price         1.000000
+Regionname    0.076071
+Date         -0.012643
+Method       -0.102035
+Type         -0.221462
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f657a066a90&gt;
+</pre></div>
+</div>
+<img alt="_images/4. Analisis y procesamiento de VaraiblesCualitativas_60_1.png" src="_images/4. Analisis y procesamiento de VaraiblesCualitativas_60_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span>
+<span class="c1">#Mantenemos todas la categorias de todas las variables para poder analizarlas por separado</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas_T</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas_T</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas_T</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">])</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>SellerG</th>
+      <th>CouncilArea</th>
+      <th>Postcode</th>
+      <th>Price</th>
+      <th>Regionname_Eastern Metropolitan</th>
+      <th>Regionname_Eastern Victoria</th>
+      <th>Regionname_Northern Metropolitan</th>
+      <th>Regionname_Northern Victoria</th>
+      <th>...</th>
+      <th>Date_8/07/2017</th>
+      <th>Date_8/10/2016</th>
+      <th>Date_9/09/2017</th>
+      <th>Date_9/12/2017</th>
+      <th>Method_oferta_vendedor</th>
+      <th>Method_otro</th>
+      <th>Method_sin_precio</th>
+      <th>Method_traspasada</th>
+      <th>Method_vend</th>
+      <th>Method_vend_ant</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abbotsford</td>
+      <td>68 Studley St</td>
+      <td>Jellis</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Abbotsford</td>
+      <td>85 Turner St</td>
+      <td>Biggin</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>1480000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Abbotsford</td>
+      <td>25 Bloomburg St</td>
+      <td>Biggin</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>1035000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abbotsford</td>
+      <td>18/659 Victoria St</td>
+      <td>Rounds</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Abbotsford</td>
+      <td>5 Charles St</td>
+      <td>Biggin</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>1465000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 101 columns</p>
+</div></div></div>
+</div>
+<p>Estudiamos la correlación ahora de cada una de las categóricas por Variable por separado.</p>
+<div class="section" id="regionname">
+<h2>Regionname<a class="headerlink" href="#regionname" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Eastern Victoria&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                          1.000000
+Regionname_Eastern Victoria   -0.040992
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Northern Metropolitan&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                               1.000000
+Regionname_Northern Metropolitan   -0.187367
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Northern Victoria&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                           1.000000
+Regionname_Northern Victoria   -0.052621
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_South-Eastern Metropolitan&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                                    1.000000
+Regionname_South-Eastern Metropolitan   -0.061181
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Southern Metropolitan&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                               1.000000
+Regionname_Southern Metropolitan    0.363694
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Western Metropolitan&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                              1.000000
+Regionname_Western Metropolitan   -0.172605
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Western Victoria&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                          1.000000
+Regionname_Western Victoria   -0.057248
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Regionname_Eastern Metropolitan&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                              1.00000
+Regionname_Eastern Metropolitan    0.03372
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="type">
+<h2>Type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Type_Casa&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price        1.000000
+Type_Casa    0.347299
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Type_Piso&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price        1.000000
+Type_Piso   -0.346388
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Type_Adosado&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price           1.000000
+Type_Adosado   -0.063657
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="method">
+<h2>Method<a class="headerlink" href="#method" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method_otro&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price          1.00000
+Method_otro   -0.00884
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method_sin_precio&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                1.0
+Method_sin_precio    NaN
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method_traspasada&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                1.000000
+Method_traspasada    0.038881
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method_vend&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price          1.000000
+Method_vend    0.002691
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method_vend_ant&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price              1.000000
+Method_vend_ant   -0.104156
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">=</span><span class="n">Variables_cualitativas_T</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span><span class="s2">&quot;Method_oferta_vendedor&quot;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>         
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Price                     1.000000
+Method_oferta_vendedor    0.074224
+Name: Price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="transformacion-de-variables-categoricas">
+<h1>3.5 Transformación de variables categóricas<a class="headerlink" href="#transformacion-de-variables-categoricas" title="Permalink to this headline">¶</a></h1>
+<p>Despues de la selección de variables vamos a proceder a transformarlas para su uso porterior en el modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Regionname&quot;</span><span class="p">],</span><span class="n">drop_first</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas_T</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Type&quot;</span><span class="p">],</span><span class="n">drop_first</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas_T</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">],</span><span class="n">drop_first</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">Variables_cualitativas_T</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">Variables_cualitativas_T</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">],</span><span class="n">drop_first</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Suburb</th>
+      <th>Address</th>
+      <th>SellerG</th>
+      <th>CouncilArea</th>
+      <th>Postcode</th>
+      <th>Price</th>
+      <th>Regionname_Eastern Victoria</th>
+      <th>Regionname_Northern Metropolitan</th>
+      <th>Regionname_Northern Victoria</th>
+      <th>Regionname_South-Eastern Metropolitan</th>
+      <th>...</th>
+      <th>Date_8/04/2017</th>
+      <th>Date_8/07/2017</th>
+      <th>Date_8/10/2016</th>
+      <th>Date_9/09/2017</th>
+      <th>Date_9/12/2017</th>
+      <th>Method_otro</th>
+      <th>Method_sin_precio</th>
+      <th>Method_traspasada</th>
+      <th>Method_vend</th>
+      <th>Method_vend_ant</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Abbotsford</td>
+      <td>68 Studley St</td>
+      <td>Jellis</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Abbotsford</td>
+      <td>85 Turner St</td>
+      <td>Biggin</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>1480000.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Abbotsford</td>
+      <td>25 Bloomburg St</td>
+      <td>Biggin</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>1035000.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abbotsford</td>
+      <td>18/659 Victoria St</td>
+      <td>Rounds</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Abbotsford</td>
+      <td>5 Charles St</td>
+      <td>Biggin</td>
+      <td>Yarra City Council</td>
+      <td>3067.0</td>
+      <td>1465000.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>34852</th>
+      <td>Yarraville</td>
+      <td>13 Burns St</td>
+      <td>Jas</td>
+      <td>Maribyrnong City Council</td>
+      <td>3013.0</td>
+      <td>1480000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>34853</th>
+      <td>Yarraville</td>
+      <td>29A Murray St</td>
+      <td>Sweeney</td>
+      <td>Maribyrnong City Council</td>
+      <td>3013.0</td>
+      <td>888000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>34854</th>
+      <td>Yarraville</td>
+      <td>147A Severn St</td>
+      <td>Jas</td>
+      <td>Maribyrnong City Council</td>
+      <td>3013.0</td>
+      <td>705000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>34855</th>
+      <td>Yarraville</td>
+      <td>12/37 Stephen St</td>
+      <td>hockingstuart</td>
+      <td>Maribyrnong City Council</td>
+      <td>3013.0</td>
+      <td>1140000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>34856</th>
+      <td>Yarraville</td>
+      <td>3 Tarrengower St</td>
+      <td>RW</td>
+      <td>Maribyrnong City Council</td>
+      <td>3013.0</td>
+      <td>1020000.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>34857 rows × 97 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_T</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;precios_casas.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Variables_cualitativas_Corr</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;precios_casas_labelencoder.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Inmaculada Borrás , Jose María Melero y Rubén Valle<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 609, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 85, in ensure_async
+    result = await obj
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/jupyter_client/asynchronous/channels.py", line 48, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/home/inma/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
   File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1087, in execute
@@ -11,40 +22,16 @@ Traceback (most recent call last):
     return future.result()
   File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 540, in async_execute
     await self.async_execute_cell(
-  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 832, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-esDeProporcion(-1)
-esAcotada(-1,100)
-clasificar_variables(data)
-   
-------------------
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
-[0;32m<ipython-input-6-425c32751639>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0mesDeProporcion[0m[0;34m([0m[0;34m-[0m[0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0mesAcotada[0m[0;34m([0m[0;34m-[0m[0;36m1[0m[0;34m,[0m[0;36m100[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m [0mclasificar_variables[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m [0;34m[0m[0m
-
-[0;32m<ipython-input-5-7bd5fc9874df>[0m in [0;36mclasificar_variables[0;34m(dataframe)[0m
-[1;32m     58[0m                 [0;31m#politomizada y alomejor ordinal[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     59[0m                 [0mprint[0m[0;34m([0m[0mdataframe[0m[0;34m[[0m[0mstr[0m[0;34m([0m[0mi[0m[0;34m)[0m[0;34m][0m[0;34m.[0m[0mvalue_counts[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 60[0;31m                 [0mordinal[0m[0;34m=[0m[0minput[0m[0;34m([0m[0;34m'¿Es ordinal?(seleccionar si o no): '[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     61[0m                 [0;32mif[0m[0;34m([0m[0mordinal[0m[0;34m==[0m[0;34m'si'[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     62[0m                     [0mtipos_columnas[0m[0;34m[[0m[0mstr[0m[0;34m([0m[0mi[0m[0;34m)[0m[0;34m][0m[0;34m=[0m[0;34m'Cualitativa Politoma Ordinal'[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/lib/python3.8/site-packages/ipykernel/kernelbase.py[0m in [0;36mraw_input[0;34m(self, prompt)[0m
-[1;32m    855[0m         """
-[1;32m    856[0m         [0;32mif[0m [0;32mnot[0m [0mself[0m[0;34m.[0m[0m_allow_stdin[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 857[0;31m             raise StdinNotImplementedError(
-[0m[1;32m    858[0m                 [0;34m"raw_input was called, but this frontend does not support input requests."[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    859[0m             )
-
-[0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
-StdinNotImplementedError: raw_input was called, but this frontend does not support input requests.
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 816, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 633, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "/home/inma/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 683, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+profile
+-------------------
 

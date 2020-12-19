@@ -7,7 +7,7 @@
 
 
 
-# # 3.Variables Cualitativas 
+# # 4.Variables Cualitativas 
 # 
 # La forma mas sencilla de  resumir las varibales cualitativas es hacer una tabla de contigencia que resuma las distribuciones de frecuencia. 
 
@@ -38,7 +38,7 @@ data.info() #añadimos post code como variable cualitativa
 
 # Podemos observar que 8 de las variables  son cualitativas, pero añadiremos "Postcode" dentro del analisis de las variables cualitativas ya que apesar de estar compuesto por un valor numerico  son datos independientes que debe ser tratados como categorias. 
 # 
-#  # 3.1 Resumen Numérico de Variables Cualitativas
+# ## 4.1 Resumen Numérico de Variables Cualitativas
 # 
 # ### Variable "Suburb" 
 # 
@@ -284,7 +284,7 @@ pd.value_counts(Variables_cualitativas['Regionname'])
 100*Variables_cualitativas["Regionname"].value_counts() /len(Variables_cualitativas["Regionname"])
 
 
-# ## 3.2 Relación entre las variables cualitativas
+# ## 4.2 Relación entre las variables cualitativas
 # 
 # Por otro lado, una vez analizado cada una de las variables podemos ver que es interesante  observar la relacion entre algunas de las variables. 
 # Por ejemplo haciendo una relacion entre el tipo de casa y al region en la que se encuentra. 
@@ -315,7 +315,12 @@ pd.crosstab(index=Variables_cualitativas["Regionname"],columns=Variables_cualita
 
 # En esta tabla, se observa que las regiones  con as ventas siempre corresponden a las de la zonas metropolitanas. Esto es logico debido a que son la areas con mayor densidad de población. 
 
-# #  3.3 Selección de variables categóricas
+# ##  4.3 Selección de variables categóricas
+# 
+# 
+# La selección de variables la hemos relizado mediante dos  prespectivas la agrupación por similitud entre las variables y la correlación con el precio. 
+# 
+# ### 4.3.1 Agrupación por similitud 
 # 
 # #### Variables relacionadas con la localización
 # 
@@ -402,9 +407,9 @@ with sns.axes_style("white"):
     sns.jointplot(x="Date",y="Price", data=G, kind="kde",height=7,fill=True)
 
 
-# # 3.4 Correlación de variables categóricas 
+# ### 4.4.2 Correlación de variables categóricas 
 # 
-# Observamos la relación del cada una delas variables categóricas con el precio. 
+# Observamos la corelación del cada una de las variables categóricas con el precio. PAra ellos hemos transformado las variables cualitativas en cuantitativas, dando un valor numérico a cada una de las categorías. 
 
 # In[30]:
 
@@ -435,6 +440,10 @@ corr_matrix["Price"].sort_values(ascending=False)
 sns.heatmap(corr_matrix.corr(), annot=True, fmt='.2f')
 
 
+# La correlación de las variables es bastante baja. Debido a ello procedemos a observar las correlaciones por cada una de las categorias y ver si existen diferencias.
+# 
+# Para ello transformamos las variables cualitativas en variables dummies. 
+
 # In[33]:
 
 
@@ -447,9 +456,8 @@ Variables_cualitativas_T=pd.get_dummies(Variables_cualitativas_T,columns = ["Met
 Variables_cualitativas_T.head()
 
 
-# Estudiamos la correlación ahora de cada una de las categóricas por Variable por separado.
 # 
-# #### Regionname 
+# ### Regionname 
 
 # In[34]:
 
@@ -516,7 +524,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# #### Type
+# ### Type
 # 
 
 # In[42]:
@@ -543,7 +551,7 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
-# #### Method 
+# ### Method 
 # 
 
 # In[45]:
@@ -594,9 +602,13 @@ corr_matrix=f.corr(method='pearson')
 corr_matrix["Price"].sort_values(ascending=False)
 
 
+# En general, la correlación de las categorías con la variable precio es baja, pero cabe destacar "Type_Casa" y "Regionname_South-Eastern Metropolitan" ambas superiores a 0,3.
+# 
+# Selecionaremos por lo tanto las variables categóricas "Type", "Regionname" y " Method"
+
 # 
 
-# # 3.5 Transformación de variables categóricas 
+# ## 4.5 Transformación de variables categóricas 
 # 
 # Despues de la selección de variables vamos a proceder a transformarlas para su uso porterior en el modelo. 
 
@@ -615,13 +627,13 @@ Variables_cualitativas_T=pd.get_dummies(Variables_cualitativas_T,columns = ["Met
 Variables_cualitativas_T
 
 
-# In[57]:
+# In[55]:
 
 
 Variables_cualitativas_T.to_csv('precios_casas.csv', index=False)
 
 
-# In[59]:
+# In[54]:
 
 
 Variables_cualitativas_Corr.to_csv('precios_casas_labelencoder.csv', index=False)
