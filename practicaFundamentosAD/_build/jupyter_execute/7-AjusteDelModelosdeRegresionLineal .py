@@ -1,24 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# #  7.Ajuste del Modelo
+# 
+# Ajustamos el modelo para predecir el precio de las casas de Melbourne (Australia) en función de las características de las casas.
+# Se ha comprobado que 
+
 # In[1]:
 
 
 get_ipython().run_line_magic('run', '-i 7-AjusteDelModelosdeRegresionLineal.py')
 
 
-# #  7.Ajuste del Modelo
-# 
-# Ajustamos el modelo para predecir el precio de las casas de Melbourne (Australia) en función de las características de las casas.
-# Se ha comprobado que 
-
 # In[39]:
 
 
 # División de los datos en train y test
 # ==============================================================================
-
-
 
 x=dataframe_old[['Distance','Rooms','Landsize','Lattitude','Bathroom']]
 y = dataframe_old['Price']

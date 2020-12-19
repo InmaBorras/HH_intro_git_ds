@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="3. Variables Cuantitativas" href="3-TransformacionVariablesCuantitativas.html" />
-    <link rel="prev" title="1. Definición de Objetivos" href="1-DefinicionObjetivos.html" />
+    <link rel="prev" title="1. Introducción." href="1-DefinicionObjetivos.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -91,7 +91,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-DefinicionObjetivos.html">
-   1. Definición de Objetivos
+   1.  Introducción.
   </a>
  </li>
 </ul>
@@ -841,77 +841,22 @@ memory usage: 5.6+ MB
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "01cd06f4379a4c76b391a21ddf9ccf20"}
+{"version_major": 2, "version_minor": 0, "model_id": "67406461fb5b46b385a45a5602e3534c"}
 </script></div>
 </div>
 <p>De esta función obtenemos informacion muy relevante con respecto al dataset:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-El dataset cuenta con 13 variaabels numéricas y 8 categóricas 
-
--Existe un pequeño porcentaje de datos duplicados, tomaremos esto en cuenta durante el análisis de variables para poder identificarlos y tratarlos. 
-
--El pocetaje de datos faltantes corresponde a un 13,8%  y todo ellos se encuentran en las variables numéricas. (es alto es bajo). Siendo &quot;YeatBuild&quot; , &quot;BuildingArea&quot;, y &quot;Landsize&quot;.
--Las variables con mayor correlación son: &quot;rooms&quot; y &quot;Bedrrom2&quot;. Tambien podemos  observar que tanto ambas variables tienen una alta correlacion entre ellas y podrían producir colinealidad. 
-</pre></div>
-</div>
+<ul class="simple">
+<li><p>El dataset cuenta con 13 variables numéricas y 8 categóricas</p></li>
+<li><p>Existe un pequeño porcentaje de datos duplicados, tomaremos esto en cuenta durante el análisis de variables para poder identificarlos y tratarlos.</p></li>
+<li><p>El pocetaje de datos faltantes corresponde a un 13,8%  y todo ellos se encuentran en las variables numéricas. (es alto es bajo). Siendo “YeatBuild” , “BuildingArea”, y “Landsize”.</p></li>
+<li><p>Las variables con mayor correlación son: “rooms” y “Bedrrom2”. Tambien podemos  observar que tanto ambas variables tienen una alta correlacion entre ellas y podrían producir colinealidad.</p></li>
+</ul>
 <p>Para poder clasificar los tipo de varibles vamos a realizar una función que las identifique que tipo de varaibles es cada una en función del tipo de datos que contiene.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i fundamentos_datos_variables.py
 <span class="n">clasificar_variables</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
    
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h    23980
-u     7297
-t     3580
-Name: Type, dtype: int64
-¿Es ordinal?(seleccionar si o no): no
-S     19744
-SP     5095
-PI     4850
-VB     3108
-SN     1317
-PN      308
-SA      226
-W       173
-SS       36
-Name: Method, dtype: int64
-¿Es ordinal?(seleccionar si o no): no
-Southern Metropolitan         11836
-Northern Metropolitan          9557
-Western Metropolitan           6799
-Eastern Metropolitan           4377
-South-Eastern Metropolitan     1739
-Eastern Victoria                228
-Northern Victoria               203
-Western Victoria                115
-Name: Regionname, dtype: int64
-¿Es ordinal?(seleccionar si o no): no
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Suburb&#39;: &#39;Cualitativa Politoma&#39;,
- &#39;Address&#39;: &#39;Cualitativa Politoma&#39;,
- &#39;Rooms&#39;: &#39;Cuantitativa Discreta de Proporcion Politomizada No Acotada&#39;,
- &#39;Type&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
- &#39;Price&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Method&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
- &#39;SellerG&#39;: &#39;Cualitativa Politoma&#39;,
- &#39;Date&#39;: &#39;Cualitativa Politoma&#39;,
- &#39;Distance&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Postcode&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Bedroom2&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Bathroom&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Car&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Landsize&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;BuildingArea&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;YearBuilt&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;CouncilArea&#39;: &#39;Cualitativa Politoma&#39;,
- &#39;Lattitude&#39;: &#39;Cuantitativa Continua de Intervalo Politomizada No Acotada&#39;,
- &#39;Longtitude&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;,
- &#39;Regionname&#39;: &#39;Cualitativa Politoma No ordinal&#39;,
- &#39;Propertycount&#39;: &#39;Cuantitativa Continua de Proporcion Politomizada No Acotada&#39;}
 </pre></div>
 </div>
 </div>
@@ -947,7 +892,7 @@ Name: Regionname, dtype: int64
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="1-DefinicionObjetivos.html" title="previous page">1. Definición de Objetivos</a>
+    <a class='left-prev' id="prev-link" href="1-DefinicionObjetivos.html" title="previous page">1.  Introducción.</a>
     <a class='right-next' id="next-link" href="3-TransformacionVariablesCuantitativas.html" title="next page">3. Variables Cuantitativas</a>
 
     </div>

@@ -89,7 +89,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="1-DefinicionObjetivos.html">
-   1. Definición de Objetivos
+   1.  Introducción.
   </a>
  </li>
 </ul>
@@ -224,7 +224,11 @@
         
               <div>
                 
-  <div class="cell docutils container">
+  <div class="section" id="ajuste-del-modelo">
+<h1>7.Ajuste del Modelo<a class="headerlink" href="#ajuste-del-modelo" title="Permalink to this headline">¶</a></h1>
+<p>Ajustamos el modelo para predecir el precio de las casas de Melbourne (Australia) en función de las características de las casas.
+Se ha comprobado que</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -i 7-AjusteDelModelosdeRegresionLineal.py
 </pre></div>
@@ -279,16 +283,10 @@
 </div>
 </div>
 </div>
-<div class="section" id="ajuste-del-modelo">
-<h1>7.Ajuste del Modelo<a class="headerlink" href="#ajuste-del-modelo" title="Permalink to this headline">¶</a></h1>
-<p>Ajustamos el modelo para predecir el precio de las casas de Melbourne (Australia) en función de las características de las casas.
-Se ha comprobado que</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># División de los datos en train y test</span>
 <span class="c1"># ==============================================================================</span>
-
-
 
 <span class="n">x</span><span class="o">=</span><span class="n">dataframe_old</span><span class="p">[[</span><span class="s1">&#39;Distance&#39;</span><span class="p">,</span><span class="s1">&#39;Rooms&#39;</span><span class="p">,</span><span class="s1">&#39;Landsize&#39;</span><span class="p">,</span><span class="s1">&#39;Lattitude&#39;</span><span class="p">,</span><span class="s1">&#39;Bathroom&#39;</span><span class="p">]]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">dataframe_old</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span>
